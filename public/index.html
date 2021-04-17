@@ -16,18 +16,28 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" as="style" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" as="script" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
       integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
       crossorigin="anonymous"
     />
+
+    <link rel="preload" href="<%= BASE_URL %>vendor/icofont/icofont.min.css" as="style">
     <link
       rel="stylesheet"
       href="<%= BASE_URL %>vendor/icofont/icofont.min.css"
+      media="print" onload="this.media='all'"
     />
-    <link rel="stylesheet" href="<%= BASE_URL %>custom/css/main.css" />
-    <link rel="stylesheet" href="<%= BASE_URL %>custom/css/index.css" />
+    
+    <link rel="preload" href="<%= BASE_URL %>custom/css/main.css" as="style">
+    <link rel="preload" href="<%= BASE_URL %>custom/css/index.css" as="style"><link rel="preload" href="<%= BASE_URL %>vendor/icofont/icofont.min.css" as="style">
+
+    <link rel="stylesheet" href="<%= BASE_URL %>custom/css/main.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="<%= BASE_URL %>custom/css/index.css" media="print" onload="this.media='all'" />
   </head>
   <body>
     <noscript>

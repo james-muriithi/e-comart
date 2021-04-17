@@ -2,7 +2,8 @@
   <nav class="sidebar-nav">
     <div class="nav-container">
       <div class="nav-header">
-        <button class="nav-close"><i class="icofont-close"></i></button
+        <button class="nav-close" aria-label="close sidebar">
+          <i class="icofont-close"></i></button
         ><a class="nav-logo" href="?"><img :src="logo" alt="logo"/></a>
         <ul class="nav nav-tabs">
           <li>

@@ -5,7 +5,7 @@
 
       <div class="header-middle">
         <input type="text" placeholder="Search anything..." />
-        <button type="submit">
+        <button type="submit" aria-label="Search">
           <i class="icofont-ui-search"></i>
         </button>
       </div>
