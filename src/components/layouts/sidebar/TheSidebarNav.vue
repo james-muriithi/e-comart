@@ -3,125 +3,22 @@
     <div class="nav-container">
       <div class="nav-header">
         <button class="nav-close"><i class="icofont-close"></i></button
-        ><a class="nav-logo" href="index.html"
-          ><img
-            src="https://mironmahmud.com/ecomart/assets/ltr/images/logo.png"
-            alt="logo"
-        /></a>
+        ><a class="nav-logo" href="?"><img :src="logo" alt="logo"/></a>
         <ul class="nav nav-tabs">
           <li>
-            <a href="#menu-list" class="nav-link active" data-toggle="tab"
-              >menu list</a
+            <a href="#cate-list" class="nav-link active" data-toggle="tab"
+              >categories</a
             >
           </li>
           <li>
-            <a href="#cate-list" class="nav-link" data-toggle="tab"
-              >cate list</a
+            <a href="#menu-list" class="nav-link" data-toggle="tab"
+              >menu list</a
             >
           </li>
         </ul>
       </div>
       <div class="nav-content">
-        <div class="tab-pane active" id="menu-list">
-          <div class="nav-profile">
-            <a href="profile.html"
-              ><img
-                src="https://mironmahmud.com/ecomart/assets/ltr/images/user.png"
-                alt="user"
-            /></a>
-            <h4><a href="#">Miron Mahmud</a></h4>
-          </div>
-          <ul class="nav-list">
-            <li class="select-option">
-              <img
-                class="img"
-                src="https://mironmahmud.com/ecomart/assets/ltr/images/language/english.png"
-                alt="language"
-              /><span class="text">english</span>
-              <ul class="option-list">
-                <li>
-                  <a href="#"
-                    ><img
-                      src="https://mironmahmud.com/ecomart/assets/ltr/images/language/english.png"
-                      alt="language"
-                    /><span>english</span></a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://mironmahmud.com/ecomart/assets/rtl/html/grocery/index.html"
-                    ><img
-                      src="https://mironmahmud.com/ecomart/assets/ltr/images/language/arabic.png"
-                      alt="language"
-                    /><span>arabic</span></a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a class="nav-link" href="index.html"
-                ><i class="icofont-ui-home"></i><span>home</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="offer.html"
-                ><i class="icofont-sale-discount"></i><span>offers</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="brand.html"
-                ><i class="icofont-shield"></i><span>brands</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="brand-profile.html"
-                ><i class="icofont-crown"></i><span>brand profile</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="profile.html"
-                ><i class="icofont-ui-user"></i><span>my profile</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="wishlist.html"
-                ><i class="icofont-ui-love"></i><span>wishlist</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="checkout.html"
-                ><i class="icofont-ui-check"></i><span>checkout</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="orderlist.html"
-                ><i class="icofont-basket"></i><span>your order</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="invoice.html"
-                ><i class="icofont-page"></i><span>order invoice</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="support.html"
-                ><i class="icofont-question-circle"></i
-                ><span>need help</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="contact.html"
-                ><i class="icofont-contacts"></i><span>contact us</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="login.html"
-                ><i class="icofont-ui-lock"></i><span>logout</span></a
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="tab-pane" id="cate-list">
+        <div class="tab-pane active mt-3" id="cate-list">
           <ul class="cate-list">
             <li>
               <a class="cate-link dropdown" href="#"
@@ -235,8 +132,82 @@
             </li>
           </ul>
         </div>
+
+        <div class="tab-pane" id="menu-list">
+          <div class="nav-profile">
+            <a href="#"
+              ><img
+                src="https://mironmahmud.com/ecomart/assets/ltr/images/user.png"
+                alt="user"
+            /></a>
+            <h4><a href="#">Miron Mahmud</a></h4>
+          </div>
+          <ul class="nav-list">
+            <li>
+              <a class="nav-link" href="/"
+                ><i class="icofont-ui-home"></i><span>home</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-sale-discount"></i><span>offers</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-shield"></i><span>brands</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-crown"></i><span>brand profile</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-ui-user"></i><span>my profile</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-ui-love"></i><span>wishlist</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-ui-check"></i><span>checkout</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-basket"></i><span>your order</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-page"></i><span>order invoice</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-question-circle"></i
+                ><span>need help</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-contacts"></i><span>contact us</span></a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#"
+                ><i class="icofont-ui-lock"></i><span>logout</span></a
+              >
+            </li>
+          </ul>
+        </div>
         <div class="nav-footer">
-          <p>&COPY; Copyright by <a href="#">Mironcoder</a></p>
+          <p>&COPY; Copyright by <a href="#">James</a></p>
         </div>
       </div>
     </div>
@@ -245,19 +216,43 @@
 
 <script>
 import $ from "jquery";
+import { global } from "../../../config/index.js";
 export default {
   emits: ["close"],
+  computed: {
+    logo() {
+      return global.logo;
+    }
+  },
   created() {
-    $(document).on("mouseup", (e) => {
+    $(document).on("mouseup", e => {
       var container = $(".sidebar-nav.active .nav-container");
 
-      if (container.length > 0 && !container.is(e.target) && container.has(e.target).length === 0) {
+      if (
+        container.length > 0 &&
+        !container.is(e.target) &&
+        container.has(e.target).length === 0
+      ) {
         this.$emit("close");
       }
+    });
+
+    //dropdowns
+    $(function() {
+      $(".dropdown").click(function() {
+        $(this)
+          .next()
+          .toggle(),
+          $(".dropdown-list:visible").length > 1 &&
+            ($(".dropdown-list:visible").hide(),
+            $(this)
+              .next()
+              .show());
+      });
     });
   },
   unmounted() {
     $(".sidebar-nav.active .nav-container").off("mouseup");
-  },
+  }
 };
 </script>
