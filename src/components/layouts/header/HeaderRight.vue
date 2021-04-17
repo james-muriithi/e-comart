@@ -1,8 +1,12 @@
 <template>
   <div class="header-right">
-    <div v-if="isLoggedIn" class="select-menu header-user" @click="toggleSidebar">
+    <div
+      v-if="isLoggedIn"
+      class="select-menu header-user"
+      @click="toggleSidebar"
+    >
       <img class="img" :src="userImage" alt="user" />
-      <span class="text">{{displayName}}</span>
+      <span class="text">{{ displayName }}</span>
     </div>
     <router-link to="/login" v-else class="select-menu header-user">
       <span class="text">Login</span>
@@ -26,12 +30,12 @@ export default {
     userImage() {
       return global.defaultUserImage;
     },
-    isLoggedIn(){
+    isLoggedIn() {
       return this.$store.getters.isAuthenticated;
     },
-    displayName(){
+    displayName() {
       console.log(this.$store.getters.user);
-      return this.$store.getters.user.displayName || '';
+      return this.$store.getters.user.displayName || "";
     }
   },
   inject: ["toggleSidebar"]

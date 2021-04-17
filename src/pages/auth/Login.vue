@@ -78,16 +78,16 @@ export default {
     return {
       email: { val: null, isValid: true },
       password: { val: null, isValid: true },
-      formIsValid: true,
+      formIsValid: true
     };
   },
   methods: {
     clearValidity(input) {
       this[input].isValid = true;
     },
-    clearInputs(){
-        this.email.val = null;
-        this.password.val = null;
+    clearInputs() {
+      this.email.val = null;
+      this.password.val = null;
     },
     validateForm() {
       this.formIsValid = true;
@@ -112,14 +112,14 @@ export default {
       }
       const actionPayload = {
         email: this.email.val,
-        password: this.password.val,
+        password: this.password.val
       };
 
       try {
         await this.$store.dispatch("login", actionPayload);
         //set alert
         await this.$store.dispatch("alert/setAlert", {
-          message: "Logged in successfully",
+          message: "Logged in successfully"
         });
         //redirect
         const redirectUrl = this.$route.query.redirect || "/";
@@ -127,14 +127,14 @@ export default {
       } catch (error) {
         this.$store.dispatch("alert/setAlert", {
           message: "Invalid credentials",
-          type: "error",
+          type: "error"
         });
         this.clearInputs();
         //from global mixin
         this.showAlert();
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

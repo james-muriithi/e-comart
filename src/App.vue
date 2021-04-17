@@ -5,8 +5,8 @@
 <script>
 export default {
   name: "App",
-  created(){
-    this.$store.dispatch('tryLogin')
+  created() {
+    this.$store.dispatch("tryLogin");
   }
 };
 </script>

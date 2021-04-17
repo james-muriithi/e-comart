@@ -220,14 +220,14 @@ import { global } from "../../../config/index.js";
 export default {
   emits: ["close"],
   methods: {
-    logout(){
-      this.$store.dispatch('logout')
+    logout() {
+      this.$store.dispatch("logout");
       this.$store.dispatch("alert/setAlert", {
-          message: "You've been logged out",
-        });
+        message: "You've been logged out"
+      });
 
-        //from global mixin
-        this.showAlert();
+      //from global mixin
+      this.showAlert();
     }
   },
   computed: {

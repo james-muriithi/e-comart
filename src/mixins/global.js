@@ -3,7 +3,6 @@ import iziToast from "izitoast";
 import { global } from "../config/index.js";
 
 const GlobalMixins = {
-  
   computed: {
     logo() {
       return global.logo;
@@ -14,9 +13,9 @@ const GlobalMixins = {
     alertDetails() {
       return {
         message: this.$store.getters["alert/message"],
-        type: this.$store.getters["alert/type"],
+        type: this.$store.getters["alert/type"]
       };
-    },
+    }
   },
   methods: {
     showAlert() {
@@ -32,7 +31,7 @@ const GlobalMixins = {
           position: "topRight",
           onClosed: function() {
             that.$store.dispatch("alert/resetState");
-          },
+          }
         });
       } else {
         iziToast.success({
@@ -41,11 +40,11 @@ const GlobalMixins = {
           position: "topRight",
           onClosed: function() {
             that.$store.dispatch("alert/resetState");
-          },
+          }
         });
       }
-    },
-  },
+    }
+  }
 };
 
 export default GlobalMixins;
