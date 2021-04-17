@@ -1,4 +1,4 @@
-# test
+# E-comart
 
 ## Project setup
 
