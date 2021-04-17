@@ -4,7 +4,7 @@
       <img class="img" :src="userImage" alt="user" />
       <span class="text">{{displayName}}</span>
     </div>
-    <router-link to="/register" v-else class="select-menu header-user">
+    <router-link to="/login" v-else class="select-menu header-user">
       <span class="text">Login</span>
     </router-link>
     <div class="header-icon-group">
