@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
           <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
             <div class="user-form-logo">
-              <a href="/" aria-label="home"><img :src="logo" alt="logo"/></a>
+              <a href="/" aria-label="home"><img :src="logo" alt="logo" /></a>
             </div>
             <div class="user-form-card">
               <div class="user-form-title">
@@ -113,7 +113,7 @@ export default {
       name: { val: null, isValid: true },
       password: { val: null, isValid: true },
       confirmPassword: { val: null, isValid: true },
-      formIsValid: true
+      formIsValid: true,
     };
   },
   methods: {
@@ -141,19 +141,34 @@ export default {
         this.formIsValid = this.confirmPassword.isValid = false;
       }
     },
-    submitForm() {
+    async submitForm() {
       this.validateForm();
       console.log(this.name);
       if (!this.formIsValid) {
         return false;
       }
-    }
+      const actionPayload = {
+        email: this.email.val,
+        password: this.password.val,
+        displayName: this.name.val,
+      };
+
+      try {
+        await this.$store.dispatch("signup", actionPayload);
+
+        const redirectUrl = this.$route.query.redirect || "/";
+        this.$router.push(redirectUrl);
+      } catch (error) {
+        console.log(error);
+        // this.error = error;
+      }
+    },
   },
   computed: {
     logo() {
       return global.logo;
-    }
-  }
+    },
+  },
 };
 </script>
 
