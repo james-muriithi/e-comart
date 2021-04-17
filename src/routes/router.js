@@ -6,9 +6,9 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: HelloWorld,
-    },
-  ],
+      component: HelloWorld
+    }
+  ]
 });
 
 export default router;
