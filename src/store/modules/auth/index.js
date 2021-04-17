@@ -7,10 +7,30 @@ export default {
       user: null,
     };
   },
-  getters: {},
+  getters: {
+    user(state) {
+        return state.user;
+      },
+      token(state) {
+        return state.token;
+      },
+      isAuthenticated(state) {
+        return !!state.token;
+      }
+  },
   actions: {
-    async login() {},
-    async signup() {},
+    async login(context, payload) {
+        return context.dispatch('authenticate', {
+          ...payload,
+          mode: 'login'
+        });
+      },
+      async signup(context, payload) {
+        return context.dispatch('authenticate', {
+          ...payload,
+          mode: 'signup'
+        });
+      },
     async authenticate(context, payload) {
         const key = 'AIzaSyD3FCV4Oly1ztwv6OaVDiBWB0Phh2pC_sw';
         let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`;
@@ -56,6 +76,11 @@ export default {
     setUser(state, {token, user}){
         state.token = token;
         state.user = user;
-    }
+    },
+    logout(state) {
+        state.token = null;
+        state.userId = null;
+      }
+    },
   },
 };
