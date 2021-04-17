@@ -200,7 +200,7 @@
               >
             </li>
             <li>
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="#" @click.prevent="logout"
                 ><i class="icofont-ui-lock"></i><span>logout</span></a
               >
             </li>
@@ -219,6 +219,11 @@ import $ from "jquery";
 import { global } from "../../../config/index.js";
 export default {
   emits: ["close"],
+  methods: {
+    logout(){
+      this.$store.dispatch('logout')
+    }
+  },
   computed: {
     logo() {
       return global.logo;
