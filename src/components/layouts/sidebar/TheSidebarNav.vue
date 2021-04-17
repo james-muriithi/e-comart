@@ -222,6 +222,12 @@ export default {
   methods: {
     logout(){
       this.$store.dispatch('logout')
+      this.$store.dispatch("alert/setAlert", {
+          message: "You've been logged out",
+        });
+
+        //from global mixin
+        this.showAlert();
     }
   },
   computed: {

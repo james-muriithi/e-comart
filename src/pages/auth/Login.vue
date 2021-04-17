@@ -73,11 +73,6 @@
 </template>
 
 <script>
-//izitoast
-import("izitoast/dist/css/iziToast.min.css");
-import iziToast from "izitoast";
-import { global } from "../../config/index.js";
-
 export default {
   data() {
     return {
@@ -89,6 +84,10 @@ export default {
   methods: {
     clearValidity(input) {
       this[input].isValid = true;
+    },
+    clearInputs(){
+        this.email.val = null;
+        this.password.val = null;
     },
     validateForm() {
       this.formIsValid = true;
@@ -119,52 +118,21 @@ export default {
       try {
         await this.$store.dispatch("login", actionPayload);
         //set alert
-        this.$store.dispatch("alert/setAlert", {
+        await this.$store.dispatch("alert/setAlert", {
           message: "Logged in successfully",
         });
         //redirect
         const redirectUrl = this.$route.query.redirect || "/";
         this.$router.push(redirectUrl);
       } catch (error) {
-        console.log(error);
         this.$store.dispatch("alert/setAlert", {
           message: "Invalid credentials",
           type: "error",
         });
-        // this.error = error;
+        this.clearInputs();
+        //from global mixin
+        this.showAlert();
       }
-    },
-  },
-  computed: {
-    logo() {
-      return global.logo;
-    },
-    loginError() {
-      return !!this.$store.getters["alert/message"];
-    },
-    loginErrorDetails() {
-      return {
-        message: this.$store.getters["alert/message"],
-        type: this.$store.getters["alert/type"],
-      };
-    },
-  },
-  watch: {
-      //to do
-      //make a mixin
-    loginError: {
-      handler(loginError) {
-          const that = this;
-          iziToast.error({
-              title: 'Error',
-              message: this.loginErrorDetails.message,
-              position: 'topRight',
-              onClosed: function () {
-                that.$store.dispatch("alert/resetState")
-              }
-          })
-        console.log(loginError);
-      },
     },
   },
 };

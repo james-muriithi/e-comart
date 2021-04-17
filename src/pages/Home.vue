@@ -6,6 +6,11 @@
 <script>
 import $ from "jquery";
 export default {
+  created() {
+    if (this.shouldShowAlert) {
+      this.showAlert();
+    }
+  },
   methods: {
     toggleSidebar() {
       $("body").css("overflow", "hidden"),
