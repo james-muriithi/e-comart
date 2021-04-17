@@ -4,6 +4,7 @@ import App from "./App.vue";
 import router from "./routes/router";
 
 //bootstrap
+() => import("popper.js");
 () => import("bootstrap");
 
 const app = createApp(App);
