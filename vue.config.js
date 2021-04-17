@@ -4,5 +4,10 @@ module.exports = {
       args[0].title = "Ecomart - Home";
       return args;
     });
+  },
+  configureWebpack: {
+    externals: {
+      jquery: "jQuery"
+    }
   }
 };

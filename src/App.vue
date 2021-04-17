@@ -3,11 +3,14 @@
 </template>
 
 <script>
+import $ from "jquery";
 export default {
-  name: "App"
+  name: "App",
+  created() {
+    console.log($("#app"));
+  }
 };
 </script>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
