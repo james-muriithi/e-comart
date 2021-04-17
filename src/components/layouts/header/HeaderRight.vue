@@ -8,7 +8,7 @@
       <router-link to="#"
         ><i class="icofont-ui-love"></i><sup>0</sup></router-link
       >
-      <button class="icon-check">
+      <button class="icon-check" aria-label="Shopping Cart">
         <i class="icofont-shopping-cart"></i><span>$0.0</span><sup>0</sup>
       </button>
     </div>

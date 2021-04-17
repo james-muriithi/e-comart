@@ -4,10 +4,11 @@
       <button
         class="icon-nav d-inline-block mr-md-3 mr-0"
         @click="toggleSidebar"
+        aria-label="Toggle sidebar"
       >
         <i class="icofont-align-left"></i></button
       ><a class="header-logo" href="/"><img :src="logo" alt="E-comart"/></a
-      ><button class="icon-cross" @click="toggleCross">
+      ><button class="icon-cross" @click="toggleCross" aria-label="Toggle Search">
         <i class="icofont-close"></i>
       </button>
     </div>
