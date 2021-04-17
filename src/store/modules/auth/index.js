@@ -67,7 +67,7 @@ export default {
 
       //save to local storage
       localStorage.setItem("token", responseData.idToken);
-      localStorage.setItem("user", responseData);
+      localStorage.setItem("user", JSON.stringify(responseData));
       localStorage.setItem("tokenExpiration", expirationDate);
 
       timer = setTimeout(function() {
@@ -81,6 +81,37 @@ export default {
 
       console.log(timer);
     },
+    tryLogin(context) {
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user'));
+        const tokenExpiration = localStorage.getItem('tokenExpiration');
+  
+        const expiresIn = +tokenExpiration - new Date().getTime();
+  
+        if (expiresIn < 0) {
+          return;
+        }
+  
+        timer = setTimeout(function() {
+          context.dispatch('logout');
+        }, expiresIn);
+  
+        if (token && user) {
+          context.commit('setUser', {
+            token,
+             user
+          });
+        }
+      },
+      logout(context) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('tokenExpiration');
+  
+        clearTimeout(timer);
+  
+        context.commit('logout');
+      }
   },
   mutations: {
     setUser(state, { token, user }) {
