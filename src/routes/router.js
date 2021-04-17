@@ -11,8 +11,8 @@ const router = createRouter({
       component: Home
     },
     {
-      path: '/register',
-      component: Register,
+      path: "/register",
+      component: Register
     }
   ]
 });

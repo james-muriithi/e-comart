@@ -8,7 +8,11 @@
       >
         <i class="icofont-align-left"></i></button
       ><a class="header-logo" href="/"><img :src="logo" alt="E-comart"/></a
-      ><button class="icon-cross" @click="toggleCross" aria-label="Toggle Search">
+      ><button
+        class="icon-cross"
+        @click="toggleCross"
+        aria-label="Toggle Search"
+      >
         <i class="icofont-close"></i>
       </button>
     </div>

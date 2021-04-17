@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
           <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
             <div class="user-form-logo">
-              <a href="/" aria-label="home"><img :src="logo" alt="logo" /></a>
+              <a href="/" aria-label="home"><img :src="logo" alt="logo"/></a>
             </div>
             <div class="user-form-card">
               <div class="user-form-title">
@@ -13,38 +13,77 @@
                 <p>Setup a new account in a minute</p>
               </div>
               <!-- signup form -->
-              <form class="user-form">
-                  <div class="form-group">
+              <form class="user-form" @submit.prevent="submitForm">
+                <div class="form-group">
                   <input
                     type="text"
-                    class="form-control"
+                    :class="
+                      name.isValid ? 'form-control' : 'form-control is-invalid'
+                    "
                     placeholder="Enter your name"
-                    v-model.trim="name"
+                    v-model.trim="name.val"
+                    @blur="clearValidity('name')"
                   />
+                  <div v-if="!name.isValid" class="pl-1 invalid-feedback">
+                    This name field is required!
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     type="email"
-                    class="form-control"
+                    :class="
+                      email.isValid ? 'form-control' : 'form-control is-invalid'
+                    "
                     placeholder="Enter your email"
-                    v-model.trim="email"
+                    v-model.trim="email.val"
+                    @blur="clearValidity('email')"
                   />
+                  <div v-if="!email.isValid" class="pl-1 invalid-feedback">
+                    {{
+                      email.val
+                        ? "Email is not valid"
+                        : "This email field is required!"
+                    }}
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     type="password"
-                    class="form-control"
+                    :class="
+                      password.isValid
+                        ? 'form-control'
+                        : 'form-control is-invalid'
+                    "
                     placeholder="Enter your password"
-                    v-model.trim="password"
+                    v-model.trim="password.val"
+                    @blur="clearValidity('password')"
                   />
+                  <div v-if="!password.isValid" class="pl-1 invalid-feedback">
+                    {{
+                      password.val
+                        ? "Password must be 6 or more characters"
+                        : "This pasword field is required!"
+                    }}
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     type="password"
-                    class="form-control"
+                    :class="
+                      confirmPassword.isValid
+                        ? 'form-control'
+                        : 'form-control is-invalid'
+                    "
                     placeholder="repeat password"
-                    v-model.trim="confirmPassword"
+                    v-model.trim="confirmPassword.val"
+                    @blur="clearValidity('confirmPassword')"
                   />
+                  <div
+                    v-if="!confirmPassword.isValid"
+                    class="pl-1 invalid-feedback"
+                  >
+                    The 2 passwords need to be the same
+                  </div>
                 </div>
                 <div class="form-button">
                   <button type="submit">signup</button>
@@ -70,21 +109,53 @@ import { global } from "../../config/index.js";
 export default {
   data() {
     return {
-        email: null,
-        name: null,
-        password: null,
-        confirmPassword: null,
-        formIsValid: true,
+      email: { val: null, isValid: true },
+      name: { val: null, isValid: true },
+      password: { val: null, isValid: true },
+      confirmPassword: { val: null, isValid: true },
+      formIsValid: true
     };
+  },
+  methods: {
+    clearValidity(input) {
+      this[input].isValid = true;
+    },
+    validateForm() {
+      this.formIsValid = true;
+      if (!this.name.val) {
+        this.formIsValid = this.name.isValid = false;
+      }
+      if (
+        !this.email.val ||
+        (this.email.val && !this.email.val.includes("@"))
+      ) {
+        this.formIsValid = this.email.isValid = false;
+      }
+      if (
+        !this.password.val ||
+        (this.password.val && this.password.val.length < 6)
+      ) {
+        this.formIsValid = this.password.isValid = false;
+      }
+      if (this.confirmPassword.val !== this.password.val) {
+        this.formIsValid = this.confirmPassword.isValid = false;
+      }
+    },
+    submitForm() {
+      this.validateForm();
+      console.log(this.name);
+      if (!this.formIsValid) {
+        return false;
+      }
+    }
   },
   computed: {
     logo() {
       return global.logo;
-    },
-  },
+    }
+  }
 };
 </script>
-
 
 <style scoped>
 .user-form-part {
