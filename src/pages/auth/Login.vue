@@ -1,11 +1,11 @@
 <template>
-    <div>
+  <div>
     <section class="user-form-part">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
             <div class="user-form-logo">
-              <a href="/" aria-label="home"><img :src="logo" alt="logo" /></a>
+              <a href="/" aria-label="home"><img :src="logo" alt="logo"/></a>
             </div>
             <div class="user-form-card">
               <div class="user-form-title">
@@ -52,7 +52,7 @@
                     }}
                   </div>
                 </div>
-                
+
                 <div class="form-button">
                   <button type="submit">login</button>
                   <p>Forgot your password?<a href="#">reset here</a></p>
@@ -73,6 +73,9 @@
 </template>
 
 <script>
+//izitoast
+import("izitoast/dist/css/iziToast.min.css");
+import iziToast from "izitoast";
 import { global } from "../../config/index.js";
 
 export default {
@@ -104,7 +107,7 @@ export default {
     },
     async submitForm() {
       this.validateForm();
-      
+
       if (!this.formIsValid) {
         return false;
       }
@@ -115,11 +118,19 @@ export default {
 
       try {
         await this.$store.dispatch("login", actionPayload);
-
+        //set alert
+        this.$store.dispatch("alert/setAlert", {
+          message: "Logged in successfully",
+        });
+        //redirect
         const redirectUrl = this.$route.query.redirect || "/";
         this.$router.push(redirectUrl);
       } catch (error) {
         console.log(error);
+        this.$store.dispatch("alert/setAlert", {
+          message: "Invalid credentials",
+          type: "error",
+        });
         // this.error = error;
       }
     },
@@ -127,6 +138,33 @@ export default {
   computed: {
     logo() {
       return global.logo;
+    },
+    loginError() {
+      return !!this.$store.getters["alert/message"];
+    },
+    loginErrorDetails() {
+      return {
+        message: this.$store.getters["alert/message"],
+        type: this.$store.getters["alert/type"],
+      };
+    },
+  },
+  watch: {
+      //to do
+      //make a mixin
+    loginError: {
+      handler(loginError) {
+          const that = this;
+          iziToast.error({
+              title: 'Error',
+              message: this.loginErrorDetails.message,
+              position: 'topRight',
+              onClosed: function () {
+                that.$store.dispatch("alert/resetState")
+              }
+          })
+        console.log(loginError);
+      },
     },
   },
 };
