@@ -23,20 +23,9 @@
 </template>
 
 <script>
-import { global } from "../../../config/index.js";
-
 export default {
   computed: {
-    userImage() {
-      return global.defaultUserImage;
-    },
-    isLoggedIn() {
-      return this.$store.getters.isAuthenticated;
-    },
-    displayName() {
-      console.log(this.$store.getters.user);
-      return this.$store.getters.user.displayName || "";
-    }
+    
   },
   inject: ["toggleSidebar"]
 };

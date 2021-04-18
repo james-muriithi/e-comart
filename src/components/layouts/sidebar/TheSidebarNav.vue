@@ -4,7 +4,7 @@
       <div class="nav-header">
         <button class="nav-close" aria-label="close sidebar">
           <i class="icofont-close"></i></button
-        ><a class="nav-logo" href="?"><img :src="logo" alt="logo"/></a>
+        ><a class="nav-logo" href="?"><img :src="logo" alt="logo" /></a>
         <ul class="nav nav-tabs">
           <li>
             <a href="#cate-list" class="nav-link active" data-toggle="tab"
@@ -135,13 +135,14 @@
         </div>
 
         <div class="tab-pane" id="menu-list">
-          <div class="nav-profile">
-            <a href="#"
-              ><img
-                src="https://mironmahmud.com/ecomart/assets/ltr/images/user.png"
-                alt="user"
-            /></a>
-            <h4><a href="#">Miron Mahmud</a></h4>
+          <div class="nav-profile" v-if="isLoggedIn">
+            <a href="#"><img :src="userImage" alt="user" /></a>
+            <h4><a href="#">{{ displayName }}</a></h4>
+          </div>
+          <div v-else class="nav-profile my-3">
+            <router-link to="/login" class="login-btn text-center">
+              Login
+            </router-link>
           </div>
           <ul class="nav-list">
             <li>
@@ -154,37 +155,27 @@
                 ><i class="icofont-sale-discount"></i><span>offers</span></a
               >
             </li>
-            <li>
-              <a class="nav-link" href="#"
-                ><i class="icofont-shield"></i><span>brands</span></a
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="#"
-                ><i class="icofont-crown"></i><span>brand profile</span></a
-              >
-            </li>
-            <li>
+            <li v-if="isLoggedIn">
               <a class="nav-link" href="#"
                 ><i class="icofont-ui-user"></i><span>my profile</span></a
               >
             </li>
-            <li>
+            <li v-if="isLoggedIn">
               <a class="nav-link" href="#"
                 ><i class="icofont-ui-love"></i><span>wishlist</span></a
               >
             </li>
-            <li>
+            <li v-if="isLoggedIn">
               <a class="nav-link" href="#"
                 ><i class="icofont-ui-check"></i><span>checkout</span></a
               >
             </li>
-            <li>
+            <li v-if="isLoggedIn">
               <a class="nav-link" href="#"
-                ><i class="icofont-basket"></i><span>your order</span></a
+                ><i class="icofont-basket"></i><span>orders</span></a
               >
             </li>
-            <li>
+            <li v-if="isLoggedIn">
               <a class="nav-link" href="#"
                 ><i class="icofont-page"></i><span>order invoice</span></a
               >
@@ -200,7 +191,7 @@
                 ><i class="icofont-contacts"></i><span>contact us</span></a
               >
             </li>
-            <li>
+            <li v-if="isLoggedIn">
               <a class="nav-link" href="#" @click.prevent="logout"
                 ><i class="icofont-ui-lock"></i><span>logout</span></a
               >
@@ -217,27 +208,27 @@
 
 <script>
 import $ from "jquery";
-import { global } from "../../../config/index.js";
+
 export default {
   emits: ["close"],
   methods: {
     logout() {
       this.$store.dispatch("logout");
       this.$store.dispatch("alert/setAlert", {
-        message: "You've been logged out"
+        message: "You've been logged out",
       });
 
       //from global mixin
       this.showAlert();
-    }
+    },
   },
   computed: {
-    logo() {
-      return global.logo;
-    }
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
   },
   created() {
-    $(document).on("mouseup", e => {
+    $(document).on("mouseup", (e) => {
       var container = $(".sidebar-nav.active .nav-container");
 
       if (
@@ -250,21 +241,38 @@ export default {
     });
 
     //dropdowns
-    $(function() {
-      $(".dropdown").click(function() {
-        $(this)
-          .next()
-          .toggle(),
+    $(function () {
+      $(".dropdown").click(function () {
+        $(this).next().toggle(),
           $(".dropdown-list:visible").length > 1 &&
-            ($(".dropdown-list:visible").hide(),
-            $(this)
-              .next()
-              .show());
+            ($(".dropdown-list:visible").hide(), $(this).next().show());
       });
     });
   },
   unmounted() {
     $(".sidebar-nav.active .nav-container").off("mouseup");
-  }
+  },
 };
 </script>
+
+
+<style scoped>
+.login-btn {
+  width: 100%;
+  height: 38px;
+  margin: 0px 5px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 13px;
+  border-radius: 5px;
+  letter-spacing: 0.3px;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--primary);
+  text-shadow: var(--primary-tshadow);
+  position: relative;
+  padding-top: 10px;
+}
+</style>
