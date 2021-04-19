@@ -20,18 +20,34 @@
       </div>
       <div class="nav-content">
         <div class="tab-pane active mt-3" id="cate-list">
-          <ul class="cate-list">
+          <div class="mt-2" v-if="isLoading">
+            <loading-shimmer
+              v-for="i in loadingElements"
+              :key="i"
+            ></loading-shimmer>
+          </div>
+          <ul class="cate-list" v-else>
             <li v-for="category in categories" :key="category.id">
               <a class="cate-link dropdown" href="#"
-                ><i :class="category.iconClass"></i><span>{{category.name || ''}}</span></a
+                ><i :class="category.iconClass"></i
+                ><span>{{ category.name || "" }}</span></a
               >
-              <ul class="dropdown-list" v-if="category.subCategories && category.subCategories.length > 0">
+
+              <ul
+                class="dropdown-list"
+                v-if="
+                  category.subCategories && category.subCategories.length > 0
+                "
+              >
                 <li v-for="subcat in category.subCategories" :key="subcat.name">
-                  <a :href="subcat.url || '#'">{{subcat.name}}</a>
-                  </li>
+                  <a :href="subcat.url || '#'">{{ subcat.name }}</a>
+                </li>
               </ul>
             </li>
-            <div class="text-center mt-5" v-if="!categories || categories.length == 0">
+            <div
+              class="text-center mt-5"
+              v-if="!categories || categories.length == 0"
+            >
               <p><b>No categories</b></p>
             </div>
           </ul>
@@ -115,9 +131,18 @@
 import $ from "jquery";
 import { fetchCategories } from "../../../helpers/FirebaseFunctions.js";
 import { saveToStorage } from "../../../helpers/LocalStorage.js";
+import LoadingShimmer from "./LoadingShimmer.vue";
 
 export default {
+  components: {
+    LoadingShimmer,
+  },
   emits: ["close"],
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   methods: {
     logout() {
       this.$store.dispatch("logout");
@@ -129,14 +154,14 @@ export default {
       this.showAlert();
     },
     async loadCategories() {
+      this.isLoading = true;
       let categories = await fetchCategories();
 
-      saveToStorage('categories', categories, true);
+      saveToStorage("categories", categories, true);
 
-      console.log(categories);
+      this.$store.dispatch("setCategories", { categories });
 
-      this.$store.dispatch('setCategories', {categories});
-
+      this.isLoading = false;
     },
   },
   computed: {
@@ -145,6 +170,9 @@ export default {
     },
     categories() {
       return this.$store.getters.categories;
+    },
+    loadingElements() {
+      return new Array(5).fill(1);
     },
   },
   created() {
@@ -159,18 +187,18 @@ export default {
         this.$emit("close");
       }
     });
-  },
-  mounted() {
-    this.loadCategories()
 
     //dropdowns
     $(function () {
-      $(".dropdown").click(function () {
+      $("#app").on("click", ".dropdown", function () {
         $(this).next().toggle(),
           $(".dropdown-list:visible").length > 1 &&
             ($(".dropdown-list:visible").hide(), $(this).next().show());
       });
     });
+  },
+  mounted() {
+    this.loadCategories();
   },
   unmounted() {
     $(".sidebar-nav.active .nav-container").off("mouseup");
