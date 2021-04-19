@@ -32,11 +32,11 @@
                 ><i :class="category.iconClass"></i
                 ><span>{{ category.name || "" }}</span></a
               >
-
+              
               <ul
                 class="dropdown-list"
                 v-if="
-                  category.subCategories && category.subCategories.length > 0
+                  !!category.subCategories && category.subCategories.length > 0
                 "
               >
                 <li v-for="subcat in category.subCategories" :key="subcat.name">
@@ -129,8 +129,6 @@
 
 <script>
 import $ from "jquery";
-import { fetchCategories } from "../../../helpers/FirebaseFunctions.js";
-import { saveToStorage } from "../../../helpers/LocalStorage.js";
 import LoadingShimmer from "./LoadingShimmer.vue";
 
 export default {
@@ -155,11 +153,8 @@ export default {
     },
     async loadCategories() {
       this.isLoading = true;
-      let categories = await fetchCategories();
-
-      saveToStorage("categories", categories, true);
-
-      this.$store.dispatch("setCategories", { categories });
+      
+      await this.$store.dispatch('fetchCategories')
 
       this.isLoading = false;
     },

@@ -5,25 +5,16 @@ async function fetchCategories() {
   let categories = [];
   try {
     const querySnapshot = await db.collection("categories").get();
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach(async (doc) => {
+      let subCategories = doc.data().sub_categories; 
+
       let category = {
         id: doc.id,
         name: doc.data().name,
         iconClass: doc.data().icon_class,
-        subCategories: [],
+        subCategories: await fetchSubCategories(subCategories)
       };
 
-      let subCategories = doc.data().sub_categories;
-      if (subCategories && subCategories.length > 0) {
-        subCategories.forEach(async (d) => {
-          const sc = await d.get();
-          const scData = sc.data();
-          category.subCategories.push({
-            name: scData.name,
-            url: scData.url,
-          });
-        });
-      }
       categories.push(category);
     });
     return categories;
@@ -32,12 +23,20 @@ async function fetchCategories() {
   }
 }
 
-async function fetchSubCategory(id, collection = "sub_categories") {
-  const subCategory = await db
-    .collection(collection)
-    .doc(id)
-    .get();
-  return subCategory;
+async function fetchSubCategories(subCategories) {
+  let subs = [];
+  if (subCategories && subCategories.length > 0) {
+    subCategories.forEach(async (d) => {
+      const sc = await d.get();
+      const scData = sc.data();
+      subs.push({
+        name: scData.name,
+        url: scData.url,
+      });
+    });
+  }
+
+  return subs;
 }
 
-export { fetchCategories, fetchSubCategory };
+export { fetchCategories };
