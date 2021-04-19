@@ -24,9 +24,7 @@
 
 <script>
 export default {
-  computed: {
-    
-  },
+  computed: {},
   inject: ["toggleSidebar"]
 };
 </script>

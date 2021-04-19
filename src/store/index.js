@@ -8,7 +8,7 @@ const store = createStore({
   modules: {
     auth: AuthModule,
     alert: AlertModule,
-    menus: MenuModule,
+    menus: MenuModule
   }
 });
 

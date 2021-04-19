@@ -4,7 +4,7 @@
       <div class="nav-header">
         <button class="nav-close" aria-label="close sidebar">
           <i class="icofont-close"></i></button
-        ><a class="nav-logo" href="?"><img :src="logo" alt="logo" /></a>
+        ><a class="nav-logo" href="?"><img :src="logo" alt="logo"/></a>
         <ul class="nav nav-tabs">
           <li>
             <a href="#cate-list" class="nav-link active" data-toggle="tab"
@@ -32,7 +32,7 @@
                 ><i :class="category.iconClass"></i
                 ><span>{{ category.name || "" }}</span></a
               >
-              
+
               <ul
                 class="dropdown-list"
                 v-if="
@@ -55,7 +55,7 @@
 
         <div class="tab-pane" id="menu-list">
           <div class="nav-profile" v-if="isLoggedIn">
-            <a href="#"><img :src="userImage" alt="user" /></a>
+            <a href="#"><img :src="userImage" alt="user"/></a>
             <h4>
               <a href="#">{{ displayName }}</a>
             </h4>
@@ -133,19 +133,19 @@ import LoadingShimmer from "./LoadingShimmer.vue";
 
 export default {
   components: {
-    LoadingShimmer,
+    LoadingShimmer
   },
   emits: ["close"],
   data() {
     return {
-      isLoading: false,
+      isLoading: false
     };
   },
   methods: {
     logout() {
       this.$store.dispatch("logout");
       this.$store.dispatch("alert/setAlert", {
-        message: "You've been logged out",
+        message: "You've been logged out"
       });
 
       //from global mixin
@@ -153,11 +153,11 @@ export default {
     },
     async loadCategories() {
       this.isLoading = true;
-      
-      await this.$store.dispatch('fetchCategories')
+
+      await this.$store.dispatch("fetchCategories");
 
       this.isLoading = false;
-    },
+    }
   },
   computed: {
     isLoggedIn() {
@@ -168,10 +168,10 @@ export default {
     },
     loadingElements() {
       return new Array(5).fill(1);
-    },
+    }
   },
   created() {
-    $(document).on("mouseup", (e) => {
+    $(document).on("mouseup", e => {
       var container = $(".sidebar-nav.active .nav-container");
 
       if (
@@ -184,11 +184,16 @@ export default {
     });
 
     //dropdowns
-    $(function () {
-      $("#app").on("click", ".dropdown", function () {
-        $(this).next().toggle(),
+    $(function() {
+      $("#app").on("click", ".dropdown", function() {
+        $(this)
+          .next()
+          .toggle(),
           $(".dropdown-list:visible").length > 1 &&
-            ($(".dropdown-list:visible").hide(), $(this).next().show());
+            ($(".dropdown-list:visible").hide(),
+            $(this)
+              .next()
+              .show());
       });
     });
   },
@@ -197,10 +202,9 @@ export default {
   },
   unmounted() {
     $(".sidebar-nav.active .nav-container").off("mouseup");
-  },
+  }
 };
 </script>
-
 
 <style scoped>
 .login-btn {

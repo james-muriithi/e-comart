@@ -1,23 +1,24 @@
 import { fetchCategories } from "../../../helpers/FirebaseFunctions.js";
-import {
-  getFromStorage,
-} from "../../../helpers/LocalStorage.js";
+import { getFromStorage } from "../../../helpers/LocalStorage.js";
 
 export default {
   state() {
     return {
-      categories: [],
+      categories: []
     };
   },
   mutations: {
     setCategories(state, { categories }) {
-        console.log(categories);
+      console.log(categories);
       state.categories = Object.assign({}, state.categories, categories);
-    },
+    }
   },
   actions: {
     async fetchCategories({ commit, getters }, forceReload = true) {
-      if (!forceReload && (!getters.categories || getters.categories.length == 0)) {
+      if (
+        !forceReload &&
+        (!getters.categories || getters.categories.length == 0)
+      ) {
         categories = getFromStorage("categories", true) || [];
         commit("setCategories", { categories });
       }
@@ -28,14 +29,14 @@ export default {
 
       let categories = await fetchCategories();
 
-    //   saveToStorage("categories", categories, true);
+      //   saveToStorage("categories", categories, true);
 
       commit("setCategories", { categories });
-    },
+    }
   },
   getters: {
     categories(state) {
       return state.categories;
-    },
-  },
+    }
+  }
 };

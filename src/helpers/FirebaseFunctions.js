@@ -5,8 +5,8 @@ async function fetchCategories() {
   let categories = [];
   try {
     const querySnapshot = await db.collection("categories").get();
-    querySnapshot.forEach(async (doc) => {
-      let subCategories = doc.data().sub_categories; 
+    querySnapshot.forEach(async doc => {
+      let subCategories = doc.data().sub_categories;
 
       let category = {
         id: doc.id,
@@ -26,12 +26,12 @@ async function fetchCategories() {
 async function fetchSubCategories(subCategories) {
   let subs = [];
   if (subCategories && subCategories.length > 0) {
-    subCategories.forEach(async (d) => {
+    subCategories.forEach(async d => {
       const sc = await d.get();
       const scData = sc.data();
       subs.push({
         name: scData.name,
-        url: scData.url,
+        url: scData.url
       });
     });
   }

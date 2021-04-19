@@ -10,7 +10,7 @@ var firebaseConfig = {
   storageBucket: "e-comart.appspot.com",
   messagingSenderId: "758831920732",
   appId: "1:758831920732:web:4c9a7e67426e1a3c271899",
-  measurementId: "G-LDPFDBFXBY",
+  measurementId: "G-LDPFDBFXBY"
 };
 
 // Initialize Firebase
