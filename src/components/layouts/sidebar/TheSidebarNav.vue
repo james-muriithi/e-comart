@@ -21,9 +21,9 @@
       <div class="nav-content">
         <div class="tab-pane active mt-3" id="cate-list">
           <ul class="cate-list">
-            <li v-for="category in categories" :key="category.name" >
+            <li v-for="category in categories" :key="category.id">
               <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-vegetable"></i><span>vegetables</span></a
+                ><i :class="category.iconClass"></i><span>{{category.name || ''}}</span></a
               >
               <ul class="dropdown-list">
                 <li><a href="#">asparagus</a></li>
@@ -31,7 +31,7 @@
                 <li><a href="#">carrot</a></li>
               </ul>
             </li>
-            <div class="text-center mt-5" v-if="categories.length == 0">
+            <div class="text-center mt-5" v-if="!categories || categories.length == 0">
               <p><b>No categories</b></p>
             </div>
           </ul>
@@ -40,7 +40,9 @@
         <div class="tab-pane" id="menu-list">
           <div class="nav-profile" v-if="isLoggedIn">
             <a href="#"><img :src="userImage" alt="user" /></a>
-            <h4><a href="#">{{ displayName }}</a></h4>
+            <h4>
+              <a href="#">{{ displayName }}</a>
+            </h4>
           </div>
           <div v-else class="nav-profile my-3">
             <router-link to="/login" class="login-btn text-center">
@@ -111,6 +113,8 @@
 
 <script>
 import $ from "jquery";
+import { fetchCategories } from "../../../helpers/FirebaseFunctions.js";
+import { saveToStorage } from "../../../helpers/LocalStorage.js";
 
 export default {
   emits: ["close"],
@@ -124,14 +128,24 @@ export default {
       //from global mixin
       this.showAlert();
     },
+    async loadCategories() {
+      let categories = await fetchCategories();
+
+      saveToStorage('categories', categories, true);
+
+      console.log(categories);
+
+      this.$store.dispatch('setCategories', {categories});
+
+    },
   },
   computed: {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
     },
-    categories(){
+    categories() {
       return this.$store.getters.categories;
-    }
+    },
   },
   created() {
     $(document).on("mouseup", (e) => {
@@ -154,6 +168,9 @@ export default {
             ($(".dropdown-list:visible").hide(), $(this).next().show());
       });
     });
+  },
+  mounted() {
+    this.loadCategories()
   },
   unmounted() {
     $(".sidebar-nav.active .nav-container").off("mouseup");
@@ -181,7 +198,7 @@ export default {
   position: relative;
   padding-top: 10px;
 }
-#cate-list{
+#cate-list {
   min-height: 60%;
 }
 </style>
