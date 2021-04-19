@@ -2,11 +2,13 @@ import { createStore } from "vuex";
 
 import AuthModule from "./modules/auth/index.js";
 import AlertModule from "./modules/alert/index.js";
+import MenuModule from "./modules/menu/index.js";
 
 const store = createStore({
   modules: {
-    AuthModule,
-    alert: AlertModule
+    auth: AuthModule,
+    alert: AlertModule,
+    menus: MenuModule,
   }
 });
 

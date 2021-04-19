@@ -21,7 +21,7 @@
       <div class="nav-content">
         <div class="tab-pane active mt-3" id="cate-list">
           <ul class="cate-list">
-            <li>
+            <li v-for="category in categories" :key="category.name" >
               <a class="cate-link dropdown" href="#"
                 ><i class="flaticon-vegetable"></i><span>vegetables</span></a
               >
@@ -31,106 +31,9 @@
                 <li><a href="#">carrot</a></li>
               </ul>
             </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-fruit"></i><span>fruits</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">Apple</a></li>
-                <li><a href="#">Orange</a></li>
-                <li><a href="#">Strawberry</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-fish"></i><span>fishes</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">elish</a></li>
-                <li><a href="#">pangash</a></li>
-                <li><a href="#">telapiya</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-barbecue"></i><span>meats</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">beaf</a></li>
-                <li><a href="#">chiken</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-crab"></i><span>sea foods</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">Lobster</a></li>
-                <li><a href="#">Octopus</a></li>
-                <li><a href="#">Shrimp</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-salad"></i><span>vegan foods</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">Legumes</a></li>
-                <li><a href="#">Seaweed</a></li>
-                <li><a href="#">Sprouted</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-dried-fruit"></i><span>dry foods</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">Almond</a></li>
-                <li><a href="#">Betel nut</a></li>
-                <li><a href="#">Cashew</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-cheers"></i><span>drinks</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">Lemonade</a></li>
-                <li><a href="#">Milkshake</a></li>
-                <li><a href="#">water</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-dairy-products"></i
-                ><span>dairy farm</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">egge</a></li>
-                <li><a href="#">milk</a></li>
-                <li><a href="#">butter</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-wheat-sack"></i><span>rices</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">Finger Millet</a></li>
-                <li><a href="#">Flattened Rice</a></li>
-                <li><a href="#">Gram Flour</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="cate-link dropdown" href="#"
-                ><i class="flaticon-beverage"></i><span>snacks</span></a
-              >
-              <ul class="dropdown-list">
-                <li><a href="#">Onion rings</a></li>
-                <li><a href="#">Piattos</a></li>
-                <li><a href="#">Sev mamra</a></li>
-              </ul>
-            </li>
+            <div class="text-center mt-5" v-if="categories.length == 0">
+              <p><b>No categories</b></p>
+            </div>
           </ul>
         </div>
 
@@ -226,6 +129,9 @@ export default {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
     },
+    categories(){
+      return this.$store.getters.categories;
+    }
   },
   created() {
     $(document).on("mouseup", (e) => {
@@ -274,5 +180,8 @@ export default {
   text-shadow: var(--primary-tshadow);
   position: relative;
   padding-top: 10px;
+}
+#cate-list{
+  min-height: 60%;
 }
 </style>
