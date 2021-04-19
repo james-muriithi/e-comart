@@ -25,10 +25,10 @@
               <a class="cate-link dropdown" href="#"
                 ><i :class="category.iconClass"></i><span>{{category.name || ''}}</span></a
               >
-              <ul class="dropdown-list">
-                <li><a href="#">asparagus</a></li>
-                <li><a href="#">broccoli</a></li>
-                <li><a href="#">carrot</a></li>
+              <ul class="dropdown-list" v-if="category.subCategories && category.subCategories.length > 0">
+                <li v-for="subcat in category.subCategories" :key="subcat.name">
+                  <a :href="subcat.url || '#'">{{subcat.name}}</a>
+                  </li>
               </ul>
             </li>
             <div class="text-center mt-5" v-if="!categories || categories.length == 0">
@@ -159,6 +159,9 @@ export default {
         this.$emit("close");
       }
     });
+  },
+  mounted() {
+    this.loadCategories()
 
     //dropdowns
     $(function () {
@@ -168,9 +171,6 @@ export default {
             ($(".dropdown-list:visible").hide(), $(this).next().show());
       });
     });
-  },
-  mounted() {
-    this.loadCategories()
   },
   unmounted() {
     $(".sidebar-nav.active .nav-container").off("mouseup");
