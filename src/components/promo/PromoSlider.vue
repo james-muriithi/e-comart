@@ -1,33 +1,10 @@
 <template>
   <section class="promo-part">
     <div class="container">
-      <ul class="promo-slider slider-arrow">
-        <li>
-          <a href="#"
-            ><img
-              src="https://mironmahmud.com/ecomart/assets/ltr/images/promo/01.jpg"
-              alt="promo"
-          /></a>
-        </li>
-        <li>
-          <a href="#"
-            ><img
-              src="https://mironmahmud.com/ecomart/assets/ltr/images/promo/02.jpg"
-              alt="promo"
-          /></a>
-        </li>
-        <li>
-          <a href="#"
-            ><img
-              src="https://mironmahmud.com/ecomart/assets/ltr/images/promo/03.jpg"
-              alt="promo"
-          /></a>
-        </li>
-        <li>
-          <a href="#"
-            ><img
-              src="https://mironmahmud.com/ecomart/assets/ltr/images/promo/04.jpg"
-              alt="promo"
+      <ul class="promo-slider slider-arrow" ref="promo_slider">
+        <li v-for="slider in sliders" :key="slider.id">
+          <a :href="slider.url"
+            ><img :src="slider.image" :alt="slider.title"
           /></a>
         </li>
       </ul>
@@ -38,6 +15,36 @@
 <script>
 import $ from "jquery";
 export default {
+  data() {
+    return {
+      sliders: [
+        {
+          id: 1,
+          url: "#",
+          image: require("../../assets/images/offer1.jpg"),
+          title: "promo",
+        },
+        {
+          id: 2,
+          url: "#",
+          image: require("../../assets/images/offer2.jpg"),
+          title: "promo",
+        },
+        {
+          id: 3,
+          url: "#",
+          image: require("../../assets/images/offer3.jpg"),
+          title: "promo",
+        },
+        {
+          id: 4,
+          url: "#",
+          image: require("../../assets/images/offer4.jpg"),
+          title: "promo",
+        },
+      ],
+    };
+  },
   mounted() {
     $(".promo-slider").slick({
       dots: !1,
@@ -58,47 +65,7 @@ export default {
         { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } },
         { breakpoint: 576, settings: { slidesToShow: 1, slidesToScroll: 1 } },
       ],
-    }),
-      $(".preview-slider").slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: !0,
-        fade: !0,
-        asNavFor: ".thumb-slider",
-        prevArrow: '<i class="icofont-arrow-right dandik"></i>',
-        nextArrow: '<i class="icofont-arrow-left bamdik"></i>',
-        responsive: [
-          {
-            breakpoint: 576,
-            settings: { slidesToShow: 1, slidesToScroll: 1, arrows: !0 },
-          },
-        ],
-      }),
-      $(".thumb-slider").slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        asNavFor: ".preview-slider",
-        dots: !1,
-        arrows: !1,
-        centerMode: !0,
-        focusOnSelect: !0,
-        responsive: [
-          { breakpoint: 992, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-          { breakpoint: 768, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-          {
-            breakpoint: 576,
-            settings: { slidesToShow: 3, slidesToScroll: 1, arrows: !1 },
-          },
-          {
-            breakpoint: 400,
-            settings: { slidesToShow: 2, slidesToScroll: 1, arrows: !1 },
-          },
-        ],
-      }),
-      $(".modal").on("shown.bs.modal", function () {
-        $(".preview-slider, .thumb-slider").slick("setPosition"),
-          $(".product-details-image").addClass("slider-opacity");
-      });
+    });
   },
 };
 </script>
