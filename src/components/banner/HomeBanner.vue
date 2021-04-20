@@ -3,20 +3,13 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <div
-            class="banner-content"
-            :style="bannerStyle"
-          >
-            <h1>get your gadget items quickly.</h1>
+          <div class="banner-content" :style="bannerStyle">
+            <h1>{{ title }}</h1>
             <p>
-              We are always ready to deliver product to your doorstep every day
+              {{ description }}
             </p>
             <form class="banner-form">
-              <input type="text" placeholder="Search anything..." /><button
-                type="submit"
-              >
-                <i class="icofont-ui-search"></i><span>search</span>
-              </button>
+              <the-seach-bar :title="true"></the-seach-bar>
             </form>
           </div>
         </div>
@@ -26,13 +19,23 @@
 </template>
 
 <script>
+import TheSeachBar from "../ui/TheSeachBar.vue";
 export default {
-    computed:{
-        bannerStyle(){
-            return `background: url(${require('../../assets/images/banner.jpg')})
+  components: { TheSeachBar },
+  data() {
+    return {
+      title: "get your gadget items quickly.",
+      description:
+        "We are always ready to deliver product to your doorstep every day",
+        bannerImage: require("../../assets/images/banner.jpg")
+    };
+  },
+  computed: {
+    bannerStyle() {
+      return `background: url(${this.bannerImage})
                 no-repeat center;
               background-size: cover;`;
-        }
-    }    
-}
+    },
+  },
+};
 </script>

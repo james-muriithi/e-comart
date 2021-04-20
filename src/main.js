@@ -10,6 +10,7 @@ import("bootstrap");
 //components
 import TheHeader from "./components/layouts/header/TheHeader.vue";
 import TheSidebarNav from "./components/layouts/sidebar/TheSidebarNav.vue";
+import TheSearchBar from "./components/ui/TheSeachBar.vue";
 import GlobalMixins from "./mixins/global";
 
 const app = createApp(App);
@@ -21,5 +22,6 @@ app.mixin(GlobalMixins);
 
 app.component("the-header", TheHeader);
 app.component("the-sidebar-nav", TheSidebarNav);
+app.component("the-searchbar", TheSearchBar);
 
 app.mount("#app");

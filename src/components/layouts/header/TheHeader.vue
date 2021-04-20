@@ -4,10 +4,7 @@
       <header-left></header-left>
 
       <div class="header-middle">
-        <input type="text" placeholder="Search anything..." />
-        <button type="submit" aria-label="Search">
-          <i class="icofont-ui-search"></i>
-        </button>
+        <the-seach-bar></the-seach-bar>
       </div>
       <header-right></header-right>
     </div>
@@ -15,12 +12,14 @@
 </template>
 
 <script>
+import TheSeachBar from '../../ui/TheSeachBar.vue';
 import HeaderLeft from "./HeaderLeft.vue";
 import HeaderRight from "./HeaderRight.vue";
 export default {
   components: {
     HeaderLeft,
-    HeaderRight
+    HeaderRight,
+    TheSeachBar
   }
 };
 </script>
