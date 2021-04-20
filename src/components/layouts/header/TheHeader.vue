@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import TheSeachBar from '../../ui/TheSeachBar.vue';
+import TheSeachBar from "../../ui/TheSeachBar.vue";
 import HeaderLeft from "./HeaderLeft.vue";
 import HeaderRight from "./HeaderRight.vue";
 export default {

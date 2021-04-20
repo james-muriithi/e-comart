@@ -67,14 +67,14 @@ export default {
       labels: [
         {
           title: "new",
-          type: "label-new",
+          type: "label-new"
         },
         {
           title: "-10%",
-          type: "label-off",
-        },
-      ],
+          type: "label-off"
+        }
+      ]
     };
-  },
+  }
 };
 </script>

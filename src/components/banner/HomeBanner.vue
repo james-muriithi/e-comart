@@ -27,7 +27,7 @@ export default {
       title: "get your gadget items quickly.",
       description:
         "We are always ready to deliver product to your doorstep every day",
-        bannerImage: require("../../assets/images/banner.jpg")
+      bannerImage: require("../../assets/images/banner.jpg")
     };
   },
   computed: {
@@ -35,7 +35,7 @@ export default {
       return `background: url(${this.bannerImage})
                 no-repeat center;
               background-size: cover;`;
-    },
-  },
+    }
+  }
 };
 </script>

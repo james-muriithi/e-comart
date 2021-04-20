@@ -17,7 +17,7 @@ export default {
   components: {
     HomeBanner,
     PromoSlider,
-    ProductSection,
+    ProductSection
   },
   created() {
     if (this.shouldShowAlert) {
@@ -28,16 +28,16 @@ export default {
     toggleSidebar() {
       $("body").css("overflow", "hidden"),
         $(".sidebar-nav").toggleClass("active"),
-        $(".nav-close").on("click", function () {
+        $(".nav-close").on("click", function() {
           $("body").css("overflow-y", "scroll"),
             $(".sidebar-nav").removeClass("active");
         });
-    },
+    }
   },
   provide() {
     return {
-      toggleSidebar: this.toggleSidebar,
+      toggleSidebar: this.toggleSidebar
     };
-  },
+  }
 };
 </script>

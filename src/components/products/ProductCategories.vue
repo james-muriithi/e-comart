@@ -27,11 +27,11 @@
 import LoadingShimmer from "../layouts/sidebar/LoadingShimmer.vue";
 export default {
   components: {
-    LoadingShimmer,
+    LoadingShimmer
   },
   data() {
     return {
-      isLoading: false,
+      isLoading: false
     };
   },
   methods: {
@@ -41,7 +41,7 @@ export default {
       await this.$store.dispatch("fetchCategories");
 
       this.isLoading = false;
-    },
+    }
   },
   computed: {
     categories() {
@@ -49,10 +49,10 @@ export default {
     },
     loadingElements() {
       return new Array(5).fill(1);
-    },
+    }
   },
   mounted() {
     this.loadCategories();
-  },
+  }
 };
 </script>
