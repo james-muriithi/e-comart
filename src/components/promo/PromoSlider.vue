@@ -22,39 +22,41 @@ export default {
           id: 1,
           url: "#",
           image: require("../../assets/images/offer1.jpg"),
-          title: "promo"
+          title: "promo",
         },
         {
           id: 2,
           url: "#",
           image: require("../../assets/images/offer2.jpg"),
-          title: "promo"
+          title: "promo",
         },
         {
           id: 3,
           url: "#",
           image: require("../../assets/images/offer3.jpg"),
-          title: "promo"
+          title: "promo",
         },
         {
           id: 4,
           url: "#",
           image: require("../../assets/images/offer4.jpg"),
-          title: "promo"
+          title: "promo",
         },
         {
           id: 4,
           url: "#",
-          image: "https://mironmahmud.com/ecomart/assets/ltr/images/offer/02.jpg",
-          title: "promo"
+          image:
+            "https://mironmahmud.com/ecomart/assets/ltr/images/offer/02.jpg",
+          title: "promo",
         },
         {
           id: 4,
           url: "#",
-          image: "https://mironmahmud.com/ecomart/assets/ltr/images/offer/11.jpg",
-          title: "promo"
+          image:
+            "https://mironmahmud.com/ecomart/assets/ltr/images/offer/11.jpg",
+          title: "promo",
         },
-      ]
+      ],
     };
   },
   mounted() {
@@ -71,21 +73,26 @@ export default {
       responsive: [
         {
           breakpoint: 1200,
-          settings: { slidesToShow: 3, slidesToScroll: 1 }
+          settings: { slidesToShow: 3, slidesToScroll: 1 },
         },
         { breakpoint: 992, settings: { slidesToShow: 2, slidesToScroll: 1 } },
         { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-        { breakpoint: 576, settings: { slidesToShow: 1, slidesToScroll: 1 } }
-      ]
+        { breakpoint: 576, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+      ],
     });
-  }
+  },
 };
 </script>
 
 <style>
 /* Slider */
-.promo-slider img{
-  height: 114px;
+.promo-slider img {
+  height: 163px;
+}
+@media screen and (max-width: 767px) {
+  .promo-slider img {
+    height: 114px;
+  }
 }
 
 .slick-slider {
