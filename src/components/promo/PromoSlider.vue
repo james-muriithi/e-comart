@@ -41,7 +41,19 @@ export default {
           url: "#",
           image: require("../../assets/images/offer4.jpg"),
           title: "promo"
-        }
+        },
+        {
+          id: 4,
+          url: "#",
+          image: "https://mironmahmud.com/ecomart/assets/ltr/images/offer/02.jpg",
+          title: "promo"
+        },
+        {
+          id: 4,
+          url: "#",
+          image: "https://mironmahmud.com/ecomart/assets/ltr/images/offer/11.jpg",
+          title: "promo"
+        },
       ]
     };
   },
@@ -72,6 +84,10 @@ export default {
 
 <style>
 /* Slider */
+.promo-slider img{
+  height: 114px;
+}
+
 .slick-slider {
   position: relative;
 

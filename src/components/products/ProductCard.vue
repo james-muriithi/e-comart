@@ -64,11 +64,11 @@ export default {
       required: true
     },
     newPrice: {
-      type: String,
+      // type: String,
       required: true
     },
     oldPrice: {
-      type: String,
+      // type: String,
       required: false
     },
     thumbnail: {

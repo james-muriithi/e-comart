@@ -8,16 +8,10 @@
         <div class="col-lg-9">
           <div class="row">
             <div class="col-lg-12">
-              <product-filter></product-filter>
+              <product-filter @refresh="fetchProducts"></product-filter>
             </div>
           </div>
           <div class="row">
-            <div
-              class="col-md-12 text-center mt-3"
-              v-if="!isLoading && (!products || products.length == 0)"
-            >
-              <p>No products yet ☹️</p>
-            </div>
             <div class="row w-100" v-if="isLoading">
               <product-placeholder
                 v-for="i in loadingElements"
@@ -36,6 +30,13 @@
                 :labels="product.labels || []"
               ></product-card>
             </div>
+
+            <div
+              class="col-md-12 text-center mt-3"
+              v-if="!isLoading && (!products || products.length == 0)"
+            >
+              <p>No products yet ☹️</p>
+            </div>
           </div>
         </div>
       </div>
@@ -52,31 +53,31 @@ import ProductPlaceholder from "./ProductPlaceholder.vue";
 export default {
   data() {
     return {
-      isLoading: false
+      isLoading: false,
     };
   },
   components: {
     ProductCategories,
     ProductFilter,
     ProductCard,
-    ProductPlaceholder
+    ProductPlaceholder,
   },
   computed: {
     products() {
       console.log(this.$store.getters.products);
       return this.$store.getters.products;
-    }
+    },
   },
   methods: {
     async fetchProducts() {
       this.isLoading = true;
       await this.$store.dispatch("fetchProducts");
       this.isLoading = false;
-    }
+    },
   },
   created() {
     this.fetchProducts();
     console.log(this.loadingElements);
-  }
+  },
 };
 </script>
