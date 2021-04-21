@@ -20,19 +20,22 @@
             </div>
 
             <div class="row w-100" v-if="isLoading">
-              <product-placeholder v-for="i in loadingElements" :key="i" ></product-placeholder>
+              <product-placeholder
+                v-for="i in loadingElements"
+                :key="i"
+              ></product-placeholder>
             </div>
 
             <div class="row" v-else>
               <product-card
-              v-for="product in products"
-              :key="product.slug"
-              :name="product.name"
-              :newPrice="`Ksh. ${product.newPrice}`"
-              :oldPrice="`Ksh. ${product.oldPrice}`"
-              :thumbnail="product.thumbnail"
-              :labels="product.labels"
-            ></product-card>
+                v-for="product in products"
+                :key="product.slug"
+                :name="product.name"
+                :newPrice="`Ksh. ${product.newPrice}`"
+                :oldPrice="`Ksh. ${product.oldPrice}`"
+                :thumbnail="product.thumbnail"
+                :labels="product.labels"
+              ></product-card>
             </div>
           </div>
         </div>
@@ -48,10 +51,10 @@ import ProductCard from "./ProductCard.vue";
 import ProductPlaceholder from "./ProductPlaceholder.vue";
 
 export default {
-  data(){
+  data() {
     return {
       isLoading: false
-    }
+    };
   },
   components: {
     ProductCategories,
@@ -63,18 +66,18 @@ export default {
     products() {
       console.log(this.$store.getters.products);
       return this.$store.getters.products;
-    },
+    }
   },
   methods: {
     async fetchProducts() {
-      this.isLoading = true
+      this.isLoading = true;
       await this.$store.dispatch("fetchProducts");
-      this.isLoading = false
-    },
+      this.isLoading = false;
+    }
   },
   created() {
     this.fetchProducts();
     console.log(this.loadingElements);
-  },
+  }
 };
 </script>

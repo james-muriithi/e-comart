@@ -65,7 +65,6 @@
   </div>
 </template>
 
-
 <style scoped>
 .product-media {
   box-sizing: border-box;

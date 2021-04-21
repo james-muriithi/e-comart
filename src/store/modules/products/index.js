@@ -4,13 +4,13 @@ import { getFromStorage, saveToStorage } from "../../../helpers/LocalStorage";
 export default {
   state() {
     return {
-      products: [],
+      products: []
     };
   },
   mutations: {
     setProducts(state, products) {
-      state.products =  Object.assign({}, state.products, products);
-    },
+      state.products = Object.assign({}, state.products, products);
+    }
   },
   actions: {
     async fetchProducts({ commit, getters }, forceReload = true) {
@@ -28,11 +28,11 @@ export default {
       saveToStorage("products", products, true);
 
       commit("setProducts", products);
-    },
+    }
   },
   getters: {
     products(state) {
       return state.products;
-    },
-  },
+    }
+  }
 };

@@ -165,7 +165,7 @@ export default {
     },
     categories() {
       return this.$store.getters.categories;
-    },
+    }
   },
   created() {
     $(document).on("mouseup", e => {

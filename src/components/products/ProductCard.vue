@@ -61,15 +61,15 @@ export default {
   props: {
     name: {
       type: String,
-      required: true,
+      required: true
     },
     newPrice: {
       type: Number,
-      required: true,
+      required: true
     },
     oldPrice: {
       type: Number,
-      required: false,
+      required: false
     },
     thumbnail: {
       type: String,
@@ -78,17 +78,15 @@ export default {
     },
     labels: {
       type: Array,
-      required: true,
+      required: true
     },
     sku: {
       type: String,
-      required: false,
-    },
+      required: false
+    }
   },
   data() {
-    return {
-      
-    };
+    return {};
   }
 };
 </script>
