@@ -20,6 +20,9 @@ const GlobalMixins = {
     shouldShowAlert() {
       return !!this.$store.getters["alert/message"];
     },
+    loadingElements() {
+      return new Array(5).fill(1);
+    },
     alertDetails() {
       return {
         message: this.$store.getters["alert/message"],

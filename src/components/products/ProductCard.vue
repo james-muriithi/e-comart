@@ -11,7 +11,7 @@
           >
         </div>
         <a class="product-image" href="product-single.html"
-          ><img :src="productImage" alt="product"
+          ><img :src="thumbnail" alt="product"
         /></a>
       </figure>
       <div class="product-content">
@@ -58,22 +58,36 @@
 
 <script>
 export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    newPrice: {
+      type: Number,
+      required: true,
+    },
+    oldPrice: {
+      type: Number,
+      required: false,
+    },
+    thumbnail: {
+      type: String,
+      required: true,
+      default: require("../../assets/images/products/01.jpg")
+    },
+    labels: {
+      type: Array,
+      required: true,
+    },
+    sku: {
+      type: String,
+      required: false,
+    },
+  },
   data() {
     return {
-      name: "Samsung Note 1",
-      newPrice: "$25",
-      oldPrice: "$42",
-      productImage: require("../../assets/images/products/01.jpg"),
-      labels: [
-        {
-          title: "new",
-          type: "label-new"
-        },
-        {
-          title: "-10%",
-          type: "label-off"
-        }
-      ]
+      
     };
   }
 };
