@@ -9,12 +9,11 @@ export default {
   },
   mutations: {
     setCategories(state, { categories }) {
-      console.log(categories);
       state.categories = Object.assign({}, state.categories, categories);
     }
   },
   actions: {
-    async fetchCategories({ commit, getters }, forceReload = true) {
+    async fetchCategories({ commit, getters }, forceReload = false) {
       if (
         !forceReload &&
         (!getters.categories || getters.categories.length == 0)

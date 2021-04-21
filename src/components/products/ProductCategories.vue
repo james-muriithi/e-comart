@@ -52,7 +52,7 @@ export default {
     }
   },
   mounted() {
-    this.loadCategories();
+    // this.loadCategories();
   }
 };
 </script>

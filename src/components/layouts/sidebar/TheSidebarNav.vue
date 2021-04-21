@@ -28,7 +28,7 @@
           </div>
           <ul class="cate-list" v-else>
             <li v-for="category in categories" :key="category.id">
-              <a class="cate-link dropdown" href="#"
+              <a class="cate-link dropdown" href="#" @click.prevent=""
                 ><i :class="category.iconClass"></i
                 ><span>{{ category.name || "" }}</span></a
               >
