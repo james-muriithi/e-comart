@@ -14,11 +14,10 @@
           <div class="row">
             <div
               class="col-md-12 text-center mt-3"
-              v-if="!products || products.length == 0"
+              v-if="!isLoading && (!products || products.length == 0)"
             >
               <p>No products yet ☹️</p>
             </div>
-
             <div class="row w-100" v-if="isLoading">
               <product-placeholder
                 v-for="i in loadingElements"
@@ -31,10 +30,10 @@
                 v-for="product in products"
                 :key="product.slug"
                 :name="product.name"
-                :newPrice="`Ksh. ${product.newPrice}`"
-                :oldPrice="`Ksh. ${product.oldPrice}`"
+                :newPrice="product.newPrice"
+                :oldPrice="product.oldPrice"
                 :thumbnail="product.thumbnail"
-                :labels="product.labels"
+                :labels="product.labels || []"
               ></product-card>
             </div>
           </div>

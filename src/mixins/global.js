@@ -26,11 +26,14 @@ const GlobalMixins = {
     alertDetails() {
       return {
         message: this.$store.getters["alert/message"],
-        type: this.$store.getters["alert/type"]
+        type: this.$store.getters["alert/type"],
       };
-    }
+    },
   },
   methods: {
+    numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     showAlert() {
       const that = this;
       const { message, type } = this.alertDetails;
@@ -44,7 +47,7 @@ const GlobalMixins = {
           position: "topRight",
           onClosed: function() {
             that.$store.dispatch("alert/resetState");
-          }
+          },
         });
       } else {
         iziToast.success({
@@ -53,11 +56,11 @@ const GlobalMixins = {
           position: "topRight",
           onClosed: function() {
             that.$store.dispatch("alert/resetState");
-          }
+          },
         });
       }
-    }
-  }
+    },
+  },
 };
 
 export default GlobalMixins;

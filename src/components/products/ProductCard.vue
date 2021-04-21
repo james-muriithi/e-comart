@@ -10,17 +10,17 @@
             >{{ label.title }}</label
           >
         </div>
-        <a class="product-image" href="product-single.html"
+        <a class="product-image" href="#"
           ><img :src="thumbnail" alt="product"
         /></a>
       </figure>
       <div class="product-content">
         <h5 class="product-price">
-          <span>{{ newPrice }}</span
-          ><del>{{ oldPrice }}</del>
+          <span>{{ formatPrice(newPrice) }}</span
+          ><del>{{ formatPrice(oldPrice) }}</del>
         </h5>
-        <h5 class="product-name">
-          <a href="product-single.html">{{ name }}</a>
+        <h5 class="product-name" data-toggle="tooltip" data-placement="top" :title="name">
+          <a href="#">{{ name }}</a>
         </h5>
         <div class="product-action-group">
           <div class="product-action">
@@ -64,11 +64,11 @@ export default {
       required: true
     },
     newPrice: {
-      type: Number,
+      type: String,
       required: true
     },
     oldPrice: {
-      type: Number,
+      type: String,
       required: false
     },
     thumbnail: {
@@ -87,6 +87,25 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    formatPrice(price){
+      if(!price || price == '') {return price}
+      return `Ksh ${this.numberWithCommas(price)}`
+    },
   }
 };
 </script>
+
+<style scoped>
+.product-name a{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}
+.product-price{
+  font-size: 16px;
+}
+</style>
