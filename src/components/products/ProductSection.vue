@@ -22,7 +22,8 @@
             <div class="row" v-else>
               <product-card
                 v-for="product in products"
-                :key="product.slug"
+                :key="product.id"
+                :id="product.id"
                 :name="product.name"
                 :newPrice="product.newPrice"
                 :oldPrice="product.oldPrice"

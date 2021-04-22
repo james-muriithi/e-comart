@@ -5,11 +5,22 @@
         <button class="check-close"><i class="icofont-close"></i></button>
         <div class="cart-total">
           <i class="icofont-basket"></i>
-          <h5 class="mt-2"><span>total item</span><span>(5)</span></h5>
+          <h5 class="mt-2">
+            <span>total items </span><span>({{cart ? cartQuantity : 0 }})</span>
+          </h5>
         </div>
       </div>
-      <ul class="cart-list">
-        <li class="cart-item alert fade show">
+      <ul class="cart-list pt-4">
+        <div class="text-center w-100" v-if="!cart || cart.length == 0">
+          <p class="h6">
+            No products in cart
+          </p>
+        </div>
+        <li
+          class="cart-item alert fade show"
+          v-for="item in cart"
+          :key="item.productId"
+        >
           <div class="cart-image">
             <a href="#"
               ><img
@@ -29,7 +40,7 @@
                 title="Quantity Number"
                 type="text"
                 name="quantity"
-                value="1"
+                :value="item.qty"
               /><button class="action-plus" title="Quantity Plus">
                 <i class="icofont-plus"></i>
               </button>
@@ -62,6 +73,14 @@
 <script>
 import $ from "jquery";
 export default {
+  computed: {
+    cart() {
+      return this.$store.getters.cart;
+    },
+    cartQuantity(){
+      return this.$store.getters.cartQuantity
+    }
+  },
   mounted() {
     $(".icon-check, .mobile-check").on("click", function () {
       $("body").css("overflow", "hidden"),

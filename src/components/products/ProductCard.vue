@@ -26,7 +26,7 @@
           <div class="product-action">
             <button class="action-wish" title="Product Wish">
               <i class="icofont-ui-love"></i></button
-            ><button class="action-cart" title="Add to Cart">
+            ><button class="action-cart" @click="addToCart" title="Add to Cart">
               <span>add to cart</span></button
             ><button
               class="action-view"
@@ -59,6 +59,9 @@
 <script>
 export default {
   props: {
+    id: {
+      required: true
+    },
     name: {
       type: String,
       required: true
@@ -93,6 +96,9 @@ export default {
       if(!price || price == '') {return price}
       return `Ksh ${this.numberWithCommas(price)}`
     },
+    addToCart(){
+      this.$store.dispatch('addToCart', this.id)
+    }
   }
 };
 </script>
