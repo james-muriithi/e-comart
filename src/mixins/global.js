@@ -32,7 +32,7 @@ const GlobalMixins = {
   },
   methods: {
     formatPrice(price) {
-      if (!price || price == "") {
+      if ((!price || price == "") && price != 0) {
         return price;
       }
       return `Ksh ${this.numberWithCommas(price)}`;

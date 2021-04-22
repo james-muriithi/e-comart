@@ -28,7 +28,7 @@
         </form>
         <a href="checkout.html" class="check-btn"
           ><span class="check-title">checkout</span
-          ><span class="check-price">$369.78</span></a
+          ><span class="check-price">{{formatPrice(cartTotal)}}</span></a
         >
       </div>
     </div>
@@ -49,6 +49,9 @@ export default {
     cartQuantity() {
       return this.$store.getters.cartQuantity;
     },
+    cartTotal(){
+      return this.$store.getters.cartTotal
+    }
   },
   mounted() {
     $(".icon-check, .mobile-check").on("click", function () {

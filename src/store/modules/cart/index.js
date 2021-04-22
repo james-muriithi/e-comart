@@ -23,14 +23,18 @@ export default {
         return cartItem ? cartItem.qty : 0;
       };
     },
-    cartTotal(state) {
+    cartTotal(state, _, _1, rootGetters) {
       if (!state.cart || state.cart.length == 0) {
         return 0;
       }
 
-      return state.cart.reduce(
-        (accumulator, item) => accumulator + parseFloat(item.newPrice)
-      );
+      let total = 0;
+
+      state.cart.map(item => {
+        total += parseFloat(rootGetters.product(item.productId).newPrice)
+      });
+
+      return total;
     },
   },
   mutations: {
