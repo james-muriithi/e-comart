@@ -11,7 +11,12 @@
               <product-filter @refresh="fetchProducts"></product-filter>
             </div>
           </div>
-          <div class="row">
+          <div class="row" v-if="!!error">
+            <div class="col-12">
+              <h6 class="text-center text-danger">There was an error loading the products</h6>
+            </div>
+          </div>
+          <div class="row" v-else>
             <div class="row w-100" v-if="isLoading">
               <product-placeholder
                 v-for="i in loadingElements"
@@ -56,6 +61,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      error: null
     };
   },
   components: {
@@ -73,13 +79,17 @@ export default {
   methods: {
     async fetchProducts() {
       this.isLoading = true;
-      await this.$store.dispatch("fetchProducts");
+      try {
+        await this.$store.dispatch("fetchProducts");
+      } catch (error) {
+        console.log(error);
+        this.error = error.message || 'error'
+      }
       this.isLoading = false;
     },
   },
   created() {
     this.fetchProducts();
-    console.log(this.loadingElements);
   },
   mounted() {
     $(window).on("scroll", function () {

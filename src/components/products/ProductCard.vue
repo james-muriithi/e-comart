@@ -28,10 +28,10 @@
           <a href="#">{{ name }}</a>
         </h5>
         <div class="product-action-group">
-          <div class="product-action">
+          <div :class="`product-action${itemCartQuantity > 0 ?' d-none':''}`">
             <button class="action-wish" title="Product Wish">
               <i class="icofont-ui-love"></i></button
-            ><button class="action-cart" @click="addToCart" title="Add to Cart">
+            ><button class="action-cart" @click="addToCart" ref="addToCart" title="Add to Cart">
               <span>add to cart</span></button
             ><button
               class="action-view"
@@ -42,16 +42,24 @@
               <i class="icofont-eye-alt"></i>
             </button>
           </div>
-          <div class="product-action">
-            <button class="action-minus" title="Quantity Minus">
+          <div :class="`product-action${itemCartQuantity > 0 ?' d-flex':''}`">
+            <button
+              class="action-minus"
+              title="Quantity Minus"
+              @click="decreaseQuantity"
+            >
               <i class="icofont-minus"></i></button
             ><input
               class="action-input"
               title="Quantity Number"
               type="text"
               name="quantity"
-              :value="itemCartQuantity"
-            /><button class="action-plus" title="Quantity Plus" @click="addToCart">
+              v-model.trim="itemCartQuantity"
+            /><button
+              class="action-plus"
+              title="Quantity Plus"
+              @click="addToCart"
+            >
               <i class="icofont-plus"></i>
             </button>
           </div>
@@ -63,6 +71,7 @@
 
 <script>
 import $ from "jquery";
+import _ from "lodash";
 
 export default {
   props: {
@@ -98,6 +107,17 @@ export default {
   data() {
     return {};
   },
+  watch: {
+    itemCartQuantity: {
+      handler: _.debounce(function () {
+        if (this.itemCartQuantity == 0) {
+          this.removeItemFromCart();
+          var c = $(this.$refs.addToCart).parents(".product-action-group").children();
+          c.first().css("display", "flex"), c.last().css("display", "none");
+        }
+      }, 500),
+    },
+  },
   methods: {
     formatPrice(price) {
       if (!price || price == "") {
@@ -108,11 +128,30 @@ export default {
     addToCart() {
       this.$store.dispatch("addToCart", this.id);
     },
+    decreaseQuantity() {
+      this.$store.dispatch("decreaseQuantity", this.id);
+    },
+    changeItemQuantity(qty) {
+      this.$store.dispatch("changeItemQuantity", { productId: this.id, qty });
+    },
+    removeItemFromCart(){
+      this.$store.dispatch('removeItemFromCart', this.id)
+    }
   },
   computed: {
-    itemCartQuantity(){
-      return this.$store.getters.itemCartQuantity(this.id)
-    }
+    itemCartQuantity: {
+      get: function () {
+        return this.$store.getters.itemCartQuantity(this.id);
+      },
+      set: _.debounce(function (newVal) {
+        if (newVal && newVal < 0) {
+          return this.itemCartQuantity;
+        }
+        if (newVal && newVal != this.itemCartQuantity) {
+          this.changeItemQuantity(newVal);
+        }
+      }, 500),
+    },
   },
   mounted() {
     $(".action-cart").on("click", function () {

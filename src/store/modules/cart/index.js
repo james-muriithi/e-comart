@@ -61,7 +61,7 @@ export default {
       );
 
       if (productInCartIndex >= 0) {
-        state.cart[productInCartIndex].qty = qty;
+        state.cart[productInCartIndex].qty = parseInt(qty);
       }
     },
     removeItemFromCart(state, productId) {

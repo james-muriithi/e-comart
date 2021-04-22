@@ -6,50 +6,15 @@
         <div class="cart-total">
           <i class="icofont-basket"></i>
           <h5 class="mt-2">
-            <span>total items </span><span>({{cartQuantity}})</span>
+            <span>total items </span><span>({{ cartQuantity }})</span>
           </h5>
         </div>
       </div>
       <ul class="cart-list pt-4">
         <div class="text-center w-100" v-if="!cart || cart.length == 0">
-          <p class="h6">
-            No products in cart
-          </p>
+          <p class="h6">No products in cart</p>
         </div>
-        <li
-          class="cart-item alert fade show"
-          v-for="item in cart"
-          :key="item.productId"
-        >
-          <div class="cart-image">
-            <a href="#"
-              ><img
-                :src="require(`../../assets/images/products/01.jpg`)"
-                alt="product"
-            /></a>
-          </div>
-          <div class="cart-info">
-            <h5><a href="product-single.html">product name</a></h5>
-            <span>$2.5 X 3</span>
-            <h6>$6.15</h6>
-            <div class="product-action">
-              <button class="action-minus" title="Quantity Minus">
-                <i class="icofont-minus"></i></button
-              ><input
-                class="action-input"
-                title="Quantity Number"
-                type="text"
-                name="quantity"
-                :value="item.qty"
-              /><button class="action-plus" title="Quantity Plus">
-                <i class="icofont-plus"></i>
-              </button>
-            </div>
-          </div>
-          <button class="cart-delete" data-dismiss="alert">
-            <i class="icofont-bin"></i>
-          </button>
-        </li>
+        <cart-product v-for="item in cart" :key="item.productId" :id="item.productId"></cart-product>
       </ul>
       <div class="check-footer">
         <button class="voucher-btn">Do you have a coupon code?</button>
@@ -72,14 +37,18 @@
 
 <script>
 import $ from "jquery";
+import CartProduct from "./CartProduct.vue";
 export default {
+  components: {
+    CartProduct,
+  },
   computed: {
     cart() {
       return this.$store.getters.cart;
     },
-    cartQuantity(){
-      return this.$store.getters.cartQuantity
-    }
+    cartQuantity() {
+      return this.$store.getters.cartQuantity;
+    },
   },
   mounted() {
     $(".icon-check, .mobile-check").on("click", function () {
