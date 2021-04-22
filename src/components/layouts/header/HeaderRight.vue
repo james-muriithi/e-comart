@@ -16,7 +16,7 @@
         ><i class="icofont-ui-love"></i><sup>0</sup></router-link
       >
       <button class="icon-check" aria-label="Shopping Cart">
-        <i class="icofont-shopping-cart"></i><span>$0.0</span><sup>0</sup>
+        <i class="icofont-shopping-cart"></i><span>{{formatPrice(cartTotal, false)}}</span><sup>{{cartQuantity}}</sup>
       </button>
     </div>
   </div>
@@ -24,7 +24,14 @@
 
 <script>
 export default {
-  computed: {},
+  computed: {
+    cartQuantity() {
+      return this.$store.getters.cartQuantity;
+    },
+    cartTotal() {
+      return this.$store.getters.cartTotal;
+    }
+  },
   inject: ["toggleSidebar"]
 };
 </script>

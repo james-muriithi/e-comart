@@ -31,11 +31,11 @@ const GlobalMixins = {
     }
   },
   methods: {
-    formatPrice(price) {
+    formatPrice(price, appendCurrency = true) {
       if ((!price || price == "") && price != 0) {
         return price;
       }
-      return `Ksh ${this.numberWithCommas(price)}`;
+      return `${appendCurrency? 'Ksh ':''}${this.numberWithCommas(price)}`;
     },
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
