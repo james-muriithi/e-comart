@@ -1,6 +1,7 @@
 # E-comart
 
 <img src="./screenshot.png" alt="screenshot" />
+<img src="./screenshot2.png" alt="screenshot" />
 
 ## Project setup
 
