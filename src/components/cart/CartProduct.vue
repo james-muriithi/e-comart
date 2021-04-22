@@ -59,26 +59,26 @@ import $ from "jquery";
 export default {
   props: {
     id: {
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     itemCartQuantity: {
-      get: function () {
+      get: function() {
         return this.$store.getters.itemCartQuantity(this.id);
       },
-      set: _.debounce(function (newVal) {
+      set: _.debounce(function(newVal) {
         if (newVal && newVal < 0) {
           return this.itemCartQuantity;
         }
         if (newVal && newVal != this.itemCartQuantity) {
           this.changeItemQuantity(newVal);
         }
-      }, 500),
+      }, 500)
     },
     product() {
       return this.$store.getters.product(this.id);
-    },
+    }
   },
   methods: {
     increaseQuantity() {
@@ -92,11 +92,11 @@ export default {
     },
     removeItemFromCart() {
       this.$store.dispatch("removeItemFromCart", this.id);
-    },
+    }
   },
   watch: {
     itemCartQuantity: {
-      handler: _.debounce(function () {
+      handler: _.debounce(function() {
         if (this.itemCartQuantity == 0) {
           this.removeItemFromCart();
           var c = $(this.$refs.addToCart)
@@ -104,9 +104,9 @@ export default {
             .children();
           c.first().css("display", "flex"), c.last().css("display", "none");
         }
-      }, 500),
-    },
-  },
+      }, 500)
+    }
+  }
 };
 </script>
 

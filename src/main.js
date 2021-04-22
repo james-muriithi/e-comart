@@ -24,6 +24,6 @@ app.mixin(GlobalMixins);
 app.component("the-header", TheHeader);
 app.component("the-sidebar-nav", TheSidebarNav);
 app.component("the-searchbar", TheSearchBar);
-app.component('cart-mobile', CartMobile);
+app.component("cart-mobile", CartMobile);
 
 app.mount("#app");

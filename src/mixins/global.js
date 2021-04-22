@@ -26,9 +26,9 @@ const GlobalMixins = {
     alertDetails() {
       return {
         message: this.$store.getters["alert/message"],
-        type: this.$store.getters["alert/type"],
+        type: this.$store.getters["alert/type"]
       };
-    },
+    }
   },
   methods: {
     formatPrice(price) {
@@ -53,7 +53,7 @@ const GlobalMixins = {
           position: "topRight",
           onClosed: function() {
             that.$store.dispatch("alert/resetState");
-          },
+          }
         });
       } else {
         iziToast.success({
@@ -62,11 +62,11 @@ const GlobalMixins = {
           position: "topRight",
           onClosed: function() {
             that.$store.dispatch("alert/resetState");
-          },
+          }
         });
       }
-    },
-  },
+    }
+  }
 };
 
 export default GlobalMixins;

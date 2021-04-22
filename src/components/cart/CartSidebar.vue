@@ -14,7 +14,11 @@
         <div class="text-center w-100" v-if="!cart || cart.length == 0">
           <p class="h6">No products in cart</p>
         </div>
-        <cart-product v-for="item in cart" :key="item.productId" :id="item.productId"></cart-product>
+        <cart-product
+          v-for="item in cart"
+          :key="item.productId"
+          :id="item.productId"
+        ></cart-product>
       </ul>
       <div class="check-footer">
         <button class="voucher-btn">Do you have a coupon code?</button>
@@ -28,7 +32,7 @@
         </form>
         <a href="checkout.html" class="check-btn"
           ><span class="check-title">checkout</span
-          ><span class="check-price">{{formatPrice(cartTotal)}}</span></a
+          ><span class="check-price">{{ formatPrice(cartTotal) }}</span></a
         >
       </div>
     </div>
@@ -40,7 +44,7 @@ import $ from "jquery";
 import CartProduct from "./CartProduct.vue";
 export default {
   components: {
-    CartProduct,
+    CartProduct
   },
   computed: {
     cart() {
@@ -49,30 +53,30 @@ export default {
     cartQuantity() {
       return this.$store.getters.cartQuantity;
     },
-    cartTotal(){
-      return this.$store.getters.cartTotal
+    cartTotal() {
+      return this.$store.getters.cartTotal;
     }
   },
   mounted() {
-    $(".icon-check, .mobile-check").on("click", function () {
+    $(".icon-check, .mobile-check").on("click", function() {
       $("body").css("overflow", "hidden"),
         $(".sidebar-check").addClass("active"),
-        $(".nav-close, .check-close").on("click", function () {
+        $(".nav-close, .check-close").on("click", function() {
           $("body").css("overflow-y", "scroll"),
             $(".sidebar-check").removeClass("active");
         });
     });
 
-    $(".voucher-btn").on("click", function () {
+    $(".voucher-btn").on("click", function() {
       $(this).hide(),
         $(".check-footer").css("margin-top", "0px"),
         $(".voucher-form").css("display", "flex");
     }),
-      $(".load-btn .btn").click(function () {
+      $(".load-btn .btn").click(function() {
         $(this).append(
           '<span class="spinner-border spinner-border-sm"></span>'
         );
       });
-  },
+  }
 };
 </script>

@@ -28,10 +28,17 @@
           <a href="#">{{ name }}</a>
         </h5>
         <div class="product-action-group">
-          <div :class="`product-action${itemCartQuantity > 0 ?' d-none':''}`">
+          <div
+            :class="`product-action${itemCartQuantity > 0 ? ' d-none' : ''}`"
+          >
             <button class="action-wish" title="Product Wish">
               <i class="icofont-ui-love"></i></button
-            ><button class="action-cart" @click="addToCart" ref="addToCart" title="Add to Cart">
+            ><button
+              class="action-cart"
+              @click="addToCart"
+              ref="addToCart"
+              title="Add to Cart"
+            >
               <span>add to cart</span></button
             ><button
               class="action-view"
@@ -42,7 +49,9 @@
               <i class="icofont-eye-alt"></i>
             </button>
           </div>
-          <div :class="`product-action${itemCartQuantity > 0 ?' d-flex':''}`">
+          <div
+            :class="`product-action${itemCartQuantity > 0 ? ' d-flex' : ''}`"
+          >
             <button
               class="action-minus"
               title="Quantity Minus"
@@ -76,47 +85,49 @@ import _ from "lodash";
 export default {
   props: {
     id: {
-      required: true,
+      required: true
     },
     name: {
       type: String,
-      required: true,
+      required: true
     },
     newPrice: {
       // type: String,
-      required: true,
+      required: true
     },
     oldPrice: {
       // type: String,
-      required: false,
+      required: false
     },
     thumbnail: {
       type: String,
       required: true,
-      default: require("../../assets/images/products/01.jpg"),
+      default: require("../../assets/images/products/01.jpg")
     },
     labels: {
       type: Array,
-      required: true,
+      required: true
     },
     sku: {
       type: String,
-      required: false,
-    },
+      required: false
+    }
   },
   data() {
     return {};
   },
   watch: {
     itemCartQuantity: {
-      handler: _.debounce(function () {
+      handler: _.debounce(function() {
         if (this.itemCartQuantity == 0) {
           this.removeItemFromCart();
-          var c = $(this.$refs.addToCart).parents(".product-action-group").children();
+          var c = $(this.$refs.addToCart)
+            .parents(".product-action-group")
+            .children();
           c.first().css("display", "flex"), c.last().css("display", "none");
         }
-      }, 500),
-    },
+      }, 500)
+    }
   },
   methods: {
     addToCart() {
@@ -128,34 +139,36 @@ export default {
     changeItemQuantity(qty) {
       this.$store.dispatch("changeItemQuantity", { productId: this.id, qty });
     },
-    removeItemFromCart(){
-      this.$store.dispatch('removeItemFromCart', this.id)
+    removeItemFromCart() {
+      this.$store.dispatch("removeItemFromCart", this.id);
     }
   },
   computed: {
     itemCartQuantity: {
-      get: function () {
+      get: function() {
         return this.$store.getters.itemCartQuantity(this.id);
       },
-      set: _.debounce(function (newVal) {
+      set: _.debounce(function(newVal) {
         if (newVal && newVal < 0) {
           return this.itemCartQuantity;
         }
         if (newVal && newVal != this.itemCartQuantity) {
           this.changeItemQuantity(newVal);
         }
-      }, 500),
-    },
+      }, 500)
+    }
   },
   mounted() {
-    $(".action-cart").on("click", function () {
-      var c = $(this).parents(".product-action-group").children();
+    $(".action-cart").on("click", function() {
+      var c = $(this)
+        .parents(".product-action-group")
+        .children();
       c.first().css("display", "none"), c.last().css("display", "flex");
     }),
-      $(".action-wish").on("click", function () {
+      $(".action-wish").on("click", function() {
         $(this).toggleClass("active");
       });
-  },
+  }
 };
 </script>
 

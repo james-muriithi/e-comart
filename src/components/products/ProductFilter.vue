@@ -1,8 +1,16 @@
 <template>
   <div class="product-filter w-100">
     <div>
-      <button class="column-3" data-toggle="tooltip" title="Refresh" @click="refresh">
-        <i class="icofont-refresh" style="color: var(--primary); background: var(--primary-light)"></i>
+      <button
+        class="column-3"
+        data-toggle="tooltip"
+        title="Refresh"
+        @click="refresh"
+      >
+        <i
+          class="icofont-refresh"
+          style="color: var(--primary); background: var(--primary-light)"
+        ></i>
       </button>
     </div>
     <div class="product-filter-short ml-auto">
@@ -36,11 +44,11 @@
 
 <script>
 export default {
-  emits: ['refresh'],
+  emits: ["refresh"],
   methods: {
-    refresh(){
-      this.$emit('refresh')
+    refresh() {
+      this.$emit("refresh");
     }
   }
-}
+};
 </script>

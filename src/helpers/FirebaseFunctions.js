@@ -44,7 +44,7 @@ async function fetchProducts() {
   try {
     const querySnapshot = await db.collection("products").get();
     querySnapshot.forEach(async doc => {
-      products.push({id: doc.id,...doc.data()});
+      products.push({ id: doc.id, ...doc.data() });
     });
     return products;
   } catch (error) {

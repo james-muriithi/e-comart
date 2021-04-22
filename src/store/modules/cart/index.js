@@ -1,7 +1,7 @@
 export default {
   state() {
     return {
-      cart: [],
+      cart: []
     };
   },
   getters: {
@@ -19,7 +19,7 @@ export default {
         if (!state.cart || state.cart.length == 0) {
           return 0;
         }
-        const cartItem = state.cart.find((item) => item.productId == productId);
+        const cartItem = state.cart.find(item => item.productId == productId);
         return cartItem ? cartItem.qty : 0;
       };
     },
@@ -31,11 +31,11 @@ export default {
       let total = 0;
 
       state.cart.map(item => {
-        total += parseFloat(rootGetters.product(item.productId).newPrice)
+        total += parseFloat(rootGetters.product(item.productId).newPrice);
       });
 
       return total;
-    },
+    }
   },
   mutations: {
     setCartItems(state, items) {
@@ -43,7 +43,7 @@ export default {
     },
     increaseQuantity(state, productId) {
       const productInCartIndex = state.cart.findIndex(
-        (ci) => ci.productId === productId
+        ci => ci.productId === productId
       );
 
       if (productInCartIndex >= 0) {
@@ -52,7 +52,7 @@ export default {
     },
     decreaseQuantity(state, productId) {
       const productInCartIndex = state.cart.findIndex(
-        (ci) => ci.productId === productId
+        ci => ci.productId === productId
       );
 
       if (productInCartIndex >= 0) {
@@ -61,7 +61,7 @@ export default {
     },
     changeItemQuantity(state, { productId, qty }) {
       const productInCartIndex = state.cart.findIndex(
-        (ci) => ci.productId === productId
+        ci => ci.productId === productId
       );
 
       if (productInCartIndex >= 0) {
@@ -69,14 +69,14 @@ export default {
       }
     },
     removeItemFromCart(state, productId) {
-      state.cart = state.cart.filter((item) => item.productId != productId);
+      state.cart = state.cart.filter(item => item.productId != productId);
     },
     clearCart(state) {
       state.cart = [];
     },
     addToCart(state, item) {
       const productInCartIndex = state.cart.findIndex(
-        (ci) => ci.productId === item
+        ci => ci.productId === item
       );
 
       if (productInCartIndex >= 0) {
@@ -84,11 +84,11 @@ export default {
       } else {
         const newProduct = {
           productId: item,
-          qty: 1,
+          qty: 1
         };
         state.cart.push(newProduct);
       }
-    },
+    }
   },
   actions: {
     setCartItems({ commit }, items) {
@@ -111,6 +111,6 @@ export default {
     },
     clearCart({ commit }) {
       commit("clearCart");
-    },
-  },
+    }
+  }
 };

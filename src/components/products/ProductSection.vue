@@ -13,7 +13,9 @@
           </div>
           <div class="row" v-if="!!error">
             <div class="col-12">
-              <h6 class="text-center text-danger">There was an error loading the products</h6>
+              <h6 class="text-center text-danger">
+                There was an error loading the products
+              </h6>
             </div>
           </div>
           <div class="row" v-else>
@@ -68,12 +70,12 @@ export default {
     ProductCategories,
     ProductFilter,
     ProductCard,
-    ProductPlaceholder,
+    ProductPlaceholder
   },
   computed: {
     products() {
       return this.$store.getters.products;
-    },
+    }
   },
   methods: {
     async fetchProducts() {
@@ -82,20 +84,20 @@ export default {
         await this.$store.dispatch("fetchProducts");
       } catch (error) {
         console.log(error);
-        this.error = error.message || 'error'
+        this.error = error.message || "error";
       }
       this.isLoading = false;
-    },
+    }
   },
   created() {
     this.fetchProducts();
   },
   mounted() {
-    $(window).on("scroll", function () {
+    $(window).on("scroll", function() {
       $(this).scrollTop() > 650
         ? $(".product-category").addClass("category-fixed")
         : $(".product-category").removeClass("category-fixed");
-    })
-  },
+    });
+  }
 };
 </script>

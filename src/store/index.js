@@ -12,7 +12,7 @@ const store = createStore({
     alert: AlertModule,
     menus: MenuModule,
     products: ProductModule,
-    cart: CartModule,
+    cart: CartModule
   }
 });
 
