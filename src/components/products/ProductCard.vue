@@ -19,7 +19,12 @@
           <span>{{ formatPrice(newPrice) }}</span
           ><del>{{ formatPrice(oldPrice) }}</del>
         </h5>
-        <h5 class="product-name" data-toggle="tooltip" data-placement="top" :title="name">
+        <h5
+          class="product-name"
+          data-toggle="tooltip"
+          data-placement="top"
+          :title="name"
+        >
           <a href="#">{{ name }}</a>
         </h5>
         <div class="product-action-group">
@@ -45,8 +50,8 @@
               title="Quantity Number"
               type="text"
               name="quantity"
-              value="1"
-            /><button class="action-plus" title="Quantity Plus">
+              :value="itemCartQuantity"
+            /><button class="action-plus" title="Quantity Plus" @click="addToCart">
               <i class="icofont-plus"></i>
             </button>
           </div>
@@ -57,61 +62,79 @@
 </template>
 
 <script>
+import $ from "jquery";
+
 export default {
   props: {
     id: {
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     newPrice: {
       // type: String,
-      required: true
+      required: true,
     },
     oldPrice: {
       // type: String,
-      required: false
+      required: false,
     },
     thumbnail: {
       type: String,
       required: true,
-      default: require("../../assets/images/products/01.jpg")
+      default: require("../../assets/images/products/01.jpg"),
     },
     labels: {
       type: Array,
-      required: true
+      required: true,
     },
     sku: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
   data() {
     return {};
   },
   methods: {
-    formatPrice(price){
-      if(!price || price == '') {return price}
-      return `Ksh ${this.numberWithCommas(price)}`
+    formatPrice(price) {
+      if (!price || price == "") {
+        return price;
+      }
+      return `Ksh ${this.numberWithCommas(price)}`;
     },
-    addToCart(){
-      this.$store.dispatch('addToCart', this.id)
+    addToCart() {
+      this.$store.dispatch("addToCart", this.id);
+    },
+  },
+  computed: {
+    itemCartQuantity(){
+      return this.$store.getters.itemCartQuantity(this.id)
     }
-  }
+  },
+  mounted() {
+    $(".action-cart").on("click", function () {
+      var c = $(this).parents(".product-action-group").children();
+      c.first().css("display", "none"), c.last().css("display", "flex");
+    }),
+      $(".action-wish").on("click", function () {
+        $(this).toggleClass("active");
+      });
+  },
 };
 </script>
 
 <style scoped>
-.product-name a{
-   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-line-clamp: 2; /* number of lines to show */
-   -webkit-box-orient: vertical;
+.product-name a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
-.product-price{
+.product-price {
   font-size: 16px;
 }
 </style>

@@ -12,7 +12,16 @@ export default {
       if (!state.cart || state.cart.length == 0) {
         return 0;
       }
-      return state.cart.reduce((acc, item) => acc.qty + item.qty);
+      return state.cart.reduce((acc, item) => acc + item.qty, 0);
+    },
+    itemCartQuantity(state) {
+      return function(productId) {
+        if (!state.cart || state.cart.length == 0) {
+          return 0;
+        }
+        const cartItem = state.cart.find((item) => item.productId == productId);
+        return cartItem ? cartItem.qty : 0;
+      };
     },
     cartTotal(state) {
       if (!state.cart || state.cart.length == 0) {
@@ -27,6 +36,39 @@ export default {
   mutations: {
     setCartItems(state, items) {
       state.cart = Object.assign({}, state.cart, items);
+    },
+    increaseQuantity(state, productId) {
+      const productInCartIndex = state.cart.findIndex(
+        (ci) => ci.productId === productId
+      );
+
+      if (productInCartIndex >= 0) {
+        state.cart[productInCartIndex].qty++;
+      }
+    },
+    decreaseQuantity(state, productId) {
+      const productInCartIndex = state.cart.findIndex(
+        (ci) => ci.productId === productId
+      );
+
+      if (productInCartIndex >= 0) {
+        state.cart[productInCartIndex].qty--;
+      }
+    },
+    changeItemQuantity(state, { productId, qty }) {
+      const productInCartIndex = state.cart.findIndex(
+        (ci) => ci.productId === productId
+      );
+
+      if (productInCartIndex >= 0) {
+        state.cart[productInCartIndex].qty = qty;
+      }
+    },
+    removeItemFromCart(state, productId) {
+      state.cart = state.cart.filter((item) => item.productId != productId);
+    },
+    clearCart(state) {
+      state.cart = [];
     },
     addToCart(state, item) {
       const productInCartIndex = state.cart.findIndex(
@@ -50,6 +92,21 @@ export default {
     },
     addToCart({ commit }, item) {
       commit("addToCart", item);
+    },
+    increaseQuantity({ commit }, productId) {
+      commit("increaseQuantity", productId);
+    },
+    decreaseQuantity({ commit }, productId) {
+      commit("decreaseQuantity", productId);
+    },
+    changeItemQuantity({ commit }, payload) {
+      commit("changeItemQuantity", payload);
+    },
+    removeItemFromCart({ commit }, productId) {
+      commit("removeItemFromCart", productId);
+    },
+    clearCart({ commit }) {
+      commit("clearCart");
     },
   },
 };

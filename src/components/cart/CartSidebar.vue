@@ -6,7 +6,7 @@
         <div class="cart-total">
           <i class="icofont-basket"></i>
           <h5 class="mt-2">
-            <span>total items </span><span>({{cart ? cartQuantity : 0 }})</span>
+            <span>total items </span><span>({{cartQuantity}})</span>
           </h5>
         </div>
       </div>

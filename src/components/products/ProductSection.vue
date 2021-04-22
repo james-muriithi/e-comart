@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import $ from "jquery";
 import ProductCategories from "./ProductCategories.vue";
 import ProductFilter from "./ProductFilter.vue";
 import ProductCard from "./ProductCard.vue";
@@ -79,6 +80,13 @@ export default {
   created() {
     this.fetchProducts();
     console.log(this.loadingElements);
+  },
+  mounted() {
+    $(window).on("scroll", function () {
+      $(this).scrollTop() > 650
+        ? $(".product-category").addClass("category-fixed")
+        : $(".product-category").removeClass("category-fixed");
+    })
   },
 };
 </script>
