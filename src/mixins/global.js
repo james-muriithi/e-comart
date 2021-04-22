@@ -31,6 +31,12 @@ const GlobalMixins = {
     },
   },
   methods: {
+    formatPrice(price) {
+      if (!price || price == "") {
+        return price;
+      }
+      return `Ksh ${this.numberWithCommas(price)}`;
+    },
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },

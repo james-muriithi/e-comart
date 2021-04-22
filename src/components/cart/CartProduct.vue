@@ -1,18 +1,32 @@
 <template>
-  <li class="cart-item alert fade show">
+  <li class="cart-item alert fade show" v-if="product">
     <div class="cart-image">
       <a href="#"
         ><img
-          :src="require(`../../assets/images/products/01.jpg`)"
+          :src="
+            product.thumbnail || require(`../../assets/images/products/01.jpg`)
+          "
           alt="product"
       /></a>
     </div>
     <div class="cart-info">
-      <h5><a href="product-single.html">product name</a></h5>
-      <span>$2.5 X 3</span>
-      <h6>$6.15</h6>
+      <h5>
+        <a
+          href="#"
+          data-toggle="tooltip"
+          data-placement="top"
+          :title="product.name ?? ''"
+          >{{ product.name ?? "" }}</a
+        >
+      </h5>
+      <span>{{ formatPrice(product.newPrice) }} X {{ itemCartQuantity }}</span>
+      <h6>{{ formatPrice(product.newPrice * itemCartQuantity) }}</h6>
       <div class="product-action">
-        <button class="action-minus" title="Quantity Minus" @click="decreaseQuantity">
+        <button
+          class="action-minus"
+          title="Quantity Minus"
+          @click="decreaseQuantity"
+        >
           <i class="icofont-minus"></i></button
         ><input
           class="action-input"
@@ -20,12 +34,20 @@
           type="text"
           name="quantity"
           v-model="itemCartQuantity"
-        /><button class="action-plus" title="Quantity Plus" @click="increaseQuantity">
+        /><button
+          class="action-plus"
+          title="Quantity Plus"
+          @click="increaseQuantity"
+        >
           <i class="icofont-plus"></i>
         </button>
       </div>
     </div>
-    <button class="cart-delete" data-dismiss="alert" @click="removeItemFromCart">
+    <button
+      class="cart-delete"
+      data-dismiss="alert"
+      @click="removeItemFromCart"
+    >
       <i class="icofont-bin"></i>
     </button>
   </li>
@@ -54,9 +76,12 @@ export default {
         }
       }, 500),
     },
+    product() {
+      return this.$store.getters.product(this.id);
+    },
   },
   methods: {
-      increaseQuantity() {
+    increaseQuantity() {
       this.$store.dispatch("increaseQuantity", this.id);
     },
     decreaseQuantity() {
@@ -84,3 +109,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+h5 a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+</style>

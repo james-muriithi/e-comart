@@ -119,12 +119,6 @@ export default {
     },
   },
   methods: {
-    formatPrice(price) {
-      if (!price || price == "") {
-        return price;
-      }
-      return `Ksh ${this.numberWithCommas(price)}`;
-    },
     addToCart() {
       this.$store.dispatch("addToCart", this.id);
     },
