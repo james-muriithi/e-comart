@@ -56,3 +56,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+ul.cate-list {
+  overflow-y: auto !important;
+}
+</style>

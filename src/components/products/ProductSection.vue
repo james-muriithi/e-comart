@@ -18,7 +18,7 @@
               </h6>
             </div>
           </div>
-          <div class="row" v-else>
+          <div v-else>
             <div class="row w-100" v-if="isLoading">
               <product-placeholder
                 v-for="i in loadingElements"
@@ -63,19 +63,19 @@ export default {
   data() {
     return {
       isLoading: false,
-      error: null
+      error: null,
     };
   },
   components: {
     ProductCategories,
     ProductFilter,
     ProductCard,
-    ProductPlaceholder
+    ProductPlaceholder,
   },
   computed: {
     products() {
       return this.$store.getters.products;
-    }
+    },
   },
   methods: {
     async fetchProducts() {
@@ -87,17 +87,23 @@ export default {
         this.error = error.message || "error";
       }
       this.isLoading = false;
-    }
+    },
   },
   created() {
     this.fetchProducts();
   },
   mounted() {
-    $(window).on("scroll", function() {
+    $(window).on("scroll", function () {
       $(this).scrollTop() > 650
         ? $(".product-category").addClass("category-fixed")
         : $(".product-category").removeClass("category-fixed");
     });
-  }
+  },
 };
 </script>
+
+<style scoped>
+.category-fixed {
+  top: 10px;
+}
+</style>

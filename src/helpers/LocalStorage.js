@@ -7,7 +7,7 @@ const saveToStorage = (name, data, json = false) => {
 
 const getFromStorage = (name, parse = false) => {
   let data = localStorage.getItem(name);
-  if (parse) {
+  if (data && parse) {
     data = JSON.parse(data);
   }
 

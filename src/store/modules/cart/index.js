@@ -1,7 +1,11 @@
+import {
+  saveToStorage,
+  getFromStorage,
+} from "../../../helpers/LocalStorage.js";
 export default {
   state() {
     return {
-      cart: []
+      cart: [],
     };
   },
   getters: {
@@ -19,7 +23,7 @@ export default {
         if (!state.cart || state.cart.length == 0) {
           return 0;
         }
-        const cartItem = state.cart.find(item => item.productId == productId);
+        const cartItem = state.cart.find((item) => item.productId == productId);
         return cartItem ? cartItem.qty : 0;
       };
     },
@@ -30,53 +34,62 @@ export default {
 
       let total = 0;
 
-      state.cart.map(item => {
-        total += parseFloat(rootGetters.product(item.productId).newPrice);
+      state.cart.map((item) => {
+        const price = rootGetters.product(item.productId)
+          ? parseFloat(rootGetters.product(item.productId).newPrice)
+          : 0;
+        total += price;
       });
 
       return total;
-    }
+    },
   },
   mutations: {
     setCartItems(state, items) {
-      state.cart = Object.assign({}, state.cart, items);
+      state.cart = items;
+      saveToStorage("cart", state.cart, true);
     },
     increaseQuantity(state, productId) {
       const productInCartIndex = state.cart.findIndex(
-        ci => ci.productId === productId
+        (ci) => ci.productId === productId
       );
 
       if (productInCartIndex >= 0) {
         state.cart[productInCartIndex].qty++;
       }
+      saveToStorage("cart", state.cart, true);
     },
     decreaseQuantity(state, productId) {
       const productInCartIndex = state.cart.findIndex(
-        ci => ci.productId === productId
+        (ci) => ci.productId === productId
       );
 
       if (productInCartIndex >= 0) {
         state.cart[productInCartIndex].qty--;
       }
+      saveToStorage("cart", state.cart, true);
     },
     changeItemQuantity(state, { productId, qty }) {
       const productInCartIndex = state.cart.findIndex(
-        ci => ci.productId === productId
+        (ci) => ci.productId === productId
       );
 
       if (productInCartIndex >= 0) {
         state.cart[productInCartIndex].qty = parseInt(qty);
       }
+      saveToStorage("cart", state.cart, true);
     },
     removeItemFromCart(state, productId) {
-      state.cart = state.cart.filter(item => item.productId != productId);
+      state.cart = state.cart.filter((item) => item.productId != productId);
+      saveToStorage("cart", state.cart, true);
     },
     clearCart(state) {
       state.cart = [];
+      saveToStorage("cart", state.cart, true);
     },
     addToCart(state, item) {
       const productInCartIndex = state.cart.findIndex(
-        ci => ci.productId === item
+        (ci) => ci.productId === item
       );
 
       if (productInCartIndex >= 0) {
@@ -84,11 +97,12 @@ export default {
       } else {
         const newProduct = {
           productId: item,
-          qty: 1
+          qty: 1,
         };
         state.cart.push(newProduct);
       }
-    }
+      saveToStorage("cart", state.cart, true);
+    },
   },
   actions: {
     setCartItems({ commit }, items) {
@@ -111,6 +125,10 @@ export default {
     },
     clearCart({ commit }) {
       commit("clearCart");
-    }
-  }
+    },
+    loadCart({ commit }) {
+      const cart = getFromStorage("cart", true) || [];
+      commit("setCartItems", cart);
+    },
+  },
 };
