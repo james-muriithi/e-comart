@@ -1,3 +1,5 @@
+// import _ from "lodash";
+import { fetchCart, saveCart } from "../../../helpers/FirebaseFunctions.js";
 import {
   saveToStorage,
   getFromStorage,
@@ -38,7 +40,7 @@ export default {
         const price = rootGetters.product(item.productId)
           ? parseFloat(rootGetters.product(item.productId).newPrice)
           : 0;
-        total += price;
+        total += price * item.qty;
       });
 
       return total;
@@ -47,7 +49,6 @@ export default {
   mutations: {
     setCartItems(state, items) {
       state.cart = items;
-      saveToStorage("cart", state.cart, true);
     },
     increaseQuantity(state, productId) {
       const productInCartIndex = state.cart.findIndex(
@@ -57,7 +58,6 @@ export default {
       if (productInCartIndex >= 0) {
         state.cart[productInCartIndex].qty++;
       }
-      saveToStorage("cart", state.cart, true);
     },
     decreaseQuantity(state, productId) {
       const productInCartIndex = state.cart.findIndex(
@@ -67,7 +67,6 @@ export default {
       if (productInCartIndex >= 0) {
         state.cart[productInCartIndex].qty--;
       }
-      saveToStorage("cart", state.cart, true);
     },
     changeItemQuantity(state, { productId, qty }) {
       const productInCartIndex = state.cart.findIndex(
@@ -77,15 +76,12 @@ export default {
       if (productInCartIndex >= 0) {
         state.cart[productInCartIndex].qty = parseInt(qty);
       }
-      saveToStorage("cart", state.cart, true);
     },
     removeItemFromCart(state, productId) {
       state.cart = state.cart.filter((item) => item.productId != productId);
-      saveToStorage("cart", state.cart, true);
     },
     clearCart(state) {
       state.cart = [];
-      saveToStorage("cart", state.cart, true);
     },
     addToCart(state, item) {
       const productInCartIndex = state.cart.findIndex(
@@ -101,34 +97,84 @@ export default {
         };
         state.cart.push(newProduct);
       }
-      saveToStorage("cart", state.cart, true);
     },
   },
   actions: {
-    setCartItems({ commit }, items) {
+    setCartItems({ commit }, { items, saveLocal = false }) {
       commit("setCartItems", items);
+      if (saveLocal) {
+        saveToStorage("cart", items, true);
+      }
     },
-    addToCart({ commit }, item) {
+    addToCart({ dispatch, commit, rootState, state }, item) {
       commit("addToCart", item);
+
+      const userId = rootState.auth.user ? rootState.auth.user.localId : null;
+      dispatch("saveCart", { cart: state.cart, userId });
     },
-    increaseQuantity({ commit }, productId) {
+    increaseQuantity({ dispatch, commit, rootState, state }, productId) {
       commit("increaseQuantity", productId);
+      const userId = rootState.auth.user ? rootState.auth.user.localId : null;
+      dispatch("saveCart", { cart: state.cart, userId });
     },
-    decreaseQuantity({ commit }, productId) {
+    decreaseQuantity({ dispatch, commit, rootState, state }, productId) {
       commit("decreaseQuantity", productId);
+      const userId = rootState.auth.user ? rootState.auth.user.localId : null;
+      dispatch("saveCart", { cart: state.cart, userId });
     },
-    changeItemQuantity({ commit }, payload) {
+    changeItemQuantity({ dispatch, commit, rootState, state }, payload) {
       commit("changeItemQuantity", payload);
+      const userId = rootState.auth.user ? rootState.auth.user.localId : null;
+      dispatch("saveCart", { cart: state.cart, userId });
     },
-    removeItemFromCart({ commit }, productId) {
+    removeItemFromCart({ dispatch, commit, rootState, state }, productId) {
       commit("removeItemFromCart", productId);
+      const userId = rootState.auth.user ? rootState.auth.user.localId : null;
+      dispatch("saveCart", { cart: state.cart, userId });
     },
     clearCart({ commit }) {
       commit("clearCart");
     },
-    loadCart({ commit }) {
-      const cart = getFromStorage("cart", true) || [];
-      commit("setCartItems", cart);
+    async saveCart(_, { cart, userId = null, saveLocal = true }) {
+      if (saveLocal) {
+        saveToStorage("cart", cart, true);
+      }
+      if (userId) {
+        await saveCart(cart, userId);
+      }
+    },
+    async loadCart({ dispatch, rootState }) {
+      let cart = getFromStorage("cart", true) || [];
+
+      let saveLocal = false;
+
+      if (rootState.auth.user) {
+        const dbCart =
+          Object.values(await fetchCart(rootState.auth.user.localId)) || [];
+        if (dbCart.length > 0) {
+          saveLocal = true;
+          cart = dbCart;
+          // let data = [...dbCart, ...cart];
+          // let localItems = _.differenceBy(cart, dbCart, 'productId')
+          // cart = [...dbCart, ...localItems]
+          // cart = _.chain(data)
+          //   .groupBy("productId")
+          //   .map(function(objects, productId) {
+          //     return {
+          //       productId,
+          //       qty: _.sumBy(objects, "qty"),
+          //     };
+          //   })
+          //   .value();
+        } else {
+          dispatch("saveCart", {
+            cart,
+            userId: rootState.auth.user.localId,
+            saveLocal,
+          });
+        }
+      }
+      dispatch("setCartItems", { items: cart, saveLocal });
     },
   },
 };

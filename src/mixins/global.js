@@ -11,7 +11,6 @@ const GlobalMixins = {
       return this.$store.getters.isAuthenticated;
     },
     displayName() {
-      console.log(this.$store.getters.user);
       return this.$store.getters.user.displayName || "";
     },
     logo() {

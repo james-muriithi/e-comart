@@ -1,6 +1,5 @@
 <template>
   <router-view></router-view>
-  <cart-mobile></cart-mobile>
 </template>
 
 <script>

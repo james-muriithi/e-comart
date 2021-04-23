@@ -5,6 +5,7 @@
   <home-banner></home-banner>
   <promo-slider></promo-slider>
   <product-section></product-section>
+  <cart-mobile></cart-mobile>
 </template>
 
 <script>
