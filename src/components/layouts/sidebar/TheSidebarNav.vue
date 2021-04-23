@@ -7,53 +7,20 @@
         ><a class="nav-logo" href="?"><img :src="logo" alt="logo"/></a>
         <ul class="nav nav-tabs">
           <li>
-            <a href="#cate-list" class="nav-link active" data-toggle="tab"
-              >categories</a
+            <a href="#menu-list" class="nav-link active" data-toggle="tab"
+              >menu list</a
             >
           </li>
           <li>
-            <a href="#menu-list" class="nav-link" data-toggle="tab"
-              >menu list</a
+            <a href="#cate-list" class="nav-link" data-toggle="tab"
+              >categories</a
             >
           </li>
         </ul>
       </div>
       <div class="nav-content">
-        <div class="tab-pane active mt-3" id="cate-list">
-          <div class="mt-2" v-if="isLoading">
-            <loading-shimmer
-              v-for="i in loadingElements"
-              :key="i"
-            ></loading-shimmer>
-          </div>
-          <ul class="cate-list" v-else>
-            <li v-for="category in categories" :key="category.id">
-              <a class="cate-link dropdown" href="#" @click.prevent=""
-                ><i :class="category.iconClass"></i
-                ><span>{{ category.name || "" }}</span></a
-              >
 
-              <ul
-                class="dropdown-list"
-                v-if="
-                  !!category.subCategories && category.subCategories.length > 0
-                "
-              >
-                <li v-for="subcat in category.subCategories" :key="subcat.name">
-                  <a :href="subcat.url || '#'">{{ subcat.name }}</a>
-                </li>
-              </ul>
-            </li>
-            <div
-              class="text-center mt-5"
-              v-if="!categories || categories.length == 0"
-            >
-              <p><b>No categories</b></p>
-            </div>
-          </ul>
-        </div>
-
-        <div class="tab-pane" id="menu-list">
+        <div class="tab-pane active" id="menu-list">
           <div class="nav-profile" v-if="isLoggedIn">
             <a href="#"><img :src="userImage" alt="user"/></a>
             <h4>
@@ -117,6 +84,39 @@
                 ><i class="icofont-ui-lock"></i><span>logout</span></a
               >
             </li>
+          </ul>
+        </div>
+        <div class="tab-pane mt-3" id="cate-list">
+          <div class="mt-2" v-if="isLoading">
+            <loading-shimmer
+              v-for="i in loadingElements"
+              :key="i"
+            ></loading-shimmer>
+          </div>
+          <ul class="cate-list" v-else>
+            <li v-for="category in categories" :key="category.id">
+              <a class="cate-link dropdown" href="#" @click.prevent=""
+                ><i :class="category.iconClass"></i
+                ><span>{{ category.name || "" }}</span></a
+              >
+
+              <ul
+                class="dropdown-list"
+                v-if="
+                  !!category.subCategories && category.subCategories.length > 0
+                "
+              >
+                <li v-for="subcat in category.subCategories" :key="subcat.name">
+                  <a :href="subcat.url || '#'">{{ subcat.name }}</a>
+                </li>
+              </ul>
+            </li>
+            <div
+              class="text-center mt-5"
+              v-if="!categories || categories.length == 0"
+            >
+              <p><b>No categories</b></p>
+            </div>
           </ul>
         </div>
         <div class="nav-footer">

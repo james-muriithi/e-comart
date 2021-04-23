@@ -36,7 +36,18 @@
                 :oldPrice="product.oldPrice"
                 :thumbnail="product.thumbnail"
                 :labels="product.labels || []"
-              ></product-card>
+              >
+                <product-modal
+                  :id="product.id"
+                  :images="product.images || []"
+                  :name="product.name"
+                  :newPrice="product.newPrice"
+                  :oldPrice="product.oldPrice"
+                  :brand="product.brand || ''"
+                  :sku="product.sku || ''"
+                  :description="product.description || ''"
+                ></product-modal>
+              </product-card>
             </div>
 
             <div
@@ -58,6 +69,7 @@ import ProductCategories from "./ProductCategories.vue";
 import ProductFilter from "./ProductFilter.vue";
 import ProductCard from "./ProductCard.vue";
 import ProductPlaceholder from "./ProductPlaceholder.vue";
+import ProductModal from "./ProductModal.vue";
 
 export default {
   data() {
@@ -71,6 +83,7 @@ export default {
     ProductFilter,
     ProductCard,
     ProductPlaceholder,
+    ProductModal,
   },
   computed: {
     products() {

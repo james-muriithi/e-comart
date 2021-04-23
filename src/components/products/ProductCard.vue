@@ -44,7 +44,7 @@
               class="action-view"
               title="Product View"
               data-toggle="modal"
-              data-target="#product-view"
+              :data-target="`#product-view${id}`"
             >
               <i class="icofont-eye-alt"></i>
             </button>
@@ -75,6 +75,7 @@
         </div>
       </div>
     </div>
+    <slot></slot>
   </div>
 </template>
 
@@ -185,7 +186,7 @@ export default {
   .product-price {
     font-size: 14px;
   }
-  .product-name a{
+  .product-name a {
     font-size: 15px;
   }
 }
