@@ -101,9 +101,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.category-fixed {
-  top: 10px;
-}
-</style>

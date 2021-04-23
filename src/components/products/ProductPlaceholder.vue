@@ -71,7 +71,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 208px;
+  width: 100%;
   height: 208px;
   padding: 16px;
 }

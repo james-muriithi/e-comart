@@ -121,6 +121,7 @@ export default {
         await this.$store.dispatch("alert/setAlert", {
           message: "Logged in successfully"
         });
+
         //redirect
         const redirectUrl = this.$route.query.redirect || "/";
         this.$router.push(redirectUrl);
