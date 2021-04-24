@@ -12,6 +12,9 @@ export default {
     setProducts(state, products) {
       state.products = Object.assign({}, state.products, products);
     },
+    addProduct(state, product){
+      state.products = [...state.products, product];
+    },
     setSelectedProduct(state, product){
       state.selectedProduct = product
     }
@@ -42,6 +45,7 @@ export default {
       if (!product) {
         product = await fetchProduct(productId)
       }
+
       commit('setSelectedProduct', product)
     }
   },

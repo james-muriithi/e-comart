@@ -96,7 +96,7 @@
 
 <script>
 import $ from "jquery";
-import _ from 'lodash';
+import _ from "lodash";
 export default {
   props: {
     id: {
@@ -111,6 +111,9 @@ export default {
   computed: {
     product() {
       return this.$store.getters.selectedProduct;
+    },
+    cartQuantity() {
+      return this.$store.getters.cartQuantity;
     },
     itemCartQuantity: {
       get: function () {
@@ -135,6 +138,16 @@ export default {
     },
     changeItemQuantity(qty) {
       this.$store.dispatch("changeItemQuantity", { productId: this.id, qty });
+    },
+    async fetchProducts() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("fetchProducts");
+      } catch (error) {
+        console.log(error);
+        this.error = error.message || "error";
+      }
+      this.isLoading = false;
     },
     async loadProduct() {
       this.isLoading = true;
@@ -206,6 +219,9 @@ export default {
     },
   },
   created() {
+    if (this.cartQuantity > 0) {
+      this.fetchProducts();
+    }
     this.loadProduct();
   },
 };
