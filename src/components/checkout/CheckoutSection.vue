@@ -39,12 +39,12 @@
               </div>
               <div class="checkout-charge">
                 <ul>
-                  <li><span>Sub total</span><span>$267.45</span></li>
-                  <li><span>delivery fee</span><span>$10.00</span></li>
-                  <li><span>discount</span><span>$00.00</span></li>
+                  <li><span>Sub total</span><span>{{formatPrice(cartTotal)}}</span></li>
+                  <li><span>delivery fee</span><span>{{formatPrice(0)}}</span></li>
+                  <li><span>discount</span><span>{{formatPrice(0)}}</span></li>
                   <li>
                     <span>Total<small>(Incl. VAT)</small></span
-                    ><span>$277.00</span>
+                    ><span>{{formatPrice(cartTotal)}}</span>
                   </li>
                 </ul>
               </div>
