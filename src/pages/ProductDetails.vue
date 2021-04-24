@@ -2,7 +2,9 @@
   <the-header></the-header>
   <the-sidebar-nav @close="toggleSidebar"></the-sidebar-nav>
   <cart-sidebar></cart-sidebar>
-  <product-details :id="id"></product-details>
+  <product-details
+    :id="id"
+  ></product-details>
   <cart-mobile></cart-mobile>
 </template>
 
@@ -13,13 +15,17 @@ import CartSidebar from "../components/cart/CartSidebar.vue";
 export default {
   props: {
     id: {
-      required: true,
-      isLoading: false,
+      required: true, 
     },
   },
   components: {
     ProductDetails,
-    CartSidebar
+    CartSidebar,
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
   },
   methods: {
     toggleSidebar() {
@@ -33,8 +39,8 @@ export default {
   },
   provide() {
     return {
-      toggleSidebar: this.toggleSidebar
+      toggleSidebar: this.toggleSidebar,
     };
-  }
+  },
 };
 </script>

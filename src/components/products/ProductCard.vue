@@ -25,7 +25,7 @@
           data-placement="top"
           :title="name"
         >
-          <a href="#">{{ name }}</a>
+          <router-link :to="`/product/${id}`">{{ name }}</router-link>
         </h5>
         <div class="product-action-group">
           <div

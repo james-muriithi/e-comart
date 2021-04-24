@@ -3,98 +3,21 @@
     <div class="container">
       <div class="row" v-if="!product">
         <div class="col-12 mt-3">
-            <p class="text-center">Product Not Found</p>
+          <p class="text-center">Product Not Found</p>
         </div>
       </div>
       <div class="row" v-else>
         <div class="col-md-6 col-lg-6">
           <div class="product-gallery">
             <ul class="preview-slider">
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
+              <li v-for="image in product.images" :key="image">
+                <img :src="image" alt="product" />
               </li>
             </ul>
+
             <ul class="thumb-slider">
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
-              </li>
-              <li>
-                <img
-                  src="https://mironmahmud.com/ecomart/assets/ltr/images/shop/product/grocery/01.jpg"
-                  alt="product"
-                />
+              <li v-for="image in product.images" :key="image">
+                <img :src="image" alt="product" />
               </li>
             </ul>
           </div>
@@ -102,7 +25,7 @@
         <div class="col-md-6 col-lg-6">
           <div class="product-details">
             <h3 class="details-name">
-              <a href="brand-profile.html">existing product name</a>
+              <a href="#">{{ product.name }}</a>
             </h3>
             <div class="details-meta">
               SKU:<span class="details-sku">1234567</span>BRAND:<a
@@ -168,8 +91,12 @@ export default {
   props: {
     id: {
       required: true,
-      isLoading: false,
     },
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
   },
   computed: {
     product() {
