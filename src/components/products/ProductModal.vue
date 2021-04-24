@@ -27,7 +27,7 @@
               <div class="col-md-6 col-lg-6">
                 <div class="product-details">
                   <h3 class="details-name">
-                    <a href="#">{{ name }}</a>
+                    <router-link :to="`/product/${id}`">{{ name }}</router-link>
                   </h3>
                   <div class="details-meta">
                     SKU:<span class="details-sku">{{ sku }}</span

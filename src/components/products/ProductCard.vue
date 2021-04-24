@@ -10,9 +10,9 @@
             >{{ label.title }}</label
           >
         </div>
-        <a class="product-image" href="#"
+        <router-link class="product-image" :to="`/product/${id}`"
           ><img :src="thumbnail" alt="product"
-        /></a>
+        /></router-link>
       </figure>
       <div class="product-content">
         <h5 class="product-price">

@@ -1,22 +1,22 @@
 <template>
   <li class="cart-item alert fade show" v-if="product">
     <div class="cart-image">
-      <a href="#"
+      <router-link :to="`/product/${id}`"
         ><img
           :src="
             product.thumbnail || require(`../../assets/images/products/01.jpg`)
           "
           alt="product"
-      /></a>
+      /></router-link>
     </div>
     <div class="cart-info">
       <h5>
-        <a
-          href="#"
+        <router-link
+          :to="`/product/${id}`"
           data-toggle="tooltip"
           data-placement="top"
           :title="product.name ?? ''"
-          >{{ product.name ?? "" }}</a
+          >{{ product.name ?? "" }}</router-link
         >
       </h5>
       <span>{{ formatPrice(product.newPrice) }} X {{ itemCartQuantity }}</span>

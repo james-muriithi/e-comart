@@ -224,11 +224,13 @@ export default {
     },
   },
   created() {
-    if (this.cartQuantity > 0) {
-      this.fetchProducts();
-    }
     this.loadProduct();
   },
+  mounted(){
+    // if (this.cartQuantity > 0) {
+      this.fetchProducts();
+    // }
+  }
 };
 </script>
 
