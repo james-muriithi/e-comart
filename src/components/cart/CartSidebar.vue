@@ -11,8 +11,13 @@
         </div>
       </div>
       <ul class="cart-list pt-4">
-        <div class="text-center w-100" v-if="!cart || cart.length == 0">
+        <div class="text-center w-100 h-100" v-if="!cart || cart.length == 0">
           <p class="h6">No products in cart</p>
+          <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12">
+              <img class="w-100" :src="require('../../assets/images/empty_cart.svg')" alt="empty cart" height="170">
+            </div>
+          </div>
         </div>
         <cart-product
           v-for="item in cart"
@@ -20,7 +25,7 @@
           :id="item.productId"
         ></cart-product>
       </ul>
-      <div class="check-footer">
+      <div class="check-footer" v-if="cart && cart.length > 0">
         <button class="voucher-btn">Do you have a coupon code?</button>
         <form class="voucher-form">
           <input type="text" placeholder="Enter your voucher code" /><button
