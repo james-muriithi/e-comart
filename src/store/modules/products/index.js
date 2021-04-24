@@ -1,15 +1,19 @@
-import { fetchProducts } from "../../../helpers/FirebaseFunctions.js";
+import { fetchProduct, fetchProducts } from "../../../helpers/FirebaseFunctions.js";
 import { getFromStorage, saveToStorage } from "../../../helpers/LocalStorage";
 
 export default {
   state() {
     return {
-      products: []
+      products: [],
+      selectedProduct: null,
     };
   },
   mutations: {
     setProducts(state, products) {
       state.products = Object.assign({}, state.products, products);
+    },
+    setSelectedProduct(state, product){
+      state.selectedProduct = product
     }
   },
   actions: {
@@ -28,6 +32,17 @@ export default {
       saveToStorage("products", products, true);
 
       commit("setProducts", products);
+    },
+    async fetchProduct({commit, getters}, productId){
+      let product = null;
+      if (getters.products.length > 0) {
+        product = Object.values(getters.products).find(prod => prod.id == productId)
+      }
+
+      if (!product) {
+        product = await fetchProduct(productId)
+      }
+      commit('setSelectedProduct', product)
     }
   },
   getters: {
@@ -41,6 +56,9 @@ export default {
         }
         return Object.values(state.products).find(prod => prod.id == productId);
       };
+    },
+    selectedProduct(state){
+      return state.selectedProduct;
     }
   }
 };

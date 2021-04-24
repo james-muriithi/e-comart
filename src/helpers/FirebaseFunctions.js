@@ -52,6 +52,15 @@ async function fetchProducts() {
   }
 }
 
+async function fetchProduct(productId){
+  try {
+    const doc = await db.collection("products").doc(productId).get();
+    return doc.data();
+  } catch (error) {
+    throw new Error(error.message || "Error fetching product");
+  }
+}
+
 async function saveCart(cart, userId) {
   try {
     await db
@@ -81,4 +90,5 @@ export {
   fetchProducts,
   saveCart,
   fetchCart,
+  fetchProduct
 };
