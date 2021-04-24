@@ -12,7 +12,7 @@ import CartSidebar from "../components/cart/CartSidebar.vue";
 export default {
   components: {
     CheckoutSection,
-    CartSidebar,
+    CartSidebar
   },
   methods: {
     toggleSidebar() {

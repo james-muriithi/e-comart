@@ -20,10 +20,10 @@
                   </thead>
                   <tbody>
                     <item-row
-                    v-for="(item, index) in cart"
-                    :key="index"
-                    :index="index+1"
-                    :id="item.productId"
+                      v-for="(item, index) in cart"
+                      :key="index"
+                      :index="index + 1"
+                      :id="item.productId"
                     ></item-row>
                   </tbody>
                 </table>
@@ -39,12 +39,19 @@
               </div>
               <div class="checkout-charge">
                 <ul>
-                  <li><span>Sub total</span><span>{{formatPrice(cartTotal)}}</span></li>
-                  <li><span>delivery fee</span><span>{{formatPrice(0)}}</span></li>
-                  <li><span>discount</span><span>{{formatPrice(0)}}</span></li>
+                  <li>
+                    <span>Sub total</span
+                    ><span>{{ formatPrice(cartTotal) }}</span>
+                  </li>
+                  <li>
+                    <span>delivery fee</span><span>{{ formatPrice(0) }}</span>
+                  </li>
+                  <li>
+                    <span>discount</span><span>{{ formatPrice(0) }}</span>
+                  </li>
                   <li>
                     <span>Total<small>(Incl. VAT)</small></span
-                    ><span>{{formatPrice(cartTotal)}}</span>
+                    ><span>{{ formatPrice(cartTotal) }}</span>
                   </li>
                 </ul>
               </div>
@@ -59,11 +66,11 @@
 <script>
 import ItemRow from "./ItemRow.vue";
 export default {
-    data(){
-        return {
-            isLoading: false,
-        }
-    },
+  data() {
+    return {
+      isLoading: false
+    };
+  },
   components: { ItemRow },
   computed: {
     cart() {
@@ -71,23 +78,23 @@ export default {
     },
     cartTotal() {
       return this.$store.getters.cartTotal;
-    },
+    }
   },
   methods: {
     async fetchProducts() {
-        this.isLoading = true;
+      this.isLoading = true;
       try {
         await this.$store.dispatch("fetchProducts");
       } catch (error) {
         console.log(error);
         this.error = error.message || "error";
       }
-        this.isLoading = false;
-    },
+      this.isLoading = false;
+    }
   },
   created() {
     this.fetchProducts();
-  },
+  }
 };
 </script>
 

@@ -36,7 +36,11 @@
           ></a>
         </li>
         <li>
-          <a class="trash" href="#" title="Remove This Item" @click.prevent="removeItemFromCart"
+          <a
+            class="trash"
+            href="#"
+            title="Remove This Item"
+            @click.prevent="removeItemFromCart"
             ><i class="icofont-trash"></i
           ></a>
         </li>
@@ -60,15 +64,15 @@
 import ProductModal from "../products/ProductModal.vue";
 export default {
   components: {
-    ProductModal,
+    ProductModal
   },
   props: {
     id: {
-      required: true,
+      required: true
     },
     index: {
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     itemCartQuantity() {
@@ -76,12 +80,12 @@ export default {
     },
     product() {
       return this.$store.getters.product(this.id);
-    },
+    }
   },
   methods: {
-      removeItemFromCart() {
+    removeItemFromCart() {
       this.$store.dispatch("removeItemFromCart", this.id);
-    },
+    }
   }
 };
 </script>
