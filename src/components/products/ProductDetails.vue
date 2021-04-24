@@ -1,12 +1,13 @@
 <template>
   <section class="product-single">
     <div class="container">
-      <div class="row" v-if="!product">
+      <placeholder v-if="isLoading"></placeholder>
+      <div class="row" v-if="!product && !isLoading">
         <div class="col-12 mt-3">
           <p class="text-center">Product Not Found</p>
         </div>
       </div>
-      <div class="row" v-else>
+      <div class="row" v-if="product && !isLoading">
         <div class="col-md-6 col-lg-6">
           <div class="product-gallery">
             <ul class="preview-slider" ref="preview_slider">
@@ -97,7 +98,11 @@
 <script>
 import $ from "jquery";
 import _ from "lodash";
+import Placeholder from './ProductDetailsLoader';
 export default {
+  components: {
+    Placeholder
+  },
   props: {
     id: {
       required: true,
