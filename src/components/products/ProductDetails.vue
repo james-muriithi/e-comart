@@ -9,7 +9,7 @@
       <div class="row" v-else>
         <div class="col-md-6 col-lg-6">
           <div class="product-gallery">
-            <ul class="preview-slider">
+            <ul class="preview-slider" ref="preview_slider">
               <li v-for="image in product.images" :key="image">
                 <img :src="image" alt="product" />
               </li>
@@ -34,20 +34,13 @@
                 >radhuni</a
               >
             </div>
-            <h3 class="details-price"><span>$124.00</span><del>$42.00</del></h3>
+            <h3 class="details-price">
+              <span>{{ formatPrice(product.newPrice) }}</span>
+              <del>{{ formatPrice(product.newPrice) }}</del>
+            </h3>
             <p class="details-desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit non
-              tempora magni repudiandae sint suscipit tempore quis maxime
-              explicabo veniam eos reprehenderit fuga
+              {{ product.description }}
             </p>
-            <div class="details-group">
-              <label class="details-group-title">tags:</label>
-              <ul class="details-tag-list">
-                <li><a href="#">organic</a></li>
-                <li><a href="#">fruits</a></li>
-                <li><a href="#">Grapes</a></li>
-              </ul>
-            </div>
             <div class="details-group">
               <label class="details-group-title">Share:</label>
               <ul class="details-share-list">
@@ -58,19 +51,35 @@
             </div>
             <hr class="details-devider" />
             <div class="details-action-group">
-              <button class="details-cart" title="Add Your Cartlist">
+              <button
+                :class="`details-cart${itemCartQuantity > 0 ? ' d-none' : ''}`"
+                title="Add Your Cartlist"
+                @click="addToCart"
+              >
                 <i class="icofont-cart"></i><span>add to cart</span>
               </button>
-              <div class="details-action">
-                <button class="details-minus" title="Quantity Minus">
+              <div
+                :class="`details-action${
+                  itemCartQuantity > 0 ? ' d-flex' : ''
+                }`"
+              >
+                <button
+                  class="details-minus"
+                  title="Quantity Minus"
+                  @click="decreaseQuantity"
+                >
                   <i class="icofont-minus"></i></button
                 ><input
                   class="details-input"
                   title="Quantity Number"
                   type="text"
                   name="quantity"
-                  value="1"
-                /><button class="details-plus" title="Quantity Plus">
+                  v-model="itemCartQuantity"
+                /><button
+                  class="details-plus"
+                  title="Quantity Plus"
+                  @click="addToCart"
+                >
                   <i class="icofont-plus"></i>
                 </button>
               </div>
@@ -87,6 +96,7 @@
 
 <script>
 import $ from "jquery";
+import _ from 'lodash';
 export default {
   props: {
     id: {
@@ -102,8 +112,30 @@ export default {
     product() {
       return this.$store.getters.selectedProduct;
     },
+    itemCartQuantity: {
+      get: function () {
+        return this.$store.getters.itemCartQuantity(this.id);
+      },
+      set: _.debounce(function (newVal) {
+        if (newVal && newVal < 0) {
+          return this.itemCartQuantity;
+        }
+        if (newVal && newVal != this.itemCartQuantity) {
+          this.changeItemQuantity(newVal);
+        }
+      }, 500),
+    },
   },
   methods: {
+    addToCart() {
+      this.$store.dispatch("addToCart", this.id);
+    },
+    decreaseQuantity() {
+      this.$store.dispatch("decreaseQuantity", this.id);
+    },
+    changeItemQuantity(qty) {
+      this.$store.dispatch("changeItemQuantity", { productId: this.id, qty });
+    },
     async loadProduct() {
       this.isLoading = true;
       try {
@@ -113,58 +145,68 @@ export default {
       }
 
       this.isLoading = false;
+      this.$nextTick(() => {
+        if (this.$refs.preview_slider) {
+          $(".preview-slider")
+            .not(".slick-initialized")
+            .slick({
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: !0,
+              fade: !0,
+              asNavFor: ".thumb-slider",
+              prevArrow: '<i class="icofont-arrow-right dandik"></i>',
+              nextArrow: '<i class="icofont-arrow-left bamdik"></i>',
+              responsive: [
+                {
+                  breakpoint: 576,
+                  settings: { slidesToShow: 1, slidesToScroll: 1, arrows: !0 },
+                },
+              ],
+            }),
+            $(".thumb-slider")
+              .not(".slick-initialized")
+              .slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                asNavFor: ".preview-slider",
+                dots: !1,
+                arrows: !1,
+                centerMode: !0,
+                focusOnSelect: !0,
+                responsive: [
+                  {
+                    breakpoint: 992,
+                    settings: { slidesToShow: 3, slidesToScroll: 1 },
+                  },
+                  {
+                    breakpoint: 768,
+                    settings: { slidesToShow: 3, slidesToScroll: 1 },
+                  },
+                  {
+                    breakpoint: 576,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 1,
+                      arrows: !1,
+                    },
+                  },
+                  {
+                    breakpoint: 400,
+                    settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1,
+                      arrows: !1,
+                    },
+                  },
+                ],
+              });
+        }
+      });
     },
   },
   created() {
     this.loadProduct();
-  },
-  mounted() {
-    $(".preview-slider")
-      .not(".slick-initialized")
-      .slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: !0,
-        fade: !0,
-        asNavFor: ".thumb-slider",
-        prevArrow: '<i class="icofont-arrow-right dandik"></i>',
-        nextArrow: '<i class="icofont-arrow-left bamdik"></i>',
-        responsive: [
-          {
-            breakpoint: 576,
-            settings: { slidesToShow: 1, slidesToScroll: 1, arrows: !0 },
-          },
-        ],
-      }),
-      $(".thumb-slider")
-        .not(".slick-initialized")
-        .slick({
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          asNavFor: ".preview-slider",
-          dots: !1,
-          arrows: !1,
-          centerMode: !0,
-          focusOnSelect: !0,
-          responsive: [
-            {
-              breakpoint: 992,
-              settings: { slidesToShow: 3, slidesToScroll: 1 },
-            },
-            {
-              breakpoint: 768,
-              settings: { slidesToShow: 3, slidesToScroll: 1 },
-            },
-            {
-              breakpoint: 576,
-              settings: { slidesToShow: 3, slidesToScroll: 1, arrows: !1 },
-            },
-            {
-              breakpoint: 400,
-              settings: { slidesToShow: 2, slidesToScroll: 1, arrows: !1 },
-            },
-          ],
-        });
   },
 };
 </script>
