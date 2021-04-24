@@ -60,9 +60,9 @@
                 <i class="icofont-cart"></i><span>add to cart</span>
               </button>
               <div
-                :class="`details-action${
-                  itemCartQuantity > 0 ? ' d-flex' : ''
-                }`"
+                :class="
+                  `details-action${itemCartQuantity > 0 ? ' d-flex' : ''}`
+                "
               >
                 <button
                   class="details-minus"
@@ -98,19 +98,19 @@
 <script>
 import $ from "jquery";
 import _ from "lodash";
-import Placeholder from './ProductDetailsLoader';
+import Placeholder from "./ProductDetailsLoader";
 export default {
   components: {
     Placeholder
   },
   props: {
     id: {
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
-      isLoading: false,
+      isLoading: false
     };
   },
   computed: {
@@ -121,18 +121,18 @@ export default {
       return this.$store.getters.cartQuantity;
     },
     itemCartQuantity: {
-      get: function () {
+      get: function() {
         return this.$store.getters.itemCartQuantity(this.id);
       },
-      set: _.debounce(function (newVal) {
+      set: _.debounce(function(newVal) {
         if (newVal && newVal < 0) {
           return this.itemCartQuantity;
         }
         if (newVal && newVal != this.itemCartQuantity) {
           this.changeItemQuantity(newVal);
         }
-      }, 500),
-    },
+      }, 500)
+    }
   },
   methods: {
     addToCart() {
@@ -178,9 +178,9 @@ export default {
               responsive: [
                 {
                   breakpoint: 576,
-                  settings: { slidesToShow: 1, slidesToScroll: 1, arrows: !0 },
-                },
-              ],
+                  settings: { slidesToShow: 1, slidesToScroll: 1, arrows: !0 }
+                }
+              ]
             }),
             $(".thumb-slider")
               .not(".slick-initialized")
@@ -195,40 +195,40 @@ export default {
                 responsive: [
                   {
                     breakpoint: 992,
-                    settings: { slidesToShow: 3, slidesToScroll: 1 },
+                    settings: { slidesToShow: 3, slidesToScroll: 1 }
                   },
                   {
                     breakpoint: 768,
-                    settings: { slidesToShow: 3, slidesToScroll: 1 },
+                    settings: { slidesToShow: 3, slidesToScroll: 1 }
                   },
                   {
                     breakpoint: 576,
                     settings: {
                       slidesToShow: 3,
                       slidesToScroll: 1,
-                      arrows: !1,
-                    },
+                      arrows: !1
+                    }
                   },
                   {
                     breakpoint: 400,
                     settings: {
                       slidesToShow: 2,
                       slidesToScroll: 1,
-                      arrows: !1,
-                    },
-                  },
-                ],
+                      arrows: !1
+                    }
+                  }
+                ]
               });
         }
       });
-    },
+    }
   },
   created() {
     this.loadProduct();
   },
-  mounted(){
+  mounted() {
     // if (this.cartQuantity > 0) {
-      this.fetchProducts();
+    this.fetchProducts();
     // }
   }
 };

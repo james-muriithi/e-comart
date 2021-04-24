@@ -7,7 +7,7 @@ export default {
   name: "App",
   created() {
     this.$store.dispatch("tryLogin");
-    this.$store.dispatch('loadCart')
+    this.$store.dispatch("loadCart");
   }
 };
 </script>

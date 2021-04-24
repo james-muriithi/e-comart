@@ -16,7 +16,9 @@
         ><i class="icofont-ui-love"></i><sup>0</sup></router-link
       >
       <button class="icon-check" aria-label="Shopping Cart">
-        <i class="icofont-shopping-cart"></i><span>{{formatPrice(cartTotal, false)}}</span><sup>{{cartQuantity}}</sup>
+        <i class="icofont-shopping-cart"></i
+        ><span>{{ formatPrice(cartTotal, false) }}</span
+        ><sup>{{ cartQuantity }}</sup>
       </button>
     </div>
   </div>

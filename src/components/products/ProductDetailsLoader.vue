@@ -78,12 +78,12 @@
             </div>
             <hr class="details-devider" />
             <div class="row">
-                <div class="col-6">
-                    <div class="block-button pulsate"></div>
-                </div>
-                <div class="col-6">
-                    <div class="block-button pulsate"></div>
-                </div>
+              <div class="col-6">
+                <div class="block-button pulsate"></div>
+              </div>
+              <div class="col-6">
+                <div class="block-button pulsate"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -121,9 +121,9 @@
   margin-bottom: 8px;
 }
 
-.block-button{
-    height: 40px;
-    width: 100%;
+.block-button {
+  height: 40px;
+  width: 100%;
 }
 
 @-webkit-keyframes Gradient {

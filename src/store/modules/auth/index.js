@@ -79,8 +79,7 @@ export default {
         user: responseData
       });
 
-      context.dispatch('loadCart')
-
+      context.dispatch("loadCart");
     },
     tryLogin(context) {
       const token = localStorage.getItem("token");

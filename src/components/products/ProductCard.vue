@@ -86,40 +86,40 @@ import _ from "lodash";
 export default {
   props: {
     id: {
-      required: true,
+      required: true
     },
     name: {
       type: String,
-      required: true,
+      required: true
     },
     newPrice: {
       // type: String,
-      required: true,
+      required: true
     },
     oldPrice: {
       // type: String,
-      required: false,
+      required: false
     },
     thumbnail: {
       type: String,
       required: true,
-      default: require("../../assets/images/products/01.jpg"),
+      default: require("../../assets/images/products/01.jpg")
     },
     labels: {
       type: Array,
-      required: true,
+      required: true
     },
     sku: {
       type: String,
-      required: false,
-    },
+      required: false
+    }
   },
   data() {
     return {};
   },
   watch: {
     itemCartQuantity: {
-      handler: _.debounce(function () {
+      handler: _.debounce(function() {
         if (this.itemCartQuantity == 0) {
           this.removeItemFromCart();
           var c = $(this.$refs.addToCart)
@@ -127,8 +127,8 @@ export default {
             .children();
           c.first().css("display", "flex"), c.last().css("display", "none");
         }
-      }, 500),
-    },
+      }, 500)
+    }
   },
   methods: {
     addToCart() {
@@ -142,32 +142,34 @@ export default {
     },
     removeItemFromCart() {
       this.$store.dispatch("removeItemFromCart", this.id);
-    },
+    }
   },
   computed: {
     itemCartQuantity: {
-      get: function () {
+      get: function() {
         return this.$store.getters.itemCartQuantity(this.id);
       },
-      set: _.debounce(function (newVal) {
+      set: _.debounce(function(newVal) {
         if (newVal && newVal < 0) {
           return this.itemCartQuantity;
         }
         if (newVal && newVal != this.itemCartQuantity) {
           this.changeItemQuantity(newVal);
         }
-      }, 500),
-    },
+      }, 500)
+    }
   },
   mounted() {
-    $(".action-cart").on("click", function () {
-      var c = $(this).parents(".product-action-group").children();
+    $(".action-cart").on("click", function() {
+      var c = $(this)
+        .parents(".product-action-group")
+        .children();
       c.first().css("display", "none"), c.last().css("display", "flex");
     }),
-      $(".action-wish").on("click", function () {
+      $(".action-wish").on("click", function() {
         $(this).toggleClass("active");
       });
-  },
+  }
 };
 </script>
 

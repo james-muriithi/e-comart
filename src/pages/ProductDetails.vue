@@ -2,9 +2,7 @@
   <the-header></the-header>
   <the-sidebar-nav @close="toggleSidebar"></the-sidebar-nav>
   <cart-sidebar></cart-sidebar>
-  <product-details
-    :id="id"
-  ></product-details>
+  <product-details :id="id"></product-details>
   <cart-mobile></cart-mobile>
 </template>
 
@@ -15,32 +13,32 @@ import CartSidebar from "../components/cart/CartSidebar.vue";
 export default {
   props: {
     id: {
-      required: true, 
-    },
+      required: true
+    }
   },
   components: {
     ProductDetails,
-    CartSidebar,
+    CartSidebar
   },
   data() {
     return {
-      isLoading: false,
+      isLoading: false
     };
   },
   methods: {
     toggleSidebar() {
       $("body").css("overflow", "hidden"),
         $(".sidebar-nav").toggleClass("active"),
-        $(".nav-close").on("click", function () {
+        $(".nav-close").on("click", function() {
           $("body").css("overflow-y", "scroll"),
             $(".sidebar-nav").removeClass("active");
         });
-    },
+    }
   },
   provide() {
     return {
-      toggleSidebar: this.toggleSidebar,
+      toggleSidebar: this.toggleSidebar
     };
-  },
+  }
 };
 </script>

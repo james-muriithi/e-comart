@@ -19,7 +19,6 @@
         </ul>
       </div>
       <div class="nav-content">
-
         <div class="tab-pane active" id="menu-list">
           <div class="nav-profile" v-if="isLoggedIn">
             <a href="#"><img :src="userImage" alt="user"/></a>

@@ -75,7 +75,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      error: null,
+      error: null
     };
   },
   components: {
@@ -83,12 +83,12 @@ export default {
     ProductFilter,
     ProductCard,
     ProductPlaceholder,
-    ProductModal,
+    ProductModal
   },
   computed: {
     products() {
       return this.$store.getters.products;
-    },
+    }
   },
   methods: {
     async fetchProducts() {
@@ -100,17 +100,17 @@ export default {
         this.error = error.message || "error";
       }
       this.isLoading = false;
-    },
+    }
   },
   created() {
     this.fetchProducts();
   },
   mounted() {
-    $(window).on("scroll", function () {
+    $(window).on("scroll", function() {
       $(this).scrollTop() > 650
         ? $(".product-category").addClass("category-fixed")
         : $(".product-category").removeClass("category-fixed");
     });
-  },
+  }
 };
 </script>

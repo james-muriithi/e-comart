@@ -34,7 +34,7 @@ const GlobalMixins = {
       if ((!price || price == "") && price != 0) {
         return price;
       }
-      return `${appendCurrency? 'Ksh ':''}${this.numberWithCommas(price)}`;
+      return `${appendCurrency ? "Ksh " : ""}${this.numberWithCommas(price)}`;
     },
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

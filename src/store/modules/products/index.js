@@ -1,22 +1,25 @@
-import { fetchProduct, fetchProducts } from "../../../helpers/FirebaseFunctions.js";
+import {
+  fetchProduct,
+  fetchProducts
+} from "../../../helpers/FirebaseFunctions.js";
 import { getFromStorage, saveToStorage } from "../../../helpers/LocalStorage";
 
 export default {
   state() {
     return {
       products: [],
-      selectedProduct: null,
+      selectedProduct: null
     };
   },
   mutations: {
     setProducts(state, products) {
       state.products = Object.assign({}, state.products, products);
     },
-    addProduct(state, product){
+    addProduct(state, product) {
       state.products = [...state.products, product];
     },
-    setSelectedProduct(state, product){
-      state.selectedProduct = product
+    setSelectedProduct(state, product) {
+      state.selectedProduct = product;
     }
   },
   actions: {
@@ -36,17 +39,19 @@ export default {
 
       commit("setProducts", products);
     },
-    async fetchProduct({commit, getters}, productId){
+    async fetchProduct({ commit, getters }, productId) {
       let product = null;
       if (getters.products.length > 0) {
-        product = Object.values(getters.products).find(prod => prod.id == productId)
+        product = Object.values(getters.products).find(
+          prod => prod.id == productId
+        );
       }
 
       if (!product) {
-        product = await fetchProduct(productId)
+        product = await fetchProduct(productId);
       }
 
-      commit('setSelectedProduct', product)
+      commit("setSelectedProduct", product);
     }
   },
   getters: {
@@ -61,7 +66,7 @@ export default {
         return Object.values(state.products).find(prod => prod.id == productId);
       };
     },
-    selectedProduct(state){
+    selectedProduct(state) {
       return state.selectedProduct;
     }
   }

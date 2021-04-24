@@ -4,7 +4,7 @@ import Home from "../pages/Home.vue";
 const Register = () => import("../pages/auth/Register.vue");
 const Login = () => import("../pages/auth/Login.vue");
 // const ProductDetails = () => import('../pages/ProductDetails.vue');
-import ProductDetails from '../pages/ProductDetails.vue';
+import ProductDetails from "../pages/ProductDetails.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -25,7 +25,7 @@ const router = createRouter({
       path: "/product/:id",
       component: ProductDetails,
       props: true
-    },
+    }
   ]
 });
 

@@ -51,18 +51,18 @@
                   <hr class="details-devider" />
                   <div class="details-action-group">
                     <button
-                      :class="`details-cart${
-                        itemCartQuantity > 0 ? ' d-none' : ''
-                      }`"
+                      :class="
+                        `details-cart${itemCartQuantity > 0 ? ' d-none' : ''}`
+                      "
                       title="Add Your Cartlist"
                       @click="addToCart"
                     >
                       <i class="icofont-cart"></i><span>add to cart</span>
                     </button>
                     <div
-                      :class="`details-action${
-                        itemCartQuantity > 0 ? ' d-flex' : ''
-                      }`"
+                      :class="
+                        `details-action${itemCartQuantity > 0 ? ' d-flex' : ''}`
+                      "
                     >
                       <button
                         class="details-minus"
@@ -104,36 +104,36 @@ import _ from "lodash";
 export default {
   props: {
     id: {
-      required: true,
+      required: true
     },
     images: {
       required: true,
-      type: Array,
+      type: Array
     },
     sku: {
       type: String,
-      required: true,
+      required: true
     },
     brand: {
       type: String,
-      required: true,
+      required: true
     },
     name: {
       type: String,
-      required: true,
+      required: true
     },
     newPrice: {
       // type: String,
-      required: true,
+      required: true
     },
     oldPrice: {
       // type: String,
-      required: false,
+      required: false
     },
     description: {
       type: String,
-      default: "",
-    },
+      default: ""
+    }
   },
   methods: {
     addToCart() {
@@ -144,22 +144,22 @@ export default {
     },
     changeItemQuantity(qty) {
       this.$store.dispatch("changeItemQuantity", { productId: this.id, qty });
-    },
+    }
   },
   computed: {
     itemCartQuantity: {
-      get: function () {
+      get: function() {
         return this.$store.getters.itemCartQuantity(this.id);
       },
-      set: _.debounce(function (newVal) {
+      set: _.debounce(function(newVal) {
         if (newVal && newVal < 0) {
           return this.itemCartQuantity;
         }
         if (newVal && newVal != this.itemCartQuantity) {
           this.changeItemQuantity(newVal);
         }
-      }, 500),
-    },
+      }, 500)
+    }
   },
   mounted() {
     $(".preview-slider")
@@ -175,9 +175,9 @@ export default {
         responsive: [
           {
             breakpoint: 576,
-            settings: { slidesToShow: 1, slidesToScroll: 1, arrows: !0 },
-          },
-        ],
+            settings: { slidesToShow: 1, slidesToScroll: 1, arrows: !0 }
+          }
+        ]
       }),
       $(".thumb-slider")
         .not(".slick-initialized")
@@ -192,26 +192,26 @@ export default {
           responsive: [
             {
               breakpoint: 992,
-              settings: { slidesToShow: 3, slidesToScroll: 1 },
+              settings: { slidesToShow: 3, slidesToScroll: 1 }
             },
             {
               breakpoint: 768,
-              settings: { slidesToShow: 3, slidesToScroll: 1 },
+              settings: { slidesToShow: 3, slidesToScroll: 1 }
             },
             {
               breakpoint: 576,
-              settings: { slidesToShow: 3, slidesToScroll: 1, arrows: !1 },
+              settings: { slidesToShow: 3, slidesToScroll: 1, arrows: !1 }
             },
             {
               breakpoint: 400,
-              settings: { slidesToShow: 2, slidesToScroll: 1, arrows: !1 },
-            },
-          ],
+              settings: { slidesToShow: 2, slidesToScroll: 1, arrows: !1 }
+            }
+          ]
         }),
-      $(".modal").on("shown.bs.modal", function () {
+      $(".modal").on("shown.bs.modal", function() {
         $(".preview-slider, .thumb-slider").slick("setPosition"),
           $(".product-details-image").addClass("slider-opacity");
       });
-  },
+  }
 };
 </script>

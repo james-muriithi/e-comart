@@ -15,7 +15,12 @@
           <p class="h6">No products in cart</p>
           <div class="row justify-content-center align-items-center h-100">
             <div class="col-12">
-              <img class="w-100" :src="require('../../assets/images/empty_cart.svg')" alt="empty cart" height="170">
+              <img
+                class="w-100"
+                :src="require('../../assets/images/empty_cart.svg')"
+                alt="empty cart"
+                height="170"
+              />
             </div>
           </div>
         </div>
