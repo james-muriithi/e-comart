@@ -40,7 +40,7 @@
             apply
           </button>
         </form>
-        <a href="checkout.html" class="check-btn"
+        <a href="/checkout" class="check-btn"
           ><span class="check-title">checkout</span
           ><span class="check-price">{{ formatPrice(cartTotal) }}</span></a
         >
