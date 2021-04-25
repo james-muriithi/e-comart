@@ -58,6 +58,9 @@
             </div>
           </div>
         </div>
+
+        <payment-options></payment-options>
+
       </div>
     </div>
   </section>
@@ -65,13 +68,14 @@
 
 <script>
 import ItemRow from "./ItemRow.vue";
+import PaymentOptions from "./PaymentOptions.vue";
 export default {
   data() {
     return {
       isLoading: false
     };
   },
-  components: { ItemRow },
+  components: { ItemRow, PaymentOptions },
   computed: {
     cart() {
       return this.$store.getters.cart;
@@ -146,34 +150,6 @@ export default {
 }
 .profile-card .user-action li {
   margin: 5px 0px;
-}
-.payment-card {
-  position: relative;
-}
-.payment-card .user-action {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all linear 0.3s;
-  -webkit-transition: all linear 0.3s;
-  -moz-transition: all linear 0.3s;
-  -ms-transition: all linear 0.3s;
-  -o-transition: all linear 0.3s;
 }
 .modal-form {
   width: 400px;
