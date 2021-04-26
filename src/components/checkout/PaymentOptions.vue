@@ -12,7 +12,7 @@
               <img
                 :src="require('../../assets/images/cash-on-delivery.png')"
                 alt="payment"
-                height="19"
+                height="23"
               />
               <h4>cash on delivery</h4>
             </div>
@@ -41,13 +41,23 @@
           </div>
         </div>
 
-        <div class="checkout-proced mt-4">
+        <div class="checkout-proced mt-4" v-show="cartQuantity > 0">
           <a href="#" class="btn btn-inline">proceed to checkout</a>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    cartQuantity() {
+      return this.$store.getters.cartQuantity;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .payment-card {
