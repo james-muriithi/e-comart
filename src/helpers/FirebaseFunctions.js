@@ -87,7 +87,7 @@ async function fetchCart(userId) {
   }
 }
 
-async function saveOrders(orders, userId){
+async function saveOrders(orders, userId) {
   try {
     await db
       .collection("orders")

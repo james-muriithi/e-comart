@@ -60,7 +60,6 @@
         </div>
 
         <payment-options></payment-options>
-
       </div>
     </div>
   </section>
