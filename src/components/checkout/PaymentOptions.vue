@@ -69,6 +69,10 @@ export default {
         total: this.cartTotal,
       });
       this.$store.dispatch("clearCart");
+      //set alert
+        await this.$store.dispatch("alert/setAlert", {
+          message: "Your order was received"
+        });
       this.$router.push('/');
     },
   },
