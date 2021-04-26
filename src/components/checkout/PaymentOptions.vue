@@ -41,8 +41,8 @@
           </div>
         </div>
 
-        <div class="checkout-proced mt-4" v-show="cartQuantity > 0">
-          <a href="#" class="btn btn-inline">proceed to checkout</a>
+        <div class="checkout-proced mt-4 mb-1 text-right" v-show="cartQuantity > 0">
+          <button @click="checkout" class="btn btn-inline">proceed to checkout</button>
         </div>
       </div>
     </div>
@@ -54,6 +54,22 @@ export default {
   computed: {
     cartQuantity() {
       return this.$store.getters.cartQuantity;
+    },
+    cart() {
+      return this.$store.getters.cart;
+    },
+    cartTotal() {
+      return this.$store.getters.cartTotal;
+    },
+  },
+  methods: {
+    async checkout() {
+      await this.$store.dispatch("addOrder", {
+        products: this.cart,
+        total: this.cartTotal,
+      });
+      this.$store.dispatch("clearCart");
+      this.$router.push('/');
     },
   },
 };

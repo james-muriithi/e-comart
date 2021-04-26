@@ -17,11 +17,12 @@ export default {
     },
   },
   actions: {
-    addOrder({ commit, state, rootState }, order) {
+    async addOrder({ commit, state, rootState }, order) {
       commit("addOrder", order);
       const userId = rootState.auth.user ? rootState.auth.user.localId : null;
       if (userId) {
-        saveOrders(state.orders, userId);
+          console.log(state.orders);
+        await saveOrders(state.orders, userId);
       }
     },
   },
