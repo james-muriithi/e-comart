@@ -87,11 +87,23 @@ async function fetchCart(userId) {
   }
 }
 
+async function saveOrders(orders, userId){
+  try {
+    await db
+      .collection("orders")
+      .doc(userId)
+      .set({ ...orders });
+  } catch (error) {
+    throw new Error(error.message || "Error saving order");
+  }
+}
+
 export {
   fetchCategories,
   fetchSubCategories,
   fetchProducts,
   saveCart,
   fetchCart,
-  fetchProduct
+  fetchProduct,
+  saveOrders
 };
