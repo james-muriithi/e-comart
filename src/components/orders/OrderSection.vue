@@ -162,19 +162,22 @@ export default {
         this.error = error.message || "error";
       }
       this.isLoading = false;
+      //after loading 
+      var i = $(".orderlist-body").hide();
+      i.first().show(),
+        $(document).on("click", ".orderlist-head", function () {
+          var n = $(this);
+          if (n.next().css('display') != 'none') {
+              i.slideUp()
+          }else{
+              i.slideUp(), n.next().slideDown();
+          }
+        });
     },
   },
   mounted() {
     this.fetchProducts();
     this.fetchOrders();
-
-    var i = $(".orderlist-body").hide();
-    console.log(i);
-    i.first().show(),
-      $(document).on("click", ".orderlist-head", function () {
-        var n = $(this);
-        i.slideUp(), n.next().slideDown();
-      });
   },
 };
 </script>

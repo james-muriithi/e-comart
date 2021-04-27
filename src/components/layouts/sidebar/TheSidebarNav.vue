@@ -62,11 +62,6 @@
                 ><i class="icofont-basket"></i><span>orders</span></a
               >
             </li>
-            <li v-if="isLoggedIn">
-              <a class="nav-link" href="#"
-                ><i class="icofont-page"></i><span>order invoice</span></a
-              >
-            </li>
             <li>
               <a class="nav-link" href="#"
                 ><i class="icofont-question-circle"></i
