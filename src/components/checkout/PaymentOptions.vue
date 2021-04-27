@@ -76,7 +76,7 @@ export default {
         total: this.cartTotal,
         discount: 0,
         status: 1,
-        delivery_feee: 0,
+        delivery_fee: 0,
         created_at: new Date()
       });
       this.$store.dispatch("clearCart");

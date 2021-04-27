@@ -35,7 +35,7 @@
             ><i class="icofont-eye-alt"></i
           ></a>
         </li>
-        <li>
+        <li v-if="!order">
           <a
             class="trash"
             href="#"
@@ -72,11 +72,18 @@ export default {
     },
     index: {
       required: true
+    },
+    order: {
+      type: Boolean,
+      default: false,
+    },
+    qty:{
+      required: false
     }
   },
   computed: {
     itemCartQuantity() {
-      return this.$store.getters.itemCartQuantity(this.id);
+      return this.order ? this.qty :this.$store.getters.itemCartQuantity(this.id);
     },
     product() {
       return this.$store.getters.product(this.id);

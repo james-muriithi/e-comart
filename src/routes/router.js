@@ -5,7 +5,7 @@ const Register = () => import("../pages/auth/Register.vue");
 const Login = () => import("../pages/auth/Login.vue");
 const ProductDetails = () => import("../pages/ProductDetails.vue");
 const Checkout = () => import("../pages/Checkout.vue");
-// import ProductDetails from "../pages/ProductDetails.vue";
+const Orders = () => import("../pages/Orders.vue");
 import store from "../store/index.js";
 
 const router = createRouter({
@@ -32,6 +32,11 @@ const router = createRouter({
       path: "/product/:id",
       component: ProductDetails,
       props: true
+    },
+    {
+      path: "/orders",
+      component: Orders,
+      meta: { requiresAuth: true }
     }
   ]
 });
