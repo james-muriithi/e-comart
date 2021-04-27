@@ -4,7 +4,7 @@
 <img src="./screenshot2.png" alt="screenshot" />
 <img src="./screenshot3.png" alt="screenshot" />
 
-I decided to do this project for learning purposes after completion of a <a href="https://www.udemy.com/course/vuejs-2-the-complete-guide/">vuejs course</a> on Udemy by Maximilian Schwarzmüller.
+I decided to do this project for learning purposes after completing a <a href="https://www.udemy.com/course/vuejs-2-the-complete-guide/">vuejs course</a> on Udemy by Maximilian Schwarzmüller.
 
 ## Project setup
 
