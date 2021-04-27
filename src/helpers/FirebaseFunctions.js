@@ -110,7 +110,6 @@ async function fetchOrders(userId) {
   }
 }
 
-
 export {
   fetchCategories,
   fetchSubCategories,

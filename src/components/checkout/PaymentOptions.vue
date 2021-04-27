@@ -88,7 +88,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('loadOrders');
+    this.$store.dispatch("loadOrders");
   }
 };
 </script>

@@ -40,7 +40,9 @@ const GlobalMixins = {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     generateOrderId() {
-      return  Math.random().toString(36).substr(2, 9);
+      return Math.random()
+        .toString(36)
+        .substr(2, 9);
     },
     showAlert() {
       const that = this;

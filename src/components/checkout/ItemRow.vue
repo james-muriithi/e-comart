@@ -75,15 +75,17 @@ export default {
     },
     order: {
       type: Boolean,
-      default: false,
+      default: false
     },
-    qty:{
+    qty: {
       required: false
     }
   },
   computed: {
     itemCartQuantity() {
-      return this.order ? this.qty :this.$store.getters.itemCartQuantity(this.id);
+      return this.order
+        ? this.qty
+        : this.$store.getters.itemCartQuantity(this.id);
     },
     product() {
       return this.$store.getters.product(this.id);

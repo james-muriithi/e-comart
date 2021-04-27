@@ -8,7 +8,7 @@
 <script>
 import $ from "jquery";
 import CartSidebar from "../components/cart/CartSidebar.vue";
-import OrderSection from '../components//orders/OrderSection.vue';
+import OrderSection from "../components//orders/OrderSection.vue";
 
 export default {
   components: {
@@ -19,16 +19,16 @@ export default {
     toggleSidebar() {
       $("body").css("overflow", "hidden"),
         $(".sidebar-nav").toggleClass("active"),
-        $(".nav-close").on("click", function () {
+        $(".nav-close").on("click", function() {
           $("body").css("overflow-y", "scroll"),
             $(".sidebar-nav").removeClass("active");
         });
-    },
+    }
   },
   provide() {
     return {
-      toggleSidebar: this.toggleSidebar,
+      toggleSidebar: this.toggleSidebar
     };
-  },
+  }
 };
 </script>

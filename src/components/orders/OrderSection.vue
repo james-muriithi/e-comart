@@ -130,17 +130,17 @@ import $ from "jquery";
 import ItemRow from "../checkout/ItemRow.vue";
 export default {
   components: {
-    ItemRow,
+    ItemRow
   },
   data() {
     return {
-      isLoading: false,
+      isLoading: false
     };
   },
   computed: {
     orders() {
       return this.$store.getters.orders;
-    },
+    }
   },
   methods: {
     async fetchProducts() {
@@ -162,23 +162,23 @@ export default {
         this.error = error.message || "error";
       }
       this.isLoading = false;
-      //after loading 
+      //after loading
       var i = $(".orderlist-body").hide();
       i.first().show(),
-        $(document).on("click", ".orderlist-head", function () {
+        $(document).on("click", ".orderlist-head", function() {
           var n = $(this);
-          if (n.next().css('display') != 'none') {
-              i.slideUp()
-          }else{
-              i.slideUp(), n.next().slideDown();
+          if (n.next().css("display") != "none") {
+            i.slideUp();
+          } else {
+            i.slideUp(), n.next().slideDown();
           }
         });
-    },
+    }
   },
   mounted() {
     this.fetchProducts();
     this.fetchOrders();
-  },
+  }
 };
 </script>
 
