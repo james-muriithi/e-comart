@@ -76,7 +76,7 @@ export default {
         total: this.cartTotal,
         discount: 0,
         status: 1,
-        deliver_feee: 0,
+        delivery_feee: 0,
         created_at: new Date()
       });
       this.$store.dispatch("clearCart");
@@ -86,6 +86,9 @@ export default {
       });
       this.$router.push("/");
     }
+  },
+  mounted() {
+    this.$store.dispatch('loadOrders');
   }
 };
 </script>

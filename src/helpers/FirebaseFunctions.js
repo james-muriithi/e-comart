@@ -83,7 +83,7 @@ async function fetchCart(userId) {
       .get();
     return doc.data();
   } catch (error) {
-    throw new Error(error.message || "Error saving cart");
+    throw new Error(error.message || "Error loading cart");
   }
 }
 
@@ -98,6 +98,18 @@ async function saveOrders(orders, userId) {
   }
 }
 
+async function fetchOrders(userId) {
+  try {
+    const doc = await db
+      .collection("orders")
+      .doc(userId)
+      .get();
+    return doc.data();
+  } catch (error) {
+    throw new Error(error.message || "Error loading orders");
+  }
+}
+
 
 export {
   fetchCategories,
@@ -106,5 +118,6 @@ export {
   saveCart,
   fetchCart,
   fetchProduct,
-  saveOrders
+  saveOrders,
+  fetchOrders
 };
