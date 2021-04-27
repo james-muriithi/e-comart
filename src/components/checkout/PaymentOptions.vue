@@ -70,8 +70,14 @@ export default {
   methods: {
     async checkout() {
       await this.$store.dispatch("addOrder", {
+        id: this.generateOrderId(),
         products: this.cart,
-        total: this.cartTotal
+        sub_total: this.cartTotal,
+        total: this.cartTotal,
+        discount: 0,
+        status: 1,
+        deliver_feee: 0,
+        created_at: new Date()
       });
       this.$store.dispatch("clearCart");
       //set alert

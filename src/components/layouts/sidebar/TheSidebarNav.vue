@@ -53,12 +53,12 @@
               >
             </li>
             <li v-if="isLoggedIn">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="/checkout"
                 ><i class="icofont-ui-check"></i><span>checkout</span></a
               >
             </li>
             <li v-if="isLoggedIn">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="/orders"
                 ><i class="icofont-basket"></i><span>orders</span></a
               >
             </li>
