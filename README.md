@@ -38,8 +38,8 @@ npm run lint
 1. Cart ✔️
 1. Fetch data from firestore ✔️
 1. Wishlist
-1. Checkout
-1. Order page
+1. Checkout ✔️
+1. Order page ✔️
 1. User profile page
 1. Search products
 1. Browse with product subcategories
