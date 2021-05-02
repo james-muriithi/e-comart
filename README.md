@@ -43,4 +43,4 @@ npm run lint
 1. User profile page
 1. Search products
 1. Browse with product subcategories
-1. Deploy to firebase
+1. Deploy to firebase ✔️
