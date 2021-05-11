@@ -6,6 +6,7 @@ const Login = () => import("../pages/auth/Login.vue");
 const ProductDetails = () => import("../pages/ProductDetails.vue");
 const Checkout = () => import("../pages/Checkout.vue");
 const Orders = () => import("../pages/Orders.vue");
+const Wishlist = () => import("../pages/Wishlist.vue");
 import store from "../store/index.js";
 
 const router = createRouter({
@@ -37,7 +38,12 @@ const router = createRouter({
       path: "/orders",
       component: Orders,
       meta: { requiresAuth: true }
-    }
+    },
+    {
+      path: "/wishlist",
+      component: Wishlist,
+      meta: { requiresAuth: true }
+    },
   ]
 });
 
