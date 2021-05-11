@@ -46,3 +46,4 @@ npm run lint
 1. Deploy to firebase ✔️
 1. Dark mode
 1. Related products
+1. Lazy load images

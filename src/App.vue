@@ -8,6 +8,7 @@ export default {
   created() {
     this.$store.dispatch("tryLogin");
     this.$store.dispatch("loadCart");
+    this.$store.dispatch("wishlist/loadCart");
   }
 };
 </script>

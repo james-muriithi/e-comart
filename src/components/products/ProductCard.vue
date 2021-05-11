@@ -31,8 +31,8 @@
           <div
             :class="`product-action${itemCartQuantity > 0 ? ' d-none' : ''}`"
           >
-            <button class="action-wish" title="Product Wish">
-              <i class="icofont-ui-love"></i></button
+            <button class="action-wish" title="Product Wish" @click="addToWishlist">
+              <i :class="itemInWishlist ? 'icofont-ui-love color-primary':'icofont-ui-love'"></i></button
             ><button
               class="action-cart"
               @click="addToCart"
@@ -134,8 +134,11 @@ export default {
     addToCart() {
       this.$store.dispatch("addToCart", this.id);
     },
+    addToWishlist(){
+      this.$store.dispatch("wishlist/addToWishlist", this.id);
+    },
     decreaseQuantity() {
-      this.$store.dispatch("decreaseQuantity", this.id);
+      this.$store.dispatch("wishlist/decreaseQuantity", this.id);
     },
     changeItemQuantity(qty) {
       this.$store.dispatch("changeItemQuantity", { productId: this.id, qty });
@@ -157,6 +160,9 @@ export default {
           this.changeItemQuantity(newVal);
         }
       }, 500)
+    },
+    itemInWishlist(){
+      return this.$store.getters['wishlist/itemInWishlist'](this.id)
     }
   },
   mounted() {
@@ -174,6 +180,9 @@ export default {
 </script>
 
 <style scoped>
+.color-primary{
+  color: var(--primary);
+}
 .product-name a {
   overflow: hidden;
   text-overflow: ellipsis;

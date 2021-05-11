@@ -13,7 +13,7 @@
     </router-link>
     <div class="header-icon-group">
       <router-link to="#"
-        ><i class="icofont-ui-love"></i><sup>0</sup></router-link
+        ><i class="icofont-ui-love"></i><sup>{{ wishlistQuantity }}</sup></router-link
       >
       <button class="icon-check" aria-label="Shopping Cart">
         <i class="icofont-shopping-cart"></i
@@ -29,6 +29,9 @@ export default {
   computed: {
     cartQuantity() {
       return this.$store.getters.cartQuantity;
+    },
+    wishlistQuantity() {
+      return this.$store.getters['wishlist/wishlistQuantity'];
     },
     cartTotal() {
       return this.$store.getters.cartTotal;

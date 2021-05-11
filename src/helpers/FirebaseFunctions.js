@@ -87,6 +87,29 @@ async function fetchCart(userId) {
   }
 }
 
+async function saveWishlist(cart, userId) {
+  try {
+    await db
+      .collection("wishlist")
+      .doc(userId)
+      .set({ ...cart });
+  } catch (error) {
+    throw new Error(error.message || "Error saving wishlist");
+  }
+}
+
+async function fetchWishlist(userId) {
+  try {
+    const doc = await db
+      .collection("wishlist")
+      .doc(userId)
+      .get();
+    return doc.data();
+  } catch (error) {
+    throw new Error(error.message || "Error loading wishlist");
+  }
+}
+
 async function saveOrders(orders, userId) {
   try {
     await db
@@ -118,5 +141,7 @@ export {
   fetchCart,
   fetchProduct,
   saveOrders,
-  fetchOrders
+  fetchOrders,
+  saveWishlist,
+  fetchWishlist
 };

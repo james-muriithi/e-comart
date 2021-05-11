@@ -6,6 +6,7 @@ import MenuModule from "./modules/menu/index.js";
 import ProductModule from "./modules/products/index.js";
 import CartModule from "./modules/cart/index.js";
 import OrderModule from "./modules/orders/index.js";
+import WishlistModule from "./modules/wishlist/index.js";
 
 const store = createStore({
   modules: {
@@ -14,7 +15,8 @@ const store = createStore({
     menus: MenuModule,
     products: ProductModule,
     cart: CartModule,
-    order: OrderModule
+    order: OrderModule,
+    wishlist: WishlistModule,
   }
 });
 
