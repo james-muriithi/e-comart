@@ -48,7 +48,7 @@
               >
             </li>
             <li v-if="isLoggedIn">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="/wishlist"
                 ><i class="icofont-ui-love"></i><span>wishlist</span></a
               >
             </li>

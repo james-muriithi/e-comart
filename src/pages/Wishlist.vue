@@ -3,6 +3,7 @@
   <the-sidebar-nav @close="toggleSidebar"></the-sidebar-nav>
   <cart-sidebar></cart-sidebar>
   <wishlist-section></wishlist-section>
+  <cart-mobile></cart-mobile>
 </template>
 
 <script>

@@ -12,7 +12,7 @@
       <span class="text">Login</span>
     </router-link>
     <div class="header-icon-group">
-      <router-link to="#"
+      <router-link to="/wishlist"
         ><i class="icofont-ui-love"></i><sup>{{ wishlistQuantity }}</sup></router-link
       >
       <button class="icon-check" aria-label="Shopping Cart">

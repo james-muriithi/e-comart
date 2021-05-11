@@ -34,12 +34,12 @@
             class="trash"
             href="#"
             title="Remove This Item"
-            @click.prevent="removeItemFromCart"
+            @click.prevent="addToWishlist"
             ><i class="icofont-trash"></i
           ></a>
         </li>
         <li>
-          <a class="view" href="#" title="Add to Cart">
+          <a class="view" href="#" title="Add to Cart" @click.prevent="addToCart">
             <i class="icofont-shopping-cart"></i>
           </a>
         </li>
@@ -78,19 +78,18 @@ export default {
     },
   },
   computed: {
-    itemCartQuantity() {
-      return this.order
-        ? this.qty
-        : this.$store.getters.itemCartQuantity(this.id);
-    },
     product() {
       return this.$store.getters.product(this.id);
     }
   },
   methods: {
-    removeItemFromCart() {
-      this.$store.dispatch("removeItemFromCart", this.id);
-    }
+    addToCart() {
+      this.addToWishlist()
+      this.$store.dispatch("addToCart", this.id);
+    },
+    addToWishlist(){
+      this.$store.dispatch("wishlist/addToWishlist", this.id);
+    },
   }
 };
 </script>
