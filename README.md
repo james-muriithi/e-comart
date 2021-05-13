@@ -37,7 +37,7 @@ npm run lint
 1. Product details page ✔️
 1. Cart ✔️
 1. Fetch data from firestore ✔️
-1. Wishlist
+1. Wishlist ✔️
 1. Checkout ✔️
 1. Order page ✔️
 1. User profile page
@@ -45,5 +45,6 @@ npm run lint
 1. Browse with product subcategories
 1. Deploy to firebase ✔️
 1. Dark mode
-1. Related products
+1. Similar products
 1. Lazy load images
+1. PWA
