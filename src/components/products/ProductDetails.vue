@@ -83,7 +83,7 @@
                   <i class="icofont-plus"></i>
                 </button>
               </div>
-              <a href="#" class="details-wish" title="Add Your Wishlist"
+              <a href="#" @click.prevent="addToWishlist" class="details-wish" title="Add Your Wishlist"
                 ><i class="icofont-heart"></i><span>add to wish</span></a
               >
             </div>
@@ -139,6 +139,9 @@ export default {
   methods: {
     addToCart() {
       this.$store.dispatch("addToCart", this.id);
+    },
+    addToWishlist() {
+      this.$store.dispatch("wishlist/addToWishlist", this.id);
     },
     decreaseQuantity() {
       this.$store.dispatch("decreaseQuantity", this.id);
