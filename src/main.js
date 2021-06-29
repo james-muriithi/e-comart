@@ -13,6 +13,7 @@ import TheSidebarNav from "./components/layouts/sidebar/TheSidebarNav.vue";
 import TheSearchBar from "./components/ui/TheSeachBar.vue";
 import CartMobile from "./components/cart/CartMobile.vue";
 import GlobalMixins from "./mixins/global";
+import './registerServiceWorker'
 
 const app = createApp(App);
 

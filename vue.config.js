@@ -9,5 +9,13 @@ module.exports = {
     externals: {
       jquery: "jQuery"
     }
+  },
+  pwa: {
+    name: 'Ecomart',
+    themeColor: '#5f1fad',
+    assetsVersion: '1',
+    manifestOptions: {
+      
+    }
   }
 };
