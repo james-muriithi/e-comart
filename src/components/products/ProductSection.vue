@@ -72,6 +72,12 @@ import ProductPlaceholder from "./ProductPlaceholder.vue";
 import ProductModal from "./ProductModal.vue";
 
 export default {
+  props: {
+    search: {
+      type: String,
+      default: '',
+    }
+  },
   data() {
     return {
       isLoading: false,
@@ -87,7 +93,7 @@ export default {
   },
   computed: {
     products() {
-      return this.$store.getters.products;
+      return this.$store.getters.products(this.search);
     }
   },
   methods: {

@@ -7,6 +7,7 @@ const ProductDetails = () => import("../pages/ProductDetails.vue");
 const Checkout = () => import("../pages/Checkout.vue");
 const Orders = () => import("../pages/Orders.vue");
 const Wishlist = () => import("../pages/Wishlist.vue");
+const Search = () => import("../pages/Search.vue");
 import store from "../store/index.js";
 
 const router = createRouter({
@@ -23,6 +24,10 @@ const router = createRouter({
     {
       path: "/login",
       component: Login
+    },
+    {
+      path: "/search",
+      component: Search,
     },
     {
       path: "/checkout",

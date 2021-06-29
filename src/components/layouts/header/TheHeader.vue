@@ -3,9 +3,9 @@
     <div class="container">
       <header-left></header-left>
 
-      <div class="header-middle">
+      <form action="search" class="header-middle">
         <the-seach-bar></the-seach-bar>
-      </div>
+      </form>
       <header-right></header-right>
     </div>
   </header>
