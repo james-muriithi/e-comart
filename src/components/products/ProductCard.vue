@@ -31,8 +31,18 @@
           <div
             :class="`product-action${itemCartQuantity > 0 ? ' d-none' : ''}`"
           >
-            <button class="action-wish" title="Product Wish" @click="addToWishlist">
-              <i :class="itemInWishlist ? 'icofont-ui-love color-primary':'icofont-ui-love'"></i></button
+            <button
+              class="action-wish"
+              title="Product Wish"
+              @click="addToWishlist"
+            >
+              <i
+                :class="
+                  itemInWishlist
+                    ? 'icofont-ui-love color-primary'
+                    : 'icofont-ui-love'
+                "
+              ></i></button
             ><button
               class="action-cart"
               @click="addToCart"
@@ -134,7 +144,7 @@ export default {
     addToCart() {
       this.$store.dispatch("addToCart", this.id);
     },
-    addToWishlist(){
+    addToWishlist() {
       this.$store.dispatch("wishlist/addToWishlist", this.id);
     },
     decreaseQuantity() {
@@ -161,8 +171,8 @@ export default {
         }
       }, 500)
     },
-    itemInWishlist(){
-      return this.$store.getters['wishlist/itemInWishlist'](this.id)
+    itemInWishlist() {
+      return this.$store.getters["wishlist/itemInWishlist"](this.id);
     }
   },
   mounted() {
@@ -180,7 +190,7 @@ export default {
 </script>
 
 <style scoped>
-.color-primary{
+.color-primary {
   color: var(--primary);
 }
 .product-name a {

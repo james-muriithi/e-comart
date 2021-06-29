@@ -16,7 +16,7 @@ const store = createStore({
     products: ProductModule,
     cart: CartModule,
     order: OrderModule,
-    wishlist: WishlistModule,
+    wishlist: WishlistModule
   }
 });
 

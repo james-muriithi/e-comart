@@ -39,7 +39,12 @@
           ></a>
         </li>
         <li>
-          <a class="view" href="#" title="Add to Cart" @click.prevent="addToCart">
+          <a
+            class="view"
+            href="#"
+            title="Add to Cart"
+            @click.prevent="addToCart"
+          >
             <i class="icofont-shopping-cart"></i>
           </a>
         </li>
@@ -75,7 +80,7 @@ export default {
     order: {
       type: Boolean,
       default: false
-    },
+    }
   },
   computed: {
     product() {
@@ -84,12 +89,12 @@ export default {
   },
   methods: {
     addToCart() {
-      this.addToWishlist()
+      this.addToWishlist();
       this.$store.dispatch("addToCart", this.id);
     },
-    addToWishlist(){
+    addToWishlist() {
       this.$store.dispatch("wishlist/addToWishlist", this.id);
-    },
+    }
   }
 };
 </script>

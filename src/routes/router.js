@@ -43,7 +43,7 @@ const router = createRouter({
       path: "/wishlist",
       component: Wishlist,
       meta: { requiresAuth: true }
-    },
+    }
   ]
 });
 

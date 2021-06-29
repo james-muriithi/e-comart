@@ -15,16 +15,16 @@ export default {
   props: {
     title: {
       type: String,
-      required: true,
+      required: true
     },
     description: {
       type: String,
-      required: true,
+      required: true
     },
     url: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
     share() {
@@ -33,12 +33,12 @@ export default {
           .share({
             title: this.title,
             text: `${this.description} \n${this.url}`,
-            url: this.url,
+            url: this.url
           })
           .then(() => console.log("Successful share"))
-          .catch((error) => console.log("Error sharing", error));
+          .catch(error => console.log("Error sharing", error));
       }
-    },
-  },
+    }
+  }
 };
 </script>

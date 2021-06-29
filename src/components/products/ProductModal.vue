@@ -40,7 +40,11 @@
                   <p class="details-desc">
                     {{ description }}
                   </p>
-                  <share :description="description" :title="name" :url="`/product/${id}`" />
+                  <share
+                    :description="description"
+                    :title="name"
+                    :url="`/product/${id}`"
+                  />
                   <hr class="details-devider" />
                   <div class="details-action-group">
                     <button
@@ -77,7 +81,11 @@
                         <i class="icofont-plus"></i>
                       </button>
                     </div>
-                    <a href="#" @click.prevent="addToWishlist" class="details-wish" title="Add Your Wishlist"
+                    <a
+                      href="#"
+                      @click.prevent="addToWishlist"
+                      class="details-wish"
+                      title="Add Your Wishlist"
                       ><i class="icofont-heart"></i><span>add to wish</span></a
                     >
                   </div>
@@ -99,7 +107,7 @@ import Share from "./Share.vue";
 
 export default {
   components: {
-    Share,
+    Share
   },
   props: {
     id: {
@@ -138,7 +146,7 @@ export default {
     addToCart() {
       this.$store.dispatch("addToCart", this.id);
     },
-    addToWishlist(){
+    addToWishlist() {
       this.$store.dispatch("wishlist/addToWishlist", this.id);
     },
     decreaseQuantity() {

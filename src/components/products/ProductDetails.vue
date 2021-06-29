@@ -42,8 +42,12 @@
             <p class="details-desc">
               {{ product.description }}
             </p>
-            
-            <share :description="product.description" :title="product.name" :url="`/product/${product.id}`" />
+
+            <share
+              :description="product.description"
+              :title="product.name"
+              :url="`/product/${product.id}`"
+            />
 
             <hr class="details-devider" />
             <div class="details-action-group">

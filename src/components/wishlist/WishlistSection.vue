@@ -7,7 +7,10 @@
             <div class="account-title"><h4>Your Wishlist</h4></div>
             <div class="account-content">
               <div class="table-scroll">
-                <table class="table-list" v-if="!isLoading && wishlist && wishlist.length > 0">
+                <table
+                  class="table-list"
+                  v-if="!isLoading && wishlist && wishlist.length > 0"
+                >
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -25,13 +28,15 @@
                     ></item-row>
                   </tbody>
                 </table>
-                <div class="mt-3 row" v-else-if="!isLoading && !wishlist || wishlist.length == 0">
-                    <div class="col-10 text-center">
-                        No items in wishlist
-                    </div>
+                <div
+                  class="mt-3 row"
+                  v-else-if="(!isLoading && !wishlist) || wishlist.length == 0"
+                >
+                  <div class="col-10 text-center">
+                    No items in wishlist
+                  </div>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>
@@ -51,8 +56,8 @@ export default {
   components: { ItemRow },
   computed: {
     wishlist() {
-      return this.$store.getters['wishlist/wishlist'];
-    },
+      return this.$store.getters["wishlist/wishlist"];
+    }
   },
   methods: {
     async fetchProducts() {
