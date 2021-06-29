@@ -40,14 +40,7 @@
                   <p class="details-desc">
                     {{ description }}
                   </p>
-                  <div class="details-group">
-                    <label class="details-group-title">Share:</label>
-                    <ul class="details-share-list">
-                      <li><a href="#" class="icofont-facebook"></a></li>
-                      <li><a href="#" class="icofont-twitter"></a></li>
-                      <li><a href="#" class="icofont-linkedin"></a></li>
-                    </ul>
-                  </div>
+                  <share :description="description" :title="name" :url="`/product/${id}`" />
                   <hr class="details-devider" />
                   <div class="details-action-group">
                     <button
@@ -84,7 +77,7 @@
                         <i class="icofont-plus"></i>
                       </button>
                     </div>
-                    <a href="#" class="details-wish" title="Add Your Wishlist"
+                    <a href="#" @click.prevent="addToWishlist" class="details-wish" title="Add Your Wishlist"
                       ><i class="icofont-heart"></i><span>add to wish</span></a
                     >
                   </div>
@@ -101,7 +94,13 @@
 <script>
 import $ from "jquery";
 import _ from "lodash";
+
+import Share from "./Share.vue";
+
 export default {
+  components: {
+    Share,
+  },
   props: {
     id: {
       required: true
@@ -138,6 +137,9 @@ export default {
   methods: {
     addToCart() {
       this.$store.dispatch("addToCart", this.id);
+    },
+    addToWishlist(){
+      this.$store.dispatch("wishlist/addToWishlist", this.id);
     },
     decreaseQuantity() {
       this.$store.dispatch("decreaseQuantity", this.id);

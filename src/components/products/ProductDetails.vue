@@ -42,14 +42,9 @@
             <p class="details-desc">
               {{ product.description }}
             </p>
-            <div class="details-group">
-              <label class="details-group-title">Share:</label>
-              <ul class="details-share-list">
-                <li><a href="#" class="icofont-facebook"></a></li>
-                <li><a href="#" class="icofont-twitter"></a></li>
-                <li><a href="#" class="icofont-linkedin"></a></li>
-              </ul>
-            </div>
+            
+            <share :description="product.description" :title="product.name" :url="`/product/${product.id}`" />
+
             <hr class="details-devider" />
             <div class="details-action-group">
               <button
@@ -99,9 +94,12 @@
 import $ from "jquery";
 import _ from "lodash";
 import Placeholder from "./ProductDetailsLoader";
+import Share from "./Share.vue";
+
 export default {
   components: {
-    Placeholder
+    Placeholder,
+    Share
   },
   props: {
     id: {
