@@ -14,6 +14,6 @@ module.exports = {
     name: "Ecomart",
     themeColor: "#5f1fad",
     assetsVersion: "2",
-    manifestOptions: {}
+    manifestOptions: {  }
   }
 };

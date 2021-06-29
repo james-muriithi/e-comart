@@ -32,7 +32,7 @@ export default {
         navigator
           .share({
             title: this.title,
-            text: `${this.description} \n${this.url}`,
+            text: `Checkout this product i found:\n${this.title}\n`,
             url: this.url
           })
           .then(() => console.log("Successful share"))
