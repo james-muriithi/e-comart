@@ -47,4 +47,4 @@ npm run lint
 1. Dark mode
 1. Similar products
 1. Lazy load images
-1. PWA
+1. PWA ✔️
