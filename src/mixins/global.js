@@ -70,7 +70,7 @@ const GlobalMixins = {
         });
       }
     }
-  },
+  }
 };
 
 export default GlobalMixins;

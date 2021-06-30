@@ -15,7 +15,7 @@ import CartSidebar from "../components/cart/CartSidebar.vue";
 export default {
   components: {
     ProductSection,
-    CartSidebar,
+    CartSidebar
   },
   created() {
     if (this.shouldShowAlert) {
@@ -26,22 +26,22 @@ export default {
     toggleSidebar() {
       $("body").css("overflow", "hidden"),
         $(".sidebar-nav").toggleClass("active"),
-        $(".nav-close").on("click", function () {
+        $(".nav-close").on("click", function() {
           $("body").css("overflow-y", "scroll"),
             $(".sidebar-nav").removeClass("active");
         });
-    },
+    }
   },
   provide() {
     return {
-      toggleSidebar: this.toggleSidebar,
+      toggleSidebar: this.toggleSidebar
     };
   },
   computed: {
     query() {
       let params = new URLSearchParams(document.location.search.substring(1));
       return params.get("query");
-    },
-  },
+    }
+  }
 };
 </script>

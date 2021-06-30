@@ -1,14 +1,14 @@
 module.exports = {
-  chainWebpack: (config) => {
-    config.plugin("html").tap((args) => {
+  chainWebpack: config => {
+    config.plugin("html").tap(args => {
       args[0].title = "Ecomart - Home";
       return args;
     });
   },
   configureWebpack: {
     externals: {
-      jquery: "jQuery",
-    },
+      jquery: "jQuery"
+    }
   },
   pwa: {
     name: "Ecomart",
@@ -16,7 +16,7 @@ module.exports = {
     assetsVersion: "3",
     manifestOptions: {},
     workboxOptions: {
-      skipWaiting: true,
-    },
-  },
+      skipWaiting: true
+    }
+  }
 };

@@ -21,7 +21,7 @@ export default {
     query() {
       let params = new URLSearchParams(document.location.search.substring(1));
       return params.get("query");
-    },
-  },
+    }
+  }
 };
 </script>

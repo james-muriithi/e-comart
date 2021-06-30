@@ -1,5 +1,5 @@
 import firebase from "../firebase/firebaseConfig";
-import  fb  from "firebase/app";
+import fb from "firebase/app";
 const db = firebase.firestore();
 
 async function fetchCategories() {

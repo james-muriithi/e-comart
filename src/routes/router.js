@@ -27,7 +27,7 @@ const router = createRouter({
     },
     {
       path: "/search",
-      component: Search,
+      component: Search
     },
     {
       path: "/checkout",

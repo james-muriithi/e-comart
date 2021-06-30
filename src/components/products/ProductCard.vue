@@ -16,8 +16,7 @@
       </figure>
       <div class="product-content">
         <h5 class="product-price">
-          <span>{{ formatPrice(newPrice) }}</span
-          >
+          <span>{{ formatPrice(newPrice) }}</span>
           <del class="d-none d-sm-block">{{ formatPrice(oldPrice) }}</del>
         </h5>
         <h5
@@ -126,7 +125,7 @@ export default {
     },
     quantity: {
       type: Number,
-      default: 0,
+      default: 0
     }
   },
   data() {

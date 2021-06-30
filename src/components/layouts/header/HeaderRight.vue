@@ -38,7 +38,7 @@ export default {
       return this.$store.getters.cartTotal;
     },
     firstName() {
-      return this.displayName.split(' ')[0]
+      return this.displayName.split(" ")[0];
     }
   },
   inject: ["toggleSidebar"]
