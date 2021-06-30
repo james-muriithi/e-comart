@@ -241,7 +241,7 @@ export default {
 
 <style scoped>
 .product-single {
-  padding: 30px;
+  padding: 30px 30px 50px 30px;
   background: var(--white);
 }
 .related-title {
@@ -249,7 +249,7 @@ export default {
 }
 @media (max-width: 575px) {
   .product-single {
-    padding: 0px;
+    padding: 0 0 60px 0;
   }
   .product-details,
   .product-gallery {

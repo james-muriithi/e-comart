@@ -45,7 +45,8 @@ npm run lint
 1. Browse with product subcategories
 1. Deploy to firebase ✔️
 1. PWA ✔️
-1. Out of stock ✔️
+1. Product out of stock ✔️
+1. Admin dashboard
 1. Dark mode
 1. Similar products
 1. Lazy load images

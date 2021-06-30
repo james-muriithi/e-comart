@@ -17,7 +17,8 @@
       <div class="product-content">
         <h5 class="product-price">
           <span>{{ formatPrice(newPrice) }}</span
-          ><del>{{ formatPrice(oldPrice) }}</del>
+          >
+          <del class="d-none d-sm-block">{{ formatPrice(oldPrice) }}</del>
         </h5>
         <h5
           class="product-name"

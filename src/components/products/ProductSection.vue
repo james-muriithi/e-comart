@@ -121,3 +121,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.product-part {
+  margin-bottom: 50px !important;
+}
+</style>
