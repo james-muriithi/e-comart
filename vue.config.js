@@ -13,7 +13,7 @@ module.exports = {
   pwa: {
     name: "Ecomart",
     themeColor: "#5f1fad",
-    assetsVersion: "2",
+    assetsVersion: "3",
     manifestOptions: {  }
   }
 };
