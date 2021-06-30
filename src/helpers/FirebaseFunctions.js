@@ -1,4 +1,5 @@
 import firebase from "../firebase/firebaseConfig";
+import  fb  from "firebase/app";
 const db = firebase.firestore();
 
 async function fetchCategories() {
@@ -59,6 +60,30 @@ async function fetchProduct(productId) {
       .doc(productId)
       .get();
     return doc.data();
+  } catch (error) {
+    throw new Error(error.message || "Error fetching product");
+  }
+}
+
+async function updateProduct(productId, updateData) {
+  try {
+    return await db
+      .collection("products")
+      .doc(productId)
+      .update(updateData);
+  } catch (error) {
+    throw new Error(error.message || "Error fetching product");
+  }
+}
+
+async function updateProductQuantity(productId, quantity) {
+  try {
+    return await db
+      .collection("products")
+      .doc(productId)
+      .update({
+        quantity: fb.firestore.FieldValue.increment(quantity)
+      });
   } catch (error) {
     throw new Error(error.message || "Error fetching product");
   }
@@ -143,5 +168,7 @@ export {
   saveOrders,
   fetchOrders,
   saveWishlist,
-  fetchWishlist
+  fetchWishlist,
+  updateProduct,
+  updateProductQuantity
 };

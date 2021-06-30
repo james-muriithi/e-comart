@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { updateProductQuantity } from "../../helpers/FirebaseFunctions.js";
 export default {
   computed: {
     cartQuantity() {
@@ -69,7 +70,8 @@ export default {
   },
   methods: {
     async checkout() {
-      const error = await Object.values(this.cart).some(async(cartItem) => {
+      let error = false;
+      for(let cartItem of Object.values(this.cart)) {
         const product = this.$store.getters.product(cartItem.productId)
         const availableQuantity = product.quantity || 0;
 
@@ -79,20 +81,27 @@ export default {
             type: 'error'
           });
           this.showAlert();
-          return true;
+          error = true;
+          break;
         }else if (availableQuantity < cartItem.qty) {
           await this.$store.dispatch("alert/setAlert", {
             message: `${product.name}'s remaining stock is ${availableQuantity}, please reduce its quantity`,
             type: 'error'
           });
           this.showAlert();
-          return true;
+          error = true;
+          break;
         }
-      });
+      }
 
       if (error) {
         return;
       }
+
+      //reduce product quantities 
+      await Object.values(this.cart).forEach(async(cartItem) => {
+        updateProductQuantity(cartItem.productId, -cartItem.qty)
+      })
 
       await this.$store.dispatch("addOrder", {
         id: this.generateOrderId(),
