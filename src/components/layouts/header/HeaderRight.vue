@@ -6,7 +6,7 @@
       @click="toggleSidebar"
     >
       <img class="img" :src="userImage" alt="user" />
-      <span class="text">{{ displayName }}</span>
+      <span class="text">{{ firstName }}</span>
     </div>
     <router-link to="/login" v-else class="select-menu header-user">
       <span class="text">Login</span>
@@ -36,6 +36,9 @@ export default {
     },
     cartTotal() {
       return this.$store.getters.cartTotal;
+    },
+    firstName() {
+      return this.displayName.split(' ')[0]
     }
   },
   inject: ["toggleSidebar"]

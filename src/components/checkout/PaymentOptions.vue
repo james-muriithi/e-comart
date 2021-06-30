@@ -69,6 +69,31 @@ export default {
   },
   methods: {
     async checkout() {
+      const error = await Object.values(this.cart).some(async(cartItem) => {
+        const product = this.$store.getters.product(cartItem.productId)
+        const availableQuantity = product.quantity || 0;
+
+        if (availableQuantity == 0) {
+          await this.$store.dispatch("alert/setAlert", {
+            message: `${product.name} is out of stock, please remove it from cart`,
+            type: 'error'
+          });
+          this.showAlert();
+          return true;
+        }else if (availableQuantity < cartItem.qty) {
+          await this.$store.dispatch("alert/setAlert", {
+            message: `${product.name}'s remaining stock is ${availableQuantity}, please reduce its quantity`,
+            type: 'error'
+          });
+          this.showAlert();
+          return true;
+        }
+      });
+
+      if (error) {
+        return;
+      }
+
       await this.$store.dispatch("addOrder", {
         id: this.generateOrderId(),
         products: this.cart,
@@ -89,6 +114,11 @@ export default {
   },
   mounted() {
     this.$store.dispatch("loadOrders");
+  },
+  created() {
+    if (this.shouldShowAlert) {
+      this.showAlert();
+    }
   }
 };
 </script>

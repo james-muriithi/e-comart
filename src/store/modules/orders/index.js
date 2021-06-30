@@ -32,7 +32,6 @@ export default {
       if (userId) {
         let orders = await fetchOrders(userId);
         orders = Object.values(orders) || [];
-        console.log(orders);
         commit("setOrders", orders);
       }
     }

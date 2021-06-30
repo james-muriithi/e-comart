@@ -36,6 +36,7 @@
                 :oldPrice="product.oldPrice"
                 :thumbnail="product.thumbnail"
                 :labels="product.labels || []"
+                :quantity="product.quantity || 0"
               >
                 <product-modal
                   :id="product.id"
@@ -100,7 +101,7 @@ export default {
     async fetchProducts() {
       this.isLoading = true;
       try {
-        await this.$store.dispatch("fetchProducts");
+        await this.$store.dispatch("fetchProducts", true);
       } catch (error) {
         console.log(error);
         this.error = error.message || "error";

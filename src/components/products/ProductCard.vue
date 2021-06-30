@@ -1,6 +1,6 @@
 <template>
   <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-    <div class="product-card">
+    <div :class="`product-card${quantity > 0 ? '' : ' product-disable'}`">
       <figure class="product-media">
         <div class="product-label-group">
           <label
@@ -122,6 +122,10 @@ export default {
     sku: {
       type: String,
       required: false
+    },
+    quantity: {
+      type: Number,
+      default: 0,
     }
   },
   data() {
@@ -148,7 +152,7 @@ export default {
       this.$store.dispatch("wishlist/addToWishlist", this.id);
     },
     decreaseQuantity() {
-      this.$store.dispatch("wishlist/decreaseQuantity", this.id);
+      this.$store.dispatch("decreaseQuantity", this.id);
     },
     changeItemQuantity(qty) {
       this.$store.dispatch("changeItemQuantity", { productId: this.id, qty });
