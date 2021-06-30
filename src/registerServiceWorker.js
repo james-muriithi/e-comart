@@ -23,12 +23,12 @@ if (process.env.NODE_ENV === "production") {
           caches.delete(cacheName);
         });
       });
-      
+
       console.log("New content is downloading.");
     },
     updated() {
       console.log("New content is available; please refresh.");
-      window.location.reload(true)
+      // window.location.reload(true)
     },
     offline() {
       console.log(
