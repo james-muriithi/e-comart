@@ -67,7 +67,7 @@
       </div>
     </section>
     <footer class="footer-part">
-      <p>Ecomart | &COPY; Copyright by <a href="#">James</a></p>
+      <p>Ecomart | &COPY; Copyright <a href="#">{{ new Date().getFullYear() }}</a></p>
     </footer>
   </div>
 </template>
